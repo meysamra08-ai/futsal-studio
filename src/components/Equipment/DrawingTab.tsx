@@ -1,4 +1,4 @@
-import { drawingTools } from "../../core/data/drawingTools";
+import { drawingTools } from "../../core/tools/drawingTools";
 import { Typography } from "../../shared/theme/typography";
 
 export default function DrawingTab() {
