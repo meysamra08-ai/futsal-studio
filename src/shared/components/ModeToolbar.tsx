@@ -1,4 +1,4 @@
-import { useUI } from "../../Context/UIContext";
+import { useUI } from "../../core/contexts/UIContext";
 
 interface Props {
   onReset: () => void;

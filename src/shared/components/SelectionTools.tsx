@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useBoard } from "../../Context/BoardContext";
+import { useBoard } from "../../core/contexts/BoardContext";
 
 
 interface Props {

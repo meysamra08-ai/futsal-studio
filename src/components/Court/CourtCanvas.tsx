@@ -1,5 +1,5 @@
-import { useBoard } from "../../Context/BoardContext";
-import { useUI } from "../../Context/UIContext";
+import { useBoard } from "../../core/contexts/BoardContext";
+import { useUI } from "../../core/contexts/UIContext";
 import futsalCourt from "../../assest/courts/futsal.png";
 
 import {

@@ -1,6 +1,6 @@
-import { useUI } from "../../Context/UIContext";
+import { useUI } from "../../core/contexts/UIContext";
 import Cone from "./Cone";
-import { Theme } from "../../theme/theme";
+import { Theme } from "../../shared/theme/theme";
 
 
 

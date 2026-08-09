@@ -1,10 +1,10 @@
-import { useUI } from "../../Context/UIContext";
-import { useTeam } from "../../Context/TeamContext";
-import { useBoard } from "../../Context/BoardContext";
-import { Theme } from "../../theme/theme";
+import { useUI } from "../../core/contexts/UIContext";
+import { useTeam } from "../../core/contexts/TeamContext";
+import { useBoard } from "../../core/contexts/BoardContext";
+import { Theme } from "../../shared/theme/theme";
 
-import ModeToolbar from "../Common/ModeToolbar";
-import SelectionTools from "../Common/SelectionTools";
+import ModeToolbar from "../../shared/components/ModeToolbar";
+import SelectionTools from "../../shared/components/SelectionTools";
 
 export default function PlayersTab() {
   const { activeTool, setActiveTool } = useUI();

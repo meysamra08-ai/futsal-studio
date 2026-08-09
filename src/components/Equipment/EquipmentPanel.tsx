@@ -1,8 +1,8 @@
 import { useState } from "react";
 import EquipmentTab from "./EquipmentTab";
 import DrawingTab from "./DrawingTab";
-import { Theme } from "../../theme/theme";
-import SelectionTools from "../Common/SelectionTools";
+import { Theme } from "../../shared/theme/theme";
+import SelectionTools from "../../shared/components/SelectionTools";
 
 type TabType =
   | "players"

@@ -1,7 +1,7 @@
-import { useUI } from "../../Context/UIContext";
-import { useTeam } from "../../Context/TeamContext";
+import { useUI } from "../../core/contexts/UIContext";
+import { useTeam } from "../../core/contexts/TeamContext";
 import Ball from "./Ball";
-import { Theme } from "../../theme/theme";
+import { Theme } from "../../shared/theme/theme";
 
 
 

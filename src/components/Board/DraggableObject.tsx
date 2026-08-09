@@ -1,7 +1,7 @@
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
-import type { BoardObject } from "../../types/BoardObject";
-import { useBoard } from "../../Context/BoardContext";
+import type { BoardObject } from "../../core/types/BoardObject";
+import { useBoard } from "../../core/contexts/BoardContext";
 import BoardObjectRenderer from "./BoardObjectRenderer";
 import SelectionHandles from "./SelectionHandles";
 

@@ -1,4 +1,4 @@
-import { Icons } from "../theme/icons";
+import { Icons } from "../../shared/theme/icons";
 
 export const playerTools = [
   {

@@ -1,7 +1,7 @@
-import { useUI } from "../../Context/UIContext";
-import ModeToolbar from "../Common/ModeToolbar";
-import { useBoard } from "../../Context/BoardContext";
-import SelectionTools from "../Common/SelectionTools";
+import { useUI } from "../../core/contexts/UIContext";
+import ModeToolbar from "../../shared/components/ModeToolbar";
+import { useBoard } from "../../core/contexts/BoardContext";
+import SelectionTools from "../../shared/components/SelectionTools";
 
 
 export default function BallPanel() {

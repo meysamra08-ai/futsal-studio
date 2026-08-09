@@ -1,8 +1,8 @@
 
-import { useUI } from "../../Context/UIContext";
-import { useBoard } from "../../Context/BoardContext";
-import ModeToolbar from "../Common/ModeToolbar";
-import SelectionTools from "../Common/SelectionTools";
+import { useUI } from "../../core/contexts/UIContext";
+import { useBoard } from "../../core/contexts/BoardContext";
+import ModeToolbar from "../../shared/components/ModeToolbar";
+import SelectionTools from "../../shared/components/SelectionTools";
 
 
 const items = [

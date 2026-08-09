@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import MainLayout from "./layouts/MainLayout";
-import { useBoard } from "./Context/BoardContext";
+import MainLayout from "./shared/layouts/MainLayout";
+import { useBoard } from "./core/contexts/BoardContext";
 
 function AppContent() {
   const {

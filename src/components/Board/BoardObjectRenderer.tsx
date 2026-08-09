@@ -1,4 +1,4 @@
-import type { BoardObject } from "../../types/BoardObject";
+import type { BoardObject } from "../../core/types/BoardObject";
 import { objectConfig } from "../../config/objectConfig";
 
 import Player from "./Player";

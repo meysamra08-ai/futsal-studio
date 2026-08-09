@@ -1,7 +1,7 @@
-import Header from "../components/Header/Header";
-import Sidebar from "../components/Sidebar/Sidebar";
-import CourtCanvas from "../components/Court/CourtCanvas";
-import RightPanel from "../components/RightPanel/RightPanel";
+import Header from "../../components/Header/Header";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import CourtCanvas from "../../components/Court/CourtCanvas";
+import RightPanel from "../../components/RightPanel/RightPanel";
 
 export default function MainLayout() {
   return (

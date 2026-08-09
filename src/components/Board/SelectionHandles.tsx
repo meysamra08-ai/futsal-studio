@@ -1,6 +1,6 @@
 import { Trash2 } from "lucide-react";
-import { useBoard } from "../../Context/BoardContext";
-import type { BoardObject } from "../../types/BoardObject";
+import { useBoard } from "../../core/contexts/BoardContext";
+import type { BoardObject } from "../../core/types/BoardObject";
 
 interface Props {
   object: BoardObject;
