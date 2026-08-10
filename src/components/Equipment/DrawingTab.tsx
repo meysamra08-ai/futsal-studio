@@ -1,5 +1,38 @@
-import { drawingTools } from "../../core/tools/drawingTools";
 import { Typography } from "../../shared/theme/typography";
+
+type DrawingTool = {
+  id: string;
+  name: string;
+  icon: string;
+};
+
+const drawingTools: DrawingTool[] = [
+  {
+    id: "select",
+    name: "Select",
+    icon: "↖",
+  },
+  {
+    id: "line",
+    name: "Line",
+    icon: "╱",
+  },
+  {
+    id: "arrow",
+    name: "Arrow",
+    icon: "➜",
+  },
+  {
+    id: "circle",
+    name: "Circle",
+    icon: "○",
+  },
+  {
+    id: "rectangle",
+    name: "Rectangle",
+    icon: "□",
+  },
+];
 
 export default function DrawingTab() {
   return (
@@ -14,7 +47,7 @@ export default function DrawingTab() {
           marginTop: 20,
         }}
       >
-        {drawingTools.map((tool) => (
+        {drawingTools.map((tool: DrawingTool) => (
           <div
             key={tool.id}
             style={{
