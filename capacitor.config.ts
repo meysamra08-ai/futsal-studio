@@ -1,9 +1,9 @@
-import type { CapacitorConfig } from '@capacitor/cli';
+import type { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: 'com.example.app',
-  appName: 'coach-studio',
-  webDir: 'dist'
+  appId: "com.coachstudio.app",
+  appName: "Coach Studio",
+  webDir: "dist",
 };
 
 export default config;

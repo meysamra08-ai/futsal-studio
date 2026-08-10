@@ -1,49 +1,42 @@
-import { useEffect } from "react";
-import MainLayout from "./shared/layouts/MainLayout";
-import { useBoard } from "./core/contexts/BoardContext";
+import { useState } from "react";
 
-function AppContent() {
-  const {
-    deleteSelected,
-    duplicateSelected,
-    undo,
-    redo,
-  } = useBoard();
+import Login from "./pages/Login/Login";
+import SportSelector from "./pages/SportSelector/SportSelector";
+import Workspace from "./pages/Workspace/Workspace";
 
-  useEffect(() => {
-    function handleKey(e: KeyboardEvent) {
-      // Delete
-      if (e.key === "Delete" || e.key === "Backspace") {
-        e.preventDefault();
-        deleteSelected();
-      }
-
-      // Ctrl + D
-      if (e.ctrlKey && e.key.toLowerCase() === "d") {
-        e.preventDefault();
-        duplicateSelected();
-      }
-
-      // Ctrl + Z
-      if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === "z") {
-        e.preventDefault();
-        undo();
-      }
-
-      // Ctrl + Shift + Z
-      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "z") {
-        e.preventDefault();
-        redo();
-      }
-    }
-
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  }, [deleteSelected, duplicateSelected, undo, redo]);
-
-  return <MainLayout />;
-}
+type AppPage =
+  | "login"
+  | "sport"
+  | "workspace";
 
 export default function App() {
-  return <AppContent />;
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const [currentPage, setCurrentPage] =
+    useState<AppPage>("login");
+
+  const handleLogin = () => {
+    setLoggedIn(true);
+    setCurrentPage("sport");
+  };
+
+  if (!loggedIn || currentPage === "login") {
+    return (
+      <Login
+        onLogin={handleLogin}
+      />
+    );
+  }
+
+  if (currentPage === "sport") {
+    return (
+      <SportSelector
+        onSportSelected={() => {
+          setCurrentPage("workspace");
+        }}
+      />
+    );
+  }
+
+  return <Workspace />;
 }
