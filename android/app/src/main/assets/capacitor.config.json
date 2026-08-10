@@ -1,5 +1,5 @@
 {
-	"appId": "com.example.app",
-	"appName": "coach-studio",
+	"appId": "com.coachstudio.app",
+	"appName": "Coach Studio",
 	"webDir": "dist"
 }
