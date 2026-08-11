@@ -4,7 +4,13 @@ import "./Workspace.css";
 
 type WorkspaceMode = "match" | "training" | null;
 
-export default function Workspace() {
+interface WorkspaceProps {
+  onHome: () => void;
+}
+
+export default function Workspace({
+  onHome,
+}: WorkspaceProps) {
   const [activeWorkspace, setActiveWorkspace] =
     useState<WorkspaceMode>(null);
 
@@ -14,16 +20,12 @@ export default function Workspace() {
 
   return (
     <main className="workspace-home">
+      {/* Background decoration */}
+      <div className="workspace-home__glow workspace-home__glow--blue" />
+      <div className="workspace-home__glow workspace-home__glow--green" />
 
-      {/* Ambient background */}
-      <div className="workspace-orb workspace-orb--blue" />
-      <div className="workspace-orb workspace-orb--green" />
-
-      <div className="workspace-noise" />
-
-      {/* Header */}
+      {/* Top bar */}
       <header className="workspace-header">
-
         <button
           type="button"
           className="workspace-menu"
@@ -36,7 +38,7 @@ export default function Workspace() {
 
         <div className="workspace-brand">
           <div className="workspace-brand__mark">
-            ⚽
+            ⚽️
           </div>
 
           <div>
@@ -45,7 +47,7 @@ export default function Workspace() {
             </div>
 
             <div className="workspace-brand__tagline">
-              PLAN • COACH • WIN
+              Plan. Coach. Win.
             </div>
           </div>
         </div>
@@ -57,15 +59,13 @@ export default function Workspace() {
           <span>♛</span>
           نسخه حرفه‌ای
         </button>
-
       </header>
 
       {/* Welcome */}
       <section className="workspace-welcome">
-
-        <div className="workspace-welcome__eyebrow">
+        <p className="workspace-welcome__eyebrow">
           COACHING PLATFORM
-        </div>
+        </p>
 
         <h1>
           به <span>Coach Studio</span> خوش آمدید
@@ -74,184 +74,155 @@ export default function Workspace() {
         <p>
           فعالیت مورد نظر خود را انتخاب کنید
         </p>
-
       </section>
 
-      {/* Cards */}
+      {/* Main cards */}
       <section className="workspace-actions">
 
-        {/* ================= MATCH ================= */}
-
+        {/* Match Coaching */}
         <article className="workspace-card workspace-card--blue">
-
-          <div className="workspace-card__shine" />
-
-          <div className="workspace-card__content">
-
-            <div className="workspace-card__heading">
-
+          <div className="workspace-card__top">
+            <div>
               <div className="workspace-card__icon">
-                ⚽
+                ⚽️
               </div>
 
-              <div>
-                <h2>کوچینگ مسابقه</h2>
+              <h2>کوچینگ مسابقه</h2>
 
-                <p>
-                  طراحی تاکتیک، ترکیب تیم و
-                  <br />
-                  ارائه راهکارهای لحظه‌ای در جریان مسابقه
-                </p>
-              </div>
-
+              <p>
+                طراحی تاکتیک، ترکیب تیم و
+                <br />
+                ارائه راهکارهای لحظه‌ای در جریان مسابقه
+              </p>
             </div>
-
-            {/* Tactical visual */}
-            <div className="workspace-card__visual workspace-card__visual--match">
-
-              <div className="visual-grid" />
-
-              <div className="field-line field-line--center" />
-
-              <div className="field-circle" />
-
-              <div className="field-box field-box--left" />
-              <div className="field-box field-box--right" />
-
-              <span className="player player--1">7</span>
-              <span className="player player--2">10</span>
-              <span className="player player--3">8</span>
-              <span className="player player--4">9</span>
-
-              <span className="player player--5 player--enemy">3</span>
-              <span className="player player--6 player--enemy">11</span>
-
-              <div className="tactical-arrow tactical-arrow--one" />
-              <div className="tactical-arrow tactical-arrow--two" />
-
-              <span className="visual-ball">●</span>
-
-              <div className="visual-label">
-                LIVE TACTICS
-              </div>
-
-            </div>
-
-            <button
-              type="button"
-              className="workspace-card__button workspace-card__button--blue"
-              onClick={() => setActiveWorkspace("match")}
-            >
-              <span>ورود به کوچینگ مسابقه</span>
-              <strong>←</strong>
-            </button>
-
           </div>
 
+          <div className="workspace-card__visual workspace-card__visual--match">
+            <div className="tactical-field">
+              <span className="player player--1">
+                7
+              </span>
+
+              <span className="player player--2">
+                10
+              </span>
+
+              <span className="player player--3">
+                8
+              </span>
+
+              <span className="player player--4">
+                9
+              </span>
+
+              <span className="ball">
+                ●
+              </span>
+
+              <div className="tactical-line tactical-line--one" />
+              <div className="tactical-line tactical-line--two" />
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className="workspace-card__button"
+            onClick={() =>
+              setActiveWorkspace("match")
+            }
+          >
+            ورود به کوچینگ مسابقه
+            <span>→</span>
+          </button>
         </article>
 
-        {/* ================= TRAINING ================= */}
-
+        {/* Training Design */}
         <article className="workspace-card workspace-card--green">
-
-          <div className="workspace-card__shine" />
-
-          <div className="workspace-card__content">
-
-            <div className="workspace-card__heading">
-
+          <div className="workspace-card__top">
+            <div>
               <div className="workspace-card__icon">
-                ◉
+                🟢
               </div>
 
-              <div>
-                <h2>طراحی تمرین</h2>
+              <h2>طراحی تمرین</h2>
 
-                <p>
-                  طراحی تمرین، استفاده از تجهیزات
-                  <br />
-                  و برنامه‌ریزی جلسات تمرینی
-                </p>
-              </div>
-
+              <p>
+                طراحی تمرین، استفاده از تجهیزات
+                <br />
+                و برنامه‌ریزی جلسات تمرینی
+              </p>
             </div>
+          </div>
 
-            {/* Training visual */}
-            <div className="workspace-card__visual workspace-card__visual--training">
-
-              <div className="training-grid" />
-
-              <div className="training-field-line training-field-line--1" />
-              <div className="training-field-line training-field-line--2" />
-              <div className="training-field-circle" />
-
-              {/* Cones */}
+          <div className="workspace-card__visual workspace-card__visual--training">
+            <div className="training-field">
               <span className="cone cone--1" />
               <span className="cone cone--2" />
               <span className="cone cone--3" />
               <span className="cone cone--4" />
               <span className="cone cone--5" />
-              <span className="cone cone--6" />
 
-              {/* Players */}
               <span className="training-player training-player--1" />
               <span className="training-player training-player--2" />
               <span className="training-player training-player--3" />
-              <span className="training-player training-player--4" />
-
-              {/* Equipment */}
-              <span className="training-pole training-pole--1" />
-              <span className="training-pole training-pole--2" />
-
-              <div className="visual-label">
-                TRAINING PLAN
-              </div>
-
             </div>
-
-            <button
-              type="button"
-              className="workspace-card__button workspace-card__button--green"
-              onClick={() => setActiveWorkspace("training")}
-            >
-              <span>ورود به طراحی تمرین</span>
-              <strong>←</strong>
-            </button>
-
           </div>
 
+          <button
+            type="button"
+            className="workspace-card__button"
+            onClick={() =>
+              setActiveWorkspace("training")
+            }
+          >
+            ورود به طراحی تمرین
+            <span>→</span>
+          </button>
         </article>
-
       </section>
 
       {/* Bottom navigation */}
       <nav className="workspace-bottom-nav">
 
+        {/* Home */}
         <button
           type="button"
           className="workspace-nav-item workspace-nav-item--active"
+          onClick={onHome}
+          aria-label="خانه"
         >
           <span>⌂</span>
           <small>خانه</small>
         </button>
 
-        <button type="button" className="workspace-nav-item">
+        {/* Library */}
+        <button
+          type="button"
+          className="workspace-nav-item"
+        >
           <span>▣</span>
           <small>کتابخانه</small>
         </button>
 
-        <button type="button" className="workspace-nav-item">
+        {/* Training Plan */}
+        <button
+          type="button"
+          className="workspace-nav-item"
+        >
           <span>▤</span>
           <small>برنامه تمرینی</small>
         </button>
 
-        <button type="button" className="workspace-nav-item">
-          <span>⚙</span>
+        {/* Settings */}
+        <button
+          type="button"
+          className="workspace-nav-item"
+        >
+          <span>⚙️</span>
           <small>تنظیمات</small>
         </button>
 
       </nav>
-
     </main>
   );
 }

@@ -1,5 +1,8 @@
+import { useState } from "react";
+
 import { useBoard } from "../../core/contexts/BoardContext";
 import { useUI } from "../../core/contexts/UIContext";
+
 import futsalCourt from "../../assest/courts/futsal.png";
 
 import {
@@ -9,124 +12,157 @@ import {
 
 import DraggableObject from "../Board/DraggableObject";
 
-
 export default function CourtCanvas() {
+  const {
+    activeTool,
+    mode,
+  } = useUI();
 
-  
-const {
-  activeTool,
-  
-  mode,
-
-} = useUI();;
-
- console.log("activeTool:", activeTool);
- 
   const {
     objects,
     addObject,
     moveObject,
   } = useBoard();
 
-<div
-  style={{
-    position: "absolute",
-    top: 12,
-    left: "50%",
-    transform: "translateX(-50%)",
-    zIndex: 2000,
+  const [courtRatio, setCourtRatio] = useState(16 / 9);
 
-    display: "flex",
-    gap: 8,
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, delta } = event;
 
-    background: "#243240",
-    padding: "8px 12px",
-    borderRadius: 12,
-  }}
->
-  
-</div>
+    const obj = objects.find(
+      (item) => item.id === active.id
+    );
 
+    if (!obj) return;
+
+    moveObject(
+      obj.id,
+      obj.x + delta.x,
+      obj.y + delta.y
+    );
+  };
+
+  const handleCourtClick = (
+    event: React.MouseEvent<HTMLDivElement>
+  ) => {
+    if (mode !== "add") return;
+
+    if (!activeTool) return;
+
+    const rect =
+      event.currentTarget.getBoundingClientRect();
+
+    const x =
+      event.clientX - rect.left;
+
+    const y =
+      event.clientY - rect.top;
+
+    addObject(
+      activeTool as any,
+      x,
+      y
+    );
+  };
 
   return (
     <DndContext
-      onDragEnd={(event: DragEndEvent) => {
-        const { active, delta } = event;
-
-        const obj = objects.find(
-          (o) => o.id === active.id
-        );
-
-        if (!obj) return;
-
-        moveObject(
-          obj.id,
-          obj.x + delta.x,
-          obj.y + delta.y
-        );
-      }}
+      onDragEnd={handleDragEnd}
     >
       <div
-       style={{
-  width: "100%",
-  height: "100%",
-  position: "relative",
-  overflow: "hidden",
-  background: "#00A0E3",
-  
-}}
-        
-        onClick={(e) => {
-          if (mode !== "add") return;
+        style={{
+          width: "100%",
+          height: "100%",
 
-if (!activeTool) return;
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
 
-          
-          const rect =
-            e.currentTarget.getBoundingClientRect();
+          position: "relative",
 
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-         
-         addObject(activeTool as any, x, y);
+          overflow: "hidden",
+
+          background: "#202A35",
+
+          padding: 12,
         }}
       >
+
+        {/* =========================
+            COURT SURFACE
+        ========================= */}
+
         <div
-  style={{
-    position: "absolute",
-    top: 10,
-    left: "50%",
-    transform: "translateX(-50%)",
-    display: "flex",
-    gap: 8,
-    zIndex: 1000,
-  }}
->
-  
-
-</div>
-        <img
-  src={futsalCourt}
-          alt="Futsal Court"
+          onClick={handleCourtClick}
           style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "contain",
-            userSelect: "none",
-            pointerEvents: "none",
+            position: "relative",
 
+            width: `min(100%, calc((100dvh - 100px) * ${courtRatio}))`,
+
+            aspectRatio: `${courtRatio}`,
+
+            maxHeight: "100%",
+
+            background: "#00A0E3",
+
+            overflow: "hidden",
+
+            borderRadius: 4,
+
+            boxShadow:
+              "0 12px 40px rgba(0, 0, 0, 0.35)",
           }}
-        />
+        >
 
-        {objects.map((obj) => (
-          <DraggableObject
-            key={obj.id}
-            object={obj}
+          {/* Court image */}
+
+          <img
+            src={futsalCourt}
+            alt="Futsal Court"
+            draggable={false}
+            onLoad={(event) => {
+              const image =
+                event.currentTarget;
+
+              if (
+                image.naturalWidth > 0 &&
+                image.naturalHeight > 0
+              ) {
+                setCourtRatio(
+                  image.naturalWidth /
+                    image.naturalHeight
+                );
+              }
+            }}
+            style={{
+              position: "absolute",
+
+              inset: 0,
+
+              width: "100%",
+              height: "100%",
+
+              objectFit: "fill",
+
+              userSelect: "none",
+
+              pointerEvents: "none",
+            }}
           />
-        ))}
-      </div>
 
-      
+          {/* =========================
+              BOARD OBJECTS
+          ========================= */}
+
+          {objects.map((obj) => (
+            <DraggableObject
+              key={obj.id}
+              object={obj}
+            />
+          ))}
+
+        </div>
+      </div>
     </DndContext>
   );
 }

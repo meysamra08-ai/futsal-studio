@@ -1,29 +1,29 @@
-/* =========================================================
-   COACH STUDIO
-   PREMIUM SPORT SELECTOR
-   ========================================================= */
-
 .sport-selector {
+  position: relative;
+
   min-height: 100vh;
+  min-height: 100dvh;
+
+  width: 100%;
+
   box-sizing: border-box;
 
-  padding: 48px 32px 64px;
-
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
+  padding: 34px 28px 65px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  color: #f8fafc;
+  overflow: hidden;
 
-  background: #020812;
+  background: #050d17;
+
+  color: #fff;
 }
 
+
 /* =========================================================
-   BACKGROUND IMAGE
+   BACKGROUND
    ========================================================= */
 
 .sport-selector__background {
@@ -35,187 +35,125 @@
   height: 100%;
 
   object-fit: cover;
-  object-position: center;
-
-  z-index: -3;
 
   pointer-events: none;
+  user-select: none;
+
+  z-index: 0;
 }
 
 
-/* =========================================================
-   CINEMATIC OVERLAY
-   ========================================================= */
-
-.sport-selector::after {
-  content: "";
-
+.sport-selector__background-overlay {
   position: absolute;
+
   inset: 0;
 
-  z-index: -2;
+  z-index: 1;
 
   pointer-events: none;
 
   background:
     radial-gradient(
-      circle at 50% 42%,
-      rgba(37, 99, 235, 0.16),
-      transparent 34%
-    ),
-    radial-gradient(
-      circle at 8% 50%,
-      rgba(14, 165, 233, 0.10),
-      transparent 30%
+      circle at 50% 25%,
+      rgba(20, 150, 220, 0.12),
+      transparent 45%
     ),
     linear-gradient(
       180deg,
-      rgba(1, 6, 15, 0.28),
-      rgba(1, 6, 15, 0.58) 55%,
-      rgba(1, 6, 15, 0.88)
+      rgba(3, 10, 18, 0.20),
+      rgba(3, 10, 18, 0.48)
     );
 }
 
 
 /* =========================================================
-   TACTICAL HUD
+   HEADER
    ========================================================= */
 
-.sport-selector::before {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  z-index: -1;
-
-  pointer-events: none;
-
-  opacity: 0.55;
-
-  background-image:
-    linear-gradient(
-      90deg,
-      transparent 49.8%,
-      rgba(96, 165, 250, 0.07) 50%,
-      transparent 50.2%
-    ),
-    linear-gradient(
-      0deg,
-      transparent 49.8%,
-      rgba(96, 165, 250, 0.05) 50%,
-      transparent 50.2%
-    );
-
-  background-size: 160px 160px;
-
-  mask-image:
-    radial-gradient(
-      ellipse at center,
-      black 0%,
-      transparent 72%
-    );
-}
-
-
-/* =========================================================
-   BRAND / HERO HEADER
-   ========================================================= */
-
-.sport-selector__brand {
+.sport-selector__header {
   position: relative;
-  z-index: 5;
 
-  margin-top: 4px;
-  margin-bottom: 8px;
+  z-index: 5;
 
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-
-  font-size: 34px;
-  line-height: 1;
-
-  font-weight: 800;
-  letter-spacing: -1px;
-
-  color: #f8fafc;
-
-  text-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.8),
-    0 0 22px rgba(59, 130, 246, 0.25);
-}
-
-/* small blue light under the brand */
-
-.sport-selector__brand::after {
-  content: "";
-
-  position: absolute;
-
-  left: 50%;
-  bottom: -13px;
-
-  width: 72px;
-  height: 2px;
-
-  transform: translateX(-50%);
-
-  border-radius: 999px;
-
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(96, 165, 250, 0.95),
-    transparent
-  );
-
-  box-shadow:
-    0 0 12px rgba(59, 130, 246, 0.7);
-}
-
-
-/* =========================================================
-   SUBTITLE
-   ========================================================= */
-
-.sport-selector__subtitle {
-  position: relative;
-  z-index: 5;
-
-  margin: 14px 0 34px;
-
-  color: rgba(226, 232, 240, 0.72);
-
-  font-size: 11px;
-  font-weight: 600;
-
-  letter-spacing: 2.8px;
-
-  text-transform: uppercase;
 
   text-align: center;
 
-  text-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.9);
+  margin-bottom: 25px;
 }
 
-/* tactical label */
 
-.sport-selector__subtitle::after {
-  content: "TACTICAL COACHING PLATFORM";
+.sport-selector__brand {
+  display: flex;
 
-  display: block;
+  align-items: center;
 
-  margin-top: 10px;
+  gap: 9px;
 
-  color: rgba(96, 165, 250, 0.48);
+  font-size: clamp(27px, 3vw, 39px);
 
-  font-size: 8px;
-  font-weight: 700;
+  font-weight: 800;
 
-  letter-spacing: 2px;
+  letter-spacing: -1px;
+
+  text-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.55);
+}
+
+
+.sport-selector__brand b {
+  color: #25c7f7;
+}
+
+
+.sport-selector__brand-ball {
+  font-size: 0.78em;
+
+  filter:
+    drop-shadow(
+      0 0 10px
+      rgba(40, 190, 255, 0.35)
+    );
+}
+
+
+.sport-selector__eyebrow {
+  margin-top: 8px;
+
+  color: #65d8ff;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 3px;
+}
+
+
+.sport-selector__title {
+  margin: 9px 0 3px;
+
+  font-size: clamp(24px, 2.7vw, 34px);
+
+  font-weight: 800;
+
+  letter-spacing: -0.7px;
+
+  color: #ffffff;
+
+  text-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.45);
+}
+
+
+.sport-selector__subtitle {
+  margin: 0;
+
+  color: rgba(226, 239, 250, 0.72);
+
+  font-size: 12px;
 }
 
 
@@ -225,140 +163,79 @@
 
 .sport-selector__grid {
   position: relative;
-  z-index: 4;
 
-  width: min(900px, 100%);
+  z-index: 5;
+
+  width: min(1040px, 100%);
 
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
 
-  gap: 18px;
-}
+  gap: 15px;
 
-
-/* central ambient glow */
-
-.sport-selector__grid::before {
-  content: "";
-
-  position: absolute;
-  left: 50%;
-  top: 48%;
-
-  width: 700px;
-  height: 520px;
-
-  transform: translate(-50%, -50%);
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(37, 99, 235, 0.14),
-      transparent 68%
-    );
-
-  filter: blur(24px);
-
-  z-index: -1;
-
-  pointer-events: none;
+  margin: 0 auto;
 }
 
 
 /* =========================================================
-   SPORT CARD
+   CARD
    ========================================================= */
 
 .sport-card {
   position: relative;
 
-  height: 220px;
+  width: 100%;
+  height: 185px;
 
   padding: 0;
 
   overflow: hidden;
 
-  border: 1px solid rgba(148, 163, 184, 0.24);
+  box-sizing: border-box;
 
-  border-radius: 20px;
+  display: block;
 
-  background: rgba(15, 23, 42, 0.35);
-
-  color: #f8fafc;
-
-  cursor: pointer;
-
-  outline: none;
-
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.38),
-    inset 0 1px 0 rgba(255, 255, 255, 0.09),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.35);
-
-  backdrop-filter: blur(3px);
-
-  transform: translateY(0);
-
-  transition:
-    transform 240ms cubic-bezier(.2,.8,.2,1),
-    border-color 240ms ease,
-    box-shadow 240ms ease,
-    filter 240ms ease;
-}
-
-
-/* =========================================================
-   CARD GLASS HIGHLIGHT
-   ========================================================= */
-
-.sport-card::before {
-  content: "";
-
-  position: absolute;
-
-  inset: 0;
-
-  z-index: 2;
-
-  border-radius: inherit;
-
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.13),
-      transparent 23%,
-      transparent 68%,
-      rgba(59, 130, 246, 0.07)
-    );
-}
-
-
-/* fine border */
-
-.sport-card::after {
-  content: "";
-
-  position: absolute;
-
-  inset: 1px;
-
-  z-index: 2;
+  border:
+    1px solid
+    rgba(160, 210, 235, 0.28);
 
   border-radius: 19px;
 
-  border: 1px solid rgba(255, 255, 255, 0.035);
+  background:
+    linear-gradient(
+      145deg,
+      #142333,
+      #08111d
+    );
 
-  pointer-events: none;
+  color: #ffffff;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  text-align: left;
+
+  box-shadow:
+    0 12px 32px
+    rgba(0, 0, 0, 0.38),
+
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.09);
+
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    filter 0.22s ease;
 }
 
 
 /* =========================================================
-   CARD IMAGE
+   IMAGE
    ========================================================= */
 
 .sport-card__image {
@@ -371,21 +248,22 @@
 
   object-fit: cover;
 
-  filter:
-    brightness(0.68)
-    saturate(0.88)
-    contrast(1.04);
+  display: block;
 
-  transform: scale(1);
+  z-index: 0;
+
+  pointer-events: none;
+
+  user-select: none;
 
   transition:
-    transform 500ms cubic-bezier(.2,.8,.2,1),
-    filter 350ms ease;
+    transform 0.35s ease,
+    filter 0.35s ease;
 }
 
 
 /* =========================================================
-   CARD IMAGE OVERLAY
+   DARK GRADIENT
    ========================================================= */
 
 .sport-card__overlay {
@@ -400,103 +278,99 @@
   background:
     linear-gradient(
       180deg,
-      rgba(2, 6, 23, 0.02) 10%,
-      rgba(2, 6, 23, 0.05) 38%,
-      rgba(2, 6, 23, 0.48) 65%,
-      rgba(2, 6, 23, 0.94) 100%
+      rgba(2, 9, 16, 0.02) 0%,
+      rgba(2, 9, 16, 0.04) 30%,
+      rgba(2, 9, 16, 0.48) 62%,
+      rgba(2, 9, 16, 0.96) 100%
     );
 }
 
 
 /* =========================================================
-   CARD HOVER
+   PREMIUM SHINE
    ========================================================= */
 
-.sport-card:hover {
-  transform: translateY(-6px);
+.sport-card__shine {
+  position: absolute;
 
-  border-color: rgba(96, 165, 250, 0.62);
+  top: -70px;
+  left: -40%;
 
-  box-shadow:
-    0 24px 55px rgba(0, 0, 0, 0.50),
-    0 0 32px rgba(37, 99, 235, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.13);
-}
+  width: 180%;
+  height: 120px;
 
-.sport-card:hover .sport-card__image {
-  transform: scale(1.055);
+  z-index: 2;
 
-  filter:
-    brightness(0.76)
-    saturate(1.03)
-    contrast(1.04);
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      105deg,
+      transparent 25%,
+      rgba(255,255,255,0.08) 45%,
+      transparent 65%
+    );
+
+  transform: rotate(-4deg);
 }
 
 
 /* =========================================================
-   CARD BOTTOM CONTENT
+   CARD BOTTOM
    ========================================================= */
 
 .sport-card__bottom {
   position: absolute;
 
-  left: 15px;
-  right: 15px;
-  bottom: 14px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
-  z-index: 5;
+  z-index: 4;
 
   display: flex;
-  align-items: flex-end;
 
-  gap: 11px;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 13px 14px 15px;
 }
 
 
 /* =========================================================
-   SPORT ICON
+   ICON
    ========================================================= */
 
 .sport-card__icon {
-  width: 42px;
-  height: 42px;
+  flex: 0 0 auto;
 
-  flex: 0 0 42px;
+  width: 41px;
+  height: 41px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
-  border-radius: 13px;
+  border-radius: 12px;
 
   background:
-    linear-gradient(
-      145deg,
-      rgba(15, 23, 42, 0.92),
-      rgba(30, 41, 59, 0.72)
-    );
+    rgba(7, 22, 37, 0.80);
 
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border:
+    1px solid
+    rgba(255,255,255,0.18);
 
-  box-shadow:
-    0 8px 20px rgba(0, 0, 0, 0.48),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+
+  -webkit-backdrop-filter: blur(10px);
 
   font-size: 20px;
 
-  transition:
-    transform 220ms ease,
-    border-color 220ms ease,
-    box-shadow 220ms ease;
-}
-.sport-card:hover .sport-card__icon {
-  transform: translateY(-2px);
-
-  border-color: rgba(96, 165, 250, 0.68);
-
   box-shadow:
-    0 8px 22px rgba(0, 0, 0, 0.5),
-    0 0 18px rgba(59, 130, 246, 0.2);
+    0 5px 17px
+    rgba(0,0,0,0.30);
 }
 
 
@@ -508,103 +382,47 @@
   min-width: 0;
 
   display: flex;
+
   flex-direction: column;
 
   gap: 3px;
-
-  text-align: left;
 }
+
 
 .sport-card__name {
   display: block;
 
+  color: #ffffff;
+
   font-size: 18px;
-  line-height: 1.1;
 
   font-weight: 800;
 
-  color: #f8fafc;
+  line-height: 1.1;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
 
   text-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.9);
+    0 2px 8px
+    rgba(0,0,0,0.7);
 }
+
 
 .sport-card__action {
   display: block;
 
+  color:
+    rgba(255,255,255,0.70);
+
   font-size: 8px;
-  line-height: 1;
 
-  font-weight: 700;
+  font-weight: 800;
 
-  letter-spacing: 1.4px;
-
-  text-transform: uppercase;
-
-  color: rgba(191, 219, 254, 0.62);
-}
-
-
-/* =========================================================
-   SELECTED CARD
-   ========================================================= */
-
-.sport-card--selected {
-  border-color: rgba(59, 130, 246, 0.95);
-
-  box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.52),
-    0 0 0 1px rgba(59, 130, 246, 0.30),
-    0 0 34px rgba(37, 99, 235, 0.28),
-    inset 0 1px 0 rgba(147, 197, 253, 0.22);
-
-  transform: translateY(-3px);
-}
-
-.sport-card--selected::before {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(147, 197, 253, 0.17),
-      transparent 24%,
-      transparent 62%,
-      rgba(37, 99, 235, 0.13)
-    );
-}
-
-.sport-card--selected .sport-card__image {
-  filter:
-    brightness(0.74)
-    saturate(1.08)
-    contrast(1.05);
-}
-
-
-/* =========================================================
-   SELECTED BLUE ACCENT
-   ========================================================= */
-
-.sport-card--selected .sport-card__bottom::before {
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-  bottom: -14px;
-
-  width: 58px;
-  height: 2px;
-
-  border-radius: 999px;
-
-  background: linear-gradient(
-    90deg,
-    #60a5fa,
-    transparent
-  );
-
-  box-shadow:
-    0 0 12px rgba(59, 130, 246, 0.7);
+  letter-spacing: 1.2px;
 }
 
 
@@ -615,15 +433,16 @@
 .sport-card__check {
   position: absolute;
 
-  top: 13px;
-  right: 13px;
+  top: 11px;
+  right: 11px;
 
-  z-index: 6;
+  z-index: 5;
 
-  width: 34px;
-  height: 34px;
+  width: 31px;
+  height: 31px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -632,67 +451,151 @@
   background:
     linear-gradient(
       145deg,
-      #3b82f6,
-      #1d4ed8
+      #36d7ff,
+      #087cf0
     );
 
-  border: 1px solid rgba(191, 219, 254, 0.75);
+  border:
+    1px solid
+    rgba(255,255,255,0.55);
 
-  color: #ffffff;
+  color: #fff;
 
-  font-size: 17px;
+  font-size: 16px;
+
   font-weight: 900;
 
   box-shadow:
-    0 8px 22px rgba(0, 0, 0, 0.48),
-    0 0 20px rgba(37, 99, 235, 0.55);
+    0 0 0 4px
+    rgba(20, 170, 255, 0.10),
+
+    0 5px 18px
+    rgba(0, 160, 255, 0.40);
 
   animation:
-    sport-check-in 220ms cubic-bezier(.2,.8,.2,1);
+    checkPop 0.22s ease;
 }
 
 
-/* =========================================================
-   FOOTER-LIKE VISUAL
-   ========================================================= */
-
-.sport-selector__grid::after {
-  content: "SELECT YOUR SPORT  •  BUILD YOUR PLAN";
-
-  position: absolute;
-
-  left: 50%;
-  bottom: -46px;
-
-  transform: translateX(-50%);
-
-  white-space: nowrap;
-
-  color: rgba(148, 163, 184, 0.40);
-
-  font-size: 8px;
-  font-weight: 700;
-
-  letter-spacing: 2.4px;
-
-  pointer-events: none;
-}
-
-
-/* =========================================================
-   ANIMATION
-   ========================================================= */
-
-@keyframes sport-check-in {
+@keyframes checkPop {
   from {
-    opacity: 0;
     transform: scale(0.65);
+    opacity: 0;
   }
 
   to {
-    opacity: 1;
     transform: scale(1);
+    opacity: 1;
   }
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.sport-card:hover {
+  transform: translateY(-5px);
+
+  border-color:
+    rgba(60, 205, 255, 0.80);
+
+  box-shadow:
+    0 20px 42px
+    rgba(0,0,0,0.45),
+
+    0 0 28px
+    rgba(0,180,255,0.13);
+
+  filter: brightness(1.07);
+}
+
+
+.sport-card:hover .sport-card__image {
+  transform: scale(1.045);
+
+  filter:
+    saturate(1.08)
+    contrast(1.03);
+}
+
+
+/* =========================================================
+   SELECTED
+   ========================================================= */
+
+.sport-card--selected,
+.sport-card--selecting {
+  border-color: #24c9ff;
+
+  box-shadow:
+    0 0 0 1px
+    rgba(36,201,255,0.25),
+
+    0 20px 42px
+    rgba(0,0,0,0.45),
+
+    0 0 32px
+    rgba(0,185,255,0.20);
+}
+
+
+/* =========================================================
+   REFEREE
+   ========================================================= */
+
+.sport-card--referee {
+  background:
+    linear-gradient(
+      145deg,
+      #24251c,
+      #10130d
+    );
+}
+
+
+.sport-card--referee .sport-card__icon {
+  background:
+    rgba(92, 82, 10, 0.65);
+
+  border-color:
+    rgba(250,204,21,0.30);
+}
+
+
+/* =========================================================
+   OTHER
+   ========================================================= */
+
+.sport-card--other {
+  background:
+    linear-gradient(
+      145deg,
+      #182333,
+      #0b121d
+    );
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.sport-selector__footer {
+  position: relative;
+
+  z-index: 5;
+
+  margin-top: 20px;
+
+  color:
+    rgba(255,255,255,0.52);
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
 }
 
 
@@ -700,68 +603,166 @@
    TABLET
    ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 950px) {
+
   .sport-selector {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .sport-selector__grid {
-    gap: 14px;
-  }
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 700px) {
-  .sport-selector {
-    padding: 34px 16px 56px;
-  }
-
-  .sport-selector__brand {
-    font-size: 28px;
-  }
-
-  .sport-selector__subtitle {
-    margin-bottom: 28px;
-  }
-  .sport-selector__grid {
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 12px;
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
   }
 
   .sport-card {
-    height: 220px;
-
-    border-radius: 17px;
-  }
-
-  .sport-card__bottom {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-  }
-
-  .sport-card__name {
-    font-size: 16px;
+    height: 175px;
   }
 }
 
 
 /* =========================================================
-   VERY SMALL PHONES
+   PHONE
    ========================================================= */
 
-@media (max-width: 420px) {
-  .sport-selector__grid {
-    grid-template-columns: 1fr;
+@media (max-width: 650px) {
+
+  .sport-selector {
+    padding:
+      25px
+      13px
+      60px;
   }
 
-  .sport-selector__grid::after {
-    display: none;
+  .sport-selector__header {
+    margin-bottom: 18px;
+  }
+
+  .sport-selector__brand {
+    font-size: 26px;
+  }
+
+  .sport-selector__eyebrow {
+    font-size: 7px;
+    letter-spacing: 2px;
+  }
+
+  .sport-selector__title {
+    font-size: 23px;
+  }
+
+  .sport-selector__subtitle {
+    font-size: 10px;
+  }
+
+  .sport-selector__grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+  }
+
+  .sport-card {
+    height: 150px;
+
+    border-radius: 16px;
+  }
+
+  .sport-card__bottom {
+    padding:
+      9px 9px 11px;
+
+    gap: 8px;
+  }
+
+  .sport-card__icon {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 10px;
+
+    font-size: 17px;
+  }
+
+  .sport-card__name {
+    font-size: 14px;
+  }
+
+  .sport-card__action {
+    font-size: 6px;
+
+    letter-spacing: 0.7px;
+  }
+
+  .sport-card__check {
+    width: 27px;
+    height: 27px;
+
+    top: 8px;
+    right: 8px;
+
+    font-size: 14px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+  .sport-selector {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+
+  .sport-selector__grid {
+    gap: 8px;
+  }
+
+  .sport-card {
+    height: 142px;
+  }
+
+  .sport-card__name {
+    font-size: 13px;
+  }
+}
+
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+.sport-card:focus-visible {
+  outline:
+    2px solid #35d3ff;
+
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .sport-card,
+  .sport-card__image {
+    transition: none;
+  }
+
+  .sport-card:hover {
+    transform: none;
+  }
+
+  .sport-card:hover .sport-card__image {
+    transform: none;
+  }
+
+  .sport-card__check {
+    animation: none;
   }
 }

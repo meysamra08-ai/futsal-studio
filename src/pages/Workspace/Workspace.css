@@ -22,7 +22,7 @@
       rgba(2, 9, 18, 0.86),
       rgba(3, 12, 24, 0.90)
     ),
-    url("/background/coach-background.png") center center / cover no-repeat fixed;
+    url("/background/sport-selector-bg.png") center center / cover no-repeat fixed;
 
   font-family:
     Arial,
@@ -1507,7 +1507,7 @@
         rgba(2, 9, 18, 0.88),
         rgba(3, 12, 24, 0.92)
       ),
-      url("/background/coach-background.png") center center / cover no-repeat;
+      url("/background/sport-selector-bgpng") center center / cover no-repeat;
   }
 
 

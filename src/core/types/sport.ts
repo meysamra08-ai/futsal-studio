@@ -4,7 +4,9 @@ export type SportId =
   | "basketball"
   | "volleyball"
   | "handball"
-  | "hockey";
+  | "hockey"
+  | "referee"
+  | "other";
 
 export interface Sport {
   id: SportId;
