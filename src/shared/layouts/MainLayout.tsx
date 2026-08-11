@@ -3,62 +3,32 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import CourtCanvas from "../../components/Court/CourtCanvas";
 import RightPanel from "../../components/RightPanel/RightPanel";
 
+import "./MainLayout.css";
+
 export default function MainLayout() {
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "60px 1fr 260px",
-        gridTemplateRows: "56px 1fr",
-        height: "100vh",
-        background: "#151C24",
-        overflow: "hidden",
-      }}
-    >
+    <div className="main-layout">
+
       {/* Header */}
-      <div
-        style={{
-          gridColumn: "1 / 4",
-          zIndex: 20,
-        }}
-      >
+      <header className="main-layout__header">
         <Header />
-      </div>
+      </header>
 
       {/* Sidebar */}
-      <div
-        style={{
-          background: "#1E2732",
-          borderRight: "1px solid #2F3D4D",
-        }}
-      >
+      <aside className="main-layout__sidebar">
         <Sidebar />
-      </div>
+      </aside>
 
       {/* Court */}
-      <div
-        style={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          background: "#202A35",
-          overflow: "hidden",
-        }}
-      >
+      <main className="main-layout__court">
         <CourtCanvas />
-      </div>
+      </main>
 
       {/* Right Panel */}
-      <div
-        style={{
-          background: "#1E2732",
-          borderLeft: "1px solid #2F3D4D",
-          overflow: "hidden",
-        }}
-      >
+      <aside className="main-layout__right-panel">
         <RightPanel />
-      </div>
+      </aside>
+
     </div>
   );
 }
