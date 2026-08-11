@@ -1,12 +1,45 @@
 import { useState } from "react";
 import MainLayout from "../../shared/layouts/MainLayout";
 import "./Workspace.css";
+import { useEffect } from "react";
+import { Capacitor } from "@capacitor/core";
+import { ScreenOrientation } from "@capacitor/screen-orientation";
 
 type WorkspaceMode = "match" | "training" | null;
 
 interface WorkspaceProps {
   onHome: () => void;
 }
+
+useEffect(() => {
+  if (!Capacitor.isNativePlatform()) {
+    return;
+  }
+
+  const lockLandscape = async () => {
+    try {
+      await ScreenOrientation.lock({
+        orientation: "landscape",
+      });
+    } catch (error) {
+      console.error(
+        "Failed to lock Android orientation:",
+        error
+      );
+    }
+  };
+
+  lockLandscape();
+
+  return () => {
+    ScreenOrientation.unlock().catch((error) => {
+      console.error(
+        "Failed to unlock orientation:",
+        error
+      );
+    });
+  };
+}, []);
 
 export default function Workspace({
   onHome,
