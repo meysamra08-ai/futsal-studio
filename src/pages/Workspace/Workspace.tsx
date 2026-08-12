@@ -11,43 +11,43 @@ interface WorkspaceProps {
   onHome: () => void;
 }
 
-useEffect(() => {
-  if (!Capacitor.isNativePlatform()) {
-    return;
-  }
-
-  const lockLandscape = async () => {
-    try {
-      await ScreenOrientation.lock({
-        orientation: "landscape",
-      });
-    } catch (error) {
-      console.error(
-        "Failed to lock Android orientation:",
-        error
-      );
-    }
-  };
-
-  lockLandscape();
-
-  return () => {
-    ScreenOrientation.unlock().catch((error) => {
-      console.error(
-        "Failed to unlock orientation:",
-        error
-      );
-    });
-  };
-}, []);
-
 export default function Workspace({
   onHome,
 }: WorkspaceProps) {
-  const [activeWorkspace, setActiveWorkspace] =
-    useState<WorkspaceMode>(null);
+  useEffect(() => {
+    if (!Capacitor.isNativePlatform()) {
+      return;
+    }
 
-  if (activeWorkspace) {
+    const lockLandscape = async () => {
+      try {
+        await ScreenOrientation.lock({
+          orientation: "landscape",
+        });
+      } catch (error) {
+        console.error(
+          "Failed to lock Android orientation:",
+          error
+        );
+      }
+    };
+
+    lockLandscape();
+
+    return () => {
+      ScreenOrientation.unlock().catch((error) => {
+        console.error(
+          "Failed to unlock orientation:",
+          error
+        );
+      });
+    };
+  }, []);
+
+ const [activeWorkspace, setActiveWorkspace] =
+  useState<WorkspaceMode>(null);
+
+if (activeWorkspace) {
     return <MainLayout />;
   }
 
