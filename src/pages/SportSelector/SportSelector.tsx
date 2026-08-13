@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Capacitor } from "@capacitor/core";
-
 import { SPORTS } from "../../modules/sports/sports";
 import { useApp } from "../../core/contexts/AppContext";
 import type { SportId } from "../../core/types/sport";
@@ -175,6 +174,15 @@ export default function SportSelector({
             <strong>Referee</strong>
             <small>REFEREE TOOLS</small>
           </span>
+
+          <button
+          type="button"
+          className="sport-selector__back"
+          onClick={() => window.history.back()}
+          aria-label="Back"
+>
+  ←
+</button>
 
           <span className="sport-selector__footer-arrow">
             ›
