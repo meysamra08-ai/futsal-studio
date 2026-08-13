@@ -22,3 +22,31 @@
     align-items:center;
     gap:8px;
 }
+@media (max-width: 900px) {
+  .header {
+    height: 52px;
+    min-height: 52px;
+    box-sizing: border-box;
+    padding: 0 10px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .actions {
+    gap: 5px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    height: 52px;
+    min-height: 52px;
+    padding: 0 8px;
+  }
+
+  .logo {
+    font-size: 16px;
+  }
+}
