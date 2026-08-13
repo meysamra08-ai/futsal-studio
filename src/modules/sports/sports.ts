@@ -30,7 +30,13 @@ export const SPORTS: Sport[] = [
     name: "Handball",
     icon: "🤾",
     courtImage: "/sports/handball.png",
-  },
+},
+  {
+  id: "Tennis",
+  name: "Tennis",
+  icon: "🎾",
+  courtImage: "/sports/tennis.png",
+},
   {
     id: "referee",
     name: "Referee",

@@ -27,7 +27,7 @@ const defaultLicense: License = {
     "basketball",
     "volleyball",
     "handball",
-    "hockey",
+    "futsal",
   ],
   features: [
     "match-coach",

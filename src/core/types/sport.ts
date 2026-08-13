@@ -4,7 +4,7 @@ export type SportId =
   | "basketball"
   | "volleyball"
   | "handball"
-  | "hockey"
+  | "Tennis"
   | "referee"
   | "other";
 
