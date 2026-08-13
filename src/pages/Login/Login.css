@@ -1,18 +1,24 @@
 .login-page {
-  min-height: 100vh;
-  box-sizing: border-box;
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
 
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
-  padding: 40px 20px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
 
   background:
     linear-gradient(
       180deg,
-      rgba(3, 12, 25, 0.72),
-      rgba(2, 10, 20, 0.96)
+      rgba(3,12,25,.72),
+      rgba(2,10,20,.96)
     ),
     url("/background/sport-selector-bg.png");
 
@@ -20,9 +26,8 @@
   background-position: center;
   background-repeat: no-repeat;
 
-  color: #ffffff;
+  color: #fff;
 }
-
 
 .login-card {
   width: min(440px, 100%);
@@ -473,5 +478,23 @@
   .register-text {
     margin-top: 16px;
     font-size: 11px;
+  }
+}
+/* ANDROID LANDSCAPE FULLSCREEN */
+@media (orientation: landscape) and (max-height: 500px) {
+
+  .login-page{
+    padding:0;
+  }
+
+  .login-card{
+    width:min(700px,92vw);
+    padding:22px 28px;
+    border-radius:22px;
+  }
+
+  .login-logo{
+    width:72px;
+    height:72px;
   }
 }
