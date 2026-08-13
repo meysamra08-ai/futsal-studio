@@ -409,3 +409,69 @@
     font-size:17px;
   }
 }
+/* =========================================================
+   ANDROID PHONE - PORTRAIT
+   ========================================================= */
+
+@media (max-width: 600px) and (orientation: portrait) {
+
+  .login-page {
+    width: 100%;
+    min-height: 100dvh;
+    height: 100dvh;
+
+    padding: 16px 12px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 430px;
+
+    padding: 24px 18px;
+
+    box-sizing: border-box;
+
+    border-radius: 20px;
+  }
+
+  .login-logo {
+    width: 72px;
+    height: 72px;
+  }
+
+  .login-hero h1 {
+    font-size: 21px;
+  }
+
+  .login-hero p {
+    font-size: 11px;
+  }
+
+  .login-button {
+    height: 50px;
+    font-size: 15px;
+  }
+
+  .google-button {
+    height: 48px;
+    font-size: 14px;
+  }
+
+  .login-divider {
+    margin: 15px 0;
+  }
+
+  .register-text {
+    margin-top: 16px;
+    font-size: 11px;
+  }
+}
