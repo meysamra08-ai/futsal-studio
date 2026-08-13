@@ -10,13 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-
-       <activity
-    android:name="com.getcapacitor.BridgeActivity"
+<activity
+    android:name="com.example.app.MainActivity"
     android:exported="true"
     android:launchMode="singleTask"
     android:screenOrientation="landscape"
-    android:windowFullscreen="true"
     android:theme="@style/AppTheme"
     android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode|navigation">
 
