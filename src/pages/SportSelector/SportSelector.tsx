@@ -19,8 +19,6 @@ export default function SportSelector({
   const [selectingSport, setSelectingSport] =
     useState<SportId | null>(null);
 
-  // فقط Android این کلاس اضافه را دریافت می‌کند.
-  // Web و Windows همان کلاس قبلی را خواهند داشت.
   const isAndroid = Capacitor.getPlatform() === "android";
 
   const handleSportSelect = (sportId: SportId) => {
@@ -32,16 +30,24 @@ export default function SportSelector({
     }, 220);
   };
 
+  // فقط این 6 ورزش در صفحه اصلی نمایش داده می‌شوند.
+  const mainSports = SPORTS.filter((sport) =>
+    [
+      "football",
+      "futsal",
+      "basketball",
+      "volleyball",
+      "handball",
+      "tennis",
+    ].includes(sport.id)
+  );
+
   return (
     <main
       className={`sport-selector ${
         isAndroid ? "sport-selector--android" : ""
       }`}
     >
-      {/* =====================================================
-          BACKGROUND
-          ===================================================== */}
-
       <img
         className="sport-selector__background"
         src="/background/sport-selector-bg.png"
@@ -51,10 +57,16 @@ export default function SportSelector({
 
       <div className="sport-selector__background-overlay" />
 
-      {/* =====================================================
-          HEADER
-          ===================================================== */}
+      {/* BACK BUTTON */}
+      <button
+        type="button"
+        className="sport-selector__back"
+        aria-label="Back"
+      >
+        ←
+      </button>
 
+      {/* HEADER */}
       <header className="sport-selector__header">
         <div className="sport-selector__brand">
           <span className="sport-selector__brand-ball">
@@ -79,21 +91,14 @@ export default function SportSelector({
         </p>
       </header>
 
-      {/* =====================================================
-          SPORT CARDS
-          ===================================================== */}
-
+      {/* SPORTS */}
       <section className="sport-selector__grid">
-        {SPORTS.map((sport) => {
+        {mainSports.map((sport) => {
           const isSelected = currentSport === sport.id;
           const isSelecting = selectingSport === sport.id;
 
           const sportImage =
-            sport.id === "referee"
-              ? "/sports/Referee.png"
-              : sport.id === "other"
-              ? "/sports/Others.png"
-              : `/sports/${sport.id}.png`;
+            `/sports/${sport.id}.png`;
 
           return (
             <button
@@ -116,12 +121,6 @@ export default function SportSelector({
 
               <div className="sport-card__overlay" />
 
-              {isSelected && (
-                <span className="sport-card__check">
-                  ✓
-                </span>
-              )}
-
               <div className="sport-card__bottom">
                 <div className="sport-card__icon">
                   {sport.icon}
@@ -137,22 +136,49 @@ export default function SportSelector({
                   </span>
                 </div>
               </div>
+
+              <span className="sport-card__glow" />
             </button>
           );
         })}
       </section>
 
-      {/* =====================================================
-          FOOTER
-          ===================================================== */}
-
+      {/* BOTTOM ACTIONS */}
       <div className="sport-selector__footer">
-        <button type="button">
-          More
+        <button
+          type="button"
+          className="sport-selector__footer-button sport-selector__footer-button--more"
+        >
+          <span className="sport-selector__footer-icon">
+            •••
+          </span>
+
+          <span className="sport-selector__footer-text">
+            <strong>More</strong>
+            <small>EXPLORE MORE SPORTS</small>
+          </span>
+
+          <span className="sport-selector__footer-arrow">
+            ›
+          </span>
         </button>
 
-        <button type="button">
-          Referee
+        <button
+          type="button"
+          className="sport-selector__footer-button sport-selector__footer-button--referee"
+        >
+          <span className="sport-selector__footer-icon">
+            ⚑
+          </span>
+
+          <span className="sport-selector__footer-text">
+            <strong>Referee</strong>
+            <small>REFEREE TOOLS</small>
+          </span>
+
+          <span className="sport-selector__footer-arrow">
+            ›
+          </span>
         </button>
       </div>
     </main>
