@@ -5,8 +5,6 @@ import Login from "./pages/Login/Login";
 import SportSelector from "./pages/SportSelector/SportSelector";
 import Workspace from "./pages/Workspace/Workspace";
 
-
-
 type Page = "login" | "sport" | "workspace";
 
 export default function App() {
@@ -60,9 +58,33 @@ export default function App() {
     }
   };
 
-  /*
-   * LOGIN
-   */
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname;
+
+      if (path === "/sport") {
+        setLoggedIn(true);
+        setCurrentPage("sport");
+      } else if (path === "/workspace") {
+        setLoggedIn(true);
+        setCurrentPage("workspace");
+      } else {
+        setLoggedIn(false);
+        setCurrentPage("login");
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
+
+  /* =========================
+     LOGIN
+     ========================= */
+
   if (!loggedIn || currentPage === "login") {
     return (
       <div
@@ -77,9 +99,10 @@ export default function App() {
     );
   }
 
-  /*
-   * SPORT SELECTOR
-   */
+  /* =========================
+     SPORT SELECTOR
+     ========================= */
+
   if (currentPage === "sport") {
     return (
       <div
@@ -99,9 +122,10 @@ export default function App() {
     );
   }
 
-  /*
-   * WORKSPACE
-   */
+  /* =========================
+     WORKSPACE
+     ========================= */
+
   return (
     <div
       className={
@@ -111,7 +135,9 @@ export default function App() {
       }
     >
       <Workspace
-        onHome={() => navigateTo("sport")}
+        onHome={() =>
+          navigateTo("sport")
+        }
       />
     </div>
   );
