@@ -766,1389 +766,419 @@
     animation: none;
   }
 }
+
 /* =========================================================
-   ANDROID LANDSCAPE — SPORT SELECTOR
-   Android ONLY
+   ANDROID APP — LANDSCAPE ONLY
+   WAP / DESKTOP ARE NOT AFFECTED
    ========================================================= */
 
-.sport-selector--android {
-  position: relative;
-
-  width: 100%;
+.android-app .sport-selector {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
   height: 100dvh;
-  min-height: 100dvh;
-
+  min-height: 0;
+  margin: 0;
   box-sizing: border-box;
-
-  padding: 22px 28px 26px;
-
+  padding: 14px 24px 16px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  overflow: hidden;
-
-  background: #020b15;
+  background: #020b14;
 }
 
-
-/* BACKGROUND */
-
-.sport-selector--android .sport-selector__background {
+.android-app .sport-selector__background {
   position: absolute;
   inset: 0;
-
   width: 100%;
   height: 100%;
-
   object-fit: cover;
-
+  opacity: .28;
+  pointer-events: none;
   z-index: 0;
-
-  opacity: 0.72;
 }
 
-.sport-selector--android .sport-selector__background-overlay {
+.android-app .sport-selector__background-overlay {
+  position: absolute;
+  inset: 0;
   z-index: 1;
-
+  pointer-events: none;
   background:
-    radial-gradient(
-      circle at 50% 35%,
-      rgba(0, 130, 220, 0.18),
-      transparent 48%
-    ),
     linear-gradient(
       180deg,
-      rgba(1, 9, 18, 0.28),
-      rgba(1, 7, 15, 0.82)
+      rgba(0, 8, 17, .32),
+      rgba(0, 8, 17, .78)
     );
 }
 
-
-/* HEADER */
-
-.sport-selector--android .sport-selector__header {
-  z-index: 5;
-
-  margin: 0 0 22px;
-
-  flex: 0 0 auto;
+/* Only one Back button — top left */
+.android-app .sport-selector__back {
+  position: fixed !important;
+  top: 14px !important;
+  left: 16px !important;
+  width: 52px !important;
+  height: 52px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 9999 !important;
+  border: 1px solid rgba(0, 210, 255, .82) !important;
+  border-radius: 15px !important;
+  background: rgba(4, 20, 35, .92) !important;
+  color: #fff !important;
+  font-size: 28px !important;
+  line-height: 1 !important;
+  box-shadow:
+    0 0 14px rgba(0, 200, 255, .35),
+    inset 0 0 12px rgba(0, 160, 255, .08) !important;
+  cursor: pointer;
 }
 
-.sport-selector--android .sport-selector__brand {
-  gap: 10px;
-
-  font-size: 38px;
-  font-weight: 800;
-
-  letter-spacing: -1px;
+.android-app .sport-selector__back:hover {
+  background: rgba(0, 130, 190, .28) !important;
+  box-shadow:
+    0 0 22px rgba(0, 210, 255, .52),
+    inset 0 0 14px rgba(0, 180, 255, .12) !important;
 }
 
-.sport-selector--android .sport-selector__brand-ball {
-  font-size: 31px;
+/* Safety: old App-level back can never appear */
+.android-app .app-back-button {
+  display: none !important;
 }
 
-.sport-selector--android .sport-selector__eyebrow {
-  margin-top: 7px;
-
-  font-size: 10px;
-  letter-spacing: 3.5px;
-
-  color: #21d4ff;
-}
-
-.sport-selector--android .sport-selector__title {
-  margin: 8px 0 3px;
-
-  font-size: 34px;
-  line-height: 1.1;
-
-  color: #fff;
-}
-
-.sport-selector--android .sport-selector__subtitle {
-  font-size: 13px;
-
-  color: rgba(220, 235, 250, 0.78);
-}
-
-
-/* GRID — SIX CARDS IN ONE ROW */
-
-.sport-selector--android .sport-selector__grid {
+.android-app .sport-selector__header {
   position: relative;
   z-index: 5;
-
+  flex: 0 0 auto;
   width: 100%;
-  max-width: none;
-
-  flex: 1 1 auto;
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(6, minmax(0, 1fr));
-
-  gap: 14px;
-
-  align-items: stretch;
-
-  min-height: 0;
-}
-
-
-/* CARD */
-
-.sport-selector--android .sport-card {
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-
-  border: 1px solid rgba(0, 205, 255, 0.72);
-
-  border-radius: 18px;
-
-  background: #06121f;
-
-  box-shadow:
-    0 0 10px rgba(0, 190, 255, 0.18),
-    0 12px 30px rgba(0, 0, 0, 0.45);
-
-  overflow: hidden;
-}
-
-
-/* CARD IMAGE */
-
-.sport-selector--android .sport-card__image {
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-
-  filter:
-    brightness(0.72)
-    saturate(0.9);
-
-  transform: scale(1.01);
-}
-
-
-/* CARD OVERLAY */
-
-.sport-selector--android .sport-card__overlay {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.03) 0%,
-      rgba(0, 5, 12, 0.10) 35%,
-      rgba(0, 5, 12, 0.55) 65%,
-      rgba(0, 5, 12, 0.96) 100%
-    );
-}
-
-
-/* CARD BOTTOM */
-
-.sport-selector--android .sport-card__bottom {
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  padding: 14px 12px 17px;
-
-  display: flex;
-  flex-direction: column;
-
-  align-items: center;
-  justify-content: flex-end;
-
-  gap: 5px;
-
+  margin: 0 0 10px;
   text-align: center;
 }
 
-
-/* ICON */
-
-.sport-selector--android .sport-card__icon {
-  width: 92px;
-  height: 92px;
-
-  margin-bottom: 4px;
-
-  border-radius: 50%;
-
-  background:
-    rgba(0, 35, 65, 0.32);
-
-  border:
-    1px solid rgba(0, 205, 255, 0.65);
-
-  box-shadow:
-    0 0 15px rgba(0, 180, 255, 0.20);
-
-  font-size: 52px;
-
-  backdrop-filter: blur(5px);
-}
-
-
-/* TEXT */
-
-.sport-selector--android .sport-card__content {
+.android-app .sport-selector__brand {
+  display: flex;
   align-items: center;
-
-  gap: 5px;
-}
-
-.sport-selector--android .sport-card__name {
+  justify-content: center;
+  gap: 8px;
   font-size: 24px;
-
-  line-height: 1;
-
-  font-weight: 800;
-
-  color: #fff;
-
-  text-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.9);
+  margin-bottom: 2px;
 }
 
-.sport-selector--android .sport-card__action {
-  font-size: 9px;
-
-  letter-spacing: 2px;
-
-  color: #12d8ff;
+.android-app .sport-selector__brand-ball {
+  font-size: 21px;
 }
 
-
-/* HOVER — Android */
-
-.sport-selector--android .sport-card:hover {
-  transform: translateY(-3px);
-
-  border-color: #16d8ff;
-
-  box-shadow:
-    0 0 18px rgba(0, 205, 255, 0.35),
-    0 15px 35px rgba(0, 0, 0, 0.5);
+.android-app .sport-selector__eyebrow {
+  margin-top: 2px;
+  font-size: 7px;
+  letter-spacing: 3px;
 }
 
+.android-app .sport-selector__title {
+  margin: 4px 0 2px;
+  font-size: 24px;
+  line-height: 1.1;
+}
 
-/* =========================================================
-   ANDROID FOOTER BUTTONS
-   ========================================================= */
+.android-app .sport-selector__subtitle {
+  margin: 0;
+  font-size: 10px;
+}
 
-.sport-selector--android .sport-selector__footer {
+/* Six sports in one row */
+.android-app .sport-selector__grid {
   position: relative;
   z-index: 5;
-
-  width: min(820px, 62%);
-
-  margin-top: 20px;
-
+  width: 100%;
+  max-width: none;
+  flex: 1 1 auto;
+  min-height: 0;
   display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: 26px;
-
-  flex: 0 0 auto;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  align-items: stretch;
+  overflow: hidden;
 }
 
-.sport-selector--android .sport-selector__footer button {
-  min-height: 68px;
+.android-app .sport-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 210, 255, .72);
+  background: #04111d;
+  box-shadow:
+    0 0 10px rgba(0, 190, 255, .16),
+    inset 0 0 22px rgba(0, 150, 220, .04);
+  cursor: pointer;
+  isolation: isolate;
+}
 
-  border-radius: 18px;
+.android-app .sport-card:hover {
+  transform: translateY(-2px);
+  border-color: #18d7ff;
+  box-shadow:
+    0 0 18px rgba(0, 205, 255, .28),
+    0 10px 28px rgba(0, 0, 0, .45);
+}
 
-  border: 1px solid rgba(0, 180, 255, 0.65);
+.android-app .sport-card__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .88;
+  z-index: -3;
+}
 
+.android-app .sport-card__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
   background:
     linear-gradient(
       180deg,
-      rgba(8, 29, 48, 0.95),
-      rgba(3, 15, 28, 0.95)
+      rgba(0, 8, 16, .05) 0%,
+      rgba(0, 8, 16, .18) 38%,
+      rgba(0, 5, 12, .94) 100%
     );
+}
 
+.android-app .sport-card__bottom {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 10px 8px 14px;
+  text-align: center;
+  z-index: 2;
+}
+
+.android-app .sport-card__icon {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 210, 255, .86);
+  background: rgba(1, 19, 32, .56);
   color: #fff;
+  font-size: 31px;
+  box-shadow:
+    0 0 15px rgba(0, 195, 255, .18),
+    inset 0 0 14px rgba(0, 190, 255, .07);
+}
 
-  font-size: 21px;
-  font-weight: 700;
+.android-app .sport-card__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
 
+.android-app .sport-card__name {
+  color: #fff;
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 800;
+  text-shadow: 0 2px 7px rgba(0, 0, 0, .7);
+}
+
+.android-app .sport-card__action {
+  color: #11ceff;
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+}
+
+.android-app .sport-card__check {
+  top: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  z-index: 10;
+}
+
+/* Keep More / Referee as the two secondary actions, not sports */
+.android-app .sport-selector__footer {
+  position: relative;
+  z-index: 5;
+  flex: 0 0 54px;
+  width: min(680px, 60%);
+  margin: 10px auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.android-app .sport-selector__footer-button {
+  height: 50px;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  padding: 5px 14px;
+  border-radius: 14px;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 28, 45, .94),
+    rgba(2, 16, 28, .97)
+  );
+  color: #fff;
+  border: 1px solid #11c9ff;
+  box-shadow: 0 0 12px rgba(0, 190, 255, .12);
   cursor: pointer;
-
-  box-shadow:
-    0 0 12px rgba(0, 160, 255, 0.12);
 }
 
-.sport-selector--android .sport-selector__footer button:last-child {
-  border-color: rgba(255, 95, 20, 0.75);
-
-  box-shadow:
-    0 0 12px rgba(255, 90, 20, 0.12);
+.android-app .sport-selector__footer-button--referee {
+  border-color: #ff7218;
+  box-shadow: 0 0 12px rgba(255, 100, 20, .12);
 }
 
+.android-app .sport-selector__footer-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid #11caff;
+  color: #11caff;
+  font-size: 15px;
+}
 
-/* =========================================================
-   ANDROID LANDSCAPE SAFETY
-   ========================================================= */
+.android-app .sport-selector__footer-button--referee .sport-selector__footer-icon {
+  border-color: #ff7218;
+  color: #ff7218;
+}
 
-@media (orientation: landscape) and (max-height: 600px) {
+.android-app .sport-selector__footer-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 9px;
+}
 
-  .sport-selector--android {
-    padding: 12px 22px 16px;
+.android-app .sport-selector__footer-text strong {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.android-app .sport-selector__footer-text small {
+  margin-top: 3px;
+  font-size: 6px;
+  letter-spacing: 1.2px;
+  color: #11caff;
+}
+
+.android-app .sport-selector__footer-button--referee .sport-selector__footer-text small {
+  color: #ff7218;
+}
+
+.android-app .sport-selector__footer-arrow {
+  font-size: 22px;
+  color: #9fc4d7;
+}
+
+/* Android landscape only — never affects WAP portrait */
+@media (orientation: landscape) and (max-height: 700px) {
+  .android-app .sport-selector {
+    height: 100dvh;
+  }
+}
+
+/* Very short Android landscape */
+@media (orientation: landscape) and (max-height: 520px) {
+  .android-app .sport-selector {
+    padding: 9px 16px 10px;
   }
 
-  .sport-selector--android .sport-selector__header {
-    margin-bottom: 12px;
+  .android-app .sport-selector__back {
+    top: 9px !important;
+    left: 12px !important;
+    width: 42px !important;
+    height: 42px !important;
+    font-size: 24px !important;
   }
 
-  .sport-selector--android .sport-selector__brand {
-    font-size: 30px;
+  .android-app .sport-selector__header {
+    margin-bottom: 7px;
   }
 
-  .sport-selector--android .sport-selector__eyebrow {
-    font-size: 8px;
-  }
-
-  .sport-selector--android .sport-selector__title {
-    font-size: 27px;
-  }
-
-  .sport-selector--android .sport-selector__subtitle {
-    font-size: 11px;
-  }
-
-  .sport-selector--android .sport-selector__grid {
-    gap: 10px;
-  }
-
-  .sport-selector--android .sport-card {
-    border-radius: 14px;
-  }
-
-  .sport-selector--android .sport-card__icon {
-    width: 68px;
-    height: 68px;
-
-    font-size: 40px;
-  }
-
-  .sport-selector--android .sport-card__name {
+  .android-app .sport-selector__brand {
     font-size: 19px;
   }
 
-  .sport-selector--android .sport-card__action {
-    font-size: 7px;
-    letter-spacing: 1.5px;
-  }
-
-  .sport-selector--android .sport-selector__footer {
-    margin-top: 12px;
-    gap: 16px;
-  }
-
-  .sport-selector--android .sport-selector__footer button {
-    min-height: 48px;
-    font-size: 16px;
-  }
-}
-
-/* =========================================================
-   ANDROID LANDSCAPE
-   COACH STUDIO - SPORT SELECTOR
-   ========================================================= */
-
-@media (orientation: landscape) and (max-height: 700px) {
-
-  .sport-selector--android {
-    position: relative;
-    width: 100%;
-    height: 100dvh;
-    min-height: 100dvh;
-
-    padding: 18px 28px 16px;
-
-    display: flex;
-    flex-direction: column;
-
-    overflow: hidden;
-
-    background:
-      radial-gradient(
-        circle at 50% 45%,
-        rgba(0, 180, 255, 0.08),
-        transparent 48%
-      ),
-      #020b14;
-  }
-
-
-  /* =====================================================
-     BACKGROUND
-     ===================================================== */
-
-  .sport-selector--android .sport-selector__background {
-    position: absolute;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    opacity: 0.30;
-
-    pointer-events: none;
-
-    z-index: 0;
-  }
-
-  .sport-selector--android
-    .sport-selector__background-overlay {
-
-    position: absolute;
-    inset: 0;
-
-    background:
-      linear-gradient(
-        180deg,
-        rgba(0, 8, 17, 0.38),
-        rgba(0, 8, 17, 0.72)
-      );
-
-    z-index: 1;
-
-    pointer-events: none;
-  }
-
-
-  /* =====================================================
-     BACK BUTTON
-     ===================================================== */
-
-  .sport-selector--android .sport-selector__back {
-
-    position: absolute;
-
-    top: 22px;
-    left: 30px;
-
-    width: 54px;
-    height: 54px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 14px;
-
-    border: 1px solid rgba(0, 210, 255, 0.75);
-
-    background: rgba(3, 18, 31, 0.72);
-
-    color: #ffffff;
-
-    font-size: 34px;
-    line-height: 1;
-
-    box-shadow:
-      0 0 14px rgba(0, 190, 255, 0.18),
-      inset 0 0 18px rgba(0, 180, 255, 0.05);
-
-    z-index: 10;
-
-    cursor: pointer;
-
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .sport-selector--android .sport-selector__back:hover {
-    transform: translateX(-2px);
-
-    box-shadow:
-      0 0 24px rgba(0, 210, 255, 0.32),
-      inset 0 0 20px rgba(0, 180, 255, 0.08);
-  }
-
-
-  /* =====================================================
-     HEADER
-     ===================================================== */
-
-  .sport-selector--android .sport-selector__header {
-
-    position: relative;
-
-    z-index: 3;
-
-    flex: 0 0 auto;
-
-    width: 100%;
-
-    margin: 0 auto 16px;
-
-    text-align: center;
-  }
-
-  .sport-selector--android .sport-selector__brand {
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 10px;
-
-    margin-bottom: 3px;
-
-    color: #f4f7fb;
-
-    font-size: 30px;
-    font-weight: 700;
-  }
-
-  .sport-selector--android
-    .sport-selector__brand-ball {
-
-    font-size: 31px;
-
-    filter:
-      drop-shadow(
-        0 0 8px rgba(0, 200, 255, 0.35)
-      );
-  }
-
-  .sport-selector--android
-    .sport-selector__brand b {
-
-    color: #16c9ff;
-  }
-
-  .sport-selector--android .sport-selector__eyebrow {
-
-    margin-top: 3px;
-
-    color: #12c9ff;
-
-    font-size: 10px;
-
-    letter-spacing: 5px;
-
-    font-weight: 700;
-  }
-
-  .sport-selector--android .sport-selector__title {
-
-    margin: 7px 0 1px;
-
-    color: #ffffff;
-
-    font-size: 32px;
-
-    line-height: 1.1;
-
-    font-weight: 800;
-
-    text-shadow:
-      0 0 16px rgba(255, 255, 255, 0.10);
-  }
-
-  .sport-selector--android .sport-selector__subtitle {
-
-    margin: 4px 0 0;
-
-    color: #9eb3c9;
-
-    font-size: 13px;
-
-    font-weight: 600;
-  }
-
-
-  /* =====================================================
-     SPORT GRID
-     ===================================================== */
-
-  .sport-selector--android .sport-selector__grid {
-
-    position: relative;
-
-    z-index: 3;
-
-    flex: 1 1 auto;
-
-    width: 100%;
-
-    min-height: 0;
-
-    display: grid;
-
-    grid-template-columns:
-      repeat(6, minmax(0, 1fr));
-
-    gap: 14px;
-
-    align-items: stretch;
-
-    overflow: hidden;
-  }
-
-
-  /* =====================================================
-     SPORT CARD
-     ===================================================== */
-
-  .sport-selector--android .sport-card {
-
-    position: relative;
-
-    width: 100%;
-    height: 100%;
-
-    min-width: 0;
-    min-height: 0;
-
-    padding: 0;
-
-    overflow: hidden;
-
-    border-radius: 18px;
-
-    border: 1px solid
-      rgba(0, 210, 255, 0.82);
-
-    background: #04111d;
-
-    box-shadow:
-      0 0 10px rgba(0, 190, 255, 0.16),
-      inset 0 0 25px rgba(0, 150, 220, 0.04);
-
-    cursor: pointer;
-
-    isolation: isolate;
-
-    transition:
-      transform 0.22s ease,
-      border-color 0.22s ease,
-      box-shadow 0.22s ease;
-  }
-
-  .sport-selector--android
-    .sport-card:hover {
-
-    transform: translateY(-4px);
-
-    border-color: #18d7ff;
-
-    box-shadow:
-      0 8px 28px rgba(0, 190, 255, 0.22),
-      0 0 18px rgba(0, 210, 255, 0.25);
-  }
-
-
-  /* =====================================================
-     CARD IMAGE
-     ===================================================== */
-
-  .sport-selector--android
-    .sport-card__image {
-
-    position: absolute;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    opacity: 0.88;
-
-    z-index: -3;
-
-    transition:
-      transform 0.35s ease,
-      opacity 0.25s ease;
-  }
-
-  .sport-selector--android
-    .sport-card:hover
-    .sport-card__image {
-
-    transform: scale(1.045);
-
-    opacity: 1;
-  }
-
-
-  /* =====================================================
-     CARD OVERLAY
-     ===================================================== */
-
-  .sport-selector--android
-    .sport-card__overlay {
-
-    position: absolute;
-    inset: 0;
-
-    z-index: -2;
-
-    background:
-      linear-gradient(
-        180deg,
-        rgba(0, 8, 16, 0.08) 0%,
-        rgba(0, 8, 16, 0.18) 38%,
-        rgba(0, 5, 12, 0.94) 100%
-      );
-  }
-
-
-  /* =====================================================
-     CARD CONTENT
-     ===================================================== */
-
-  .sport-selector--android
-    .sport-card__bottom {
-
-    position: absolute;
-    inset: 0;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: flex-end;
-
-    gap: 8px;
-
-    padding:
-      12px
-      10px
-      18px;
-
-    text-align: center;
-
-    z-index: 2;
-  }
-
-  .sport-selector--android
-    .sport-card__icon {
-
-    width: 72px;
-    height: 72px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    margin-bottom: 2px;
-
-    border-radius: 50%;
-
-    border:
-      1px solid rgba(0, 210, 255, 0.9);
-
-    background:
-      rgba(1, 19, 32, 0.54);
-
-    color: #ffffff;
-
-    font-size: 39px;
-
-    box-shadow:
-      0 0 18px rgba(0, 195, 255, 0.20),
-      inset 0 0 16px rgba(0, 190, 255, 0.07);
-  }
-
-  .sport-selector--android
-    .sport-card__content {
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    gap: 4px;
-  }
-
-  .sport-selector--android
-    .sport-card__name {
-
-    color: #ffffff;
-
+  .android-app .sport-selector__title {
     font-size: 20px;
-
-    line-height: 1;
-
-    font-weight: 800;
-
-    text-shadow:
-      0 2px 7px rgba(0, 0, 0, 0.65);
   }
 
-  .sport-selector--android
-    .sport-card__action {
-
-    color: #11ceff;
-
-    font-size: 9px;
-
-    font-weight: 800;
-
-    letter-spacing: 2.5px;
-
-    white-space: nowrap;
+  .android-app .sport-selector__subtitle {
+    font-size: 8px;
   }
 
-
-  /* =====================================================
-     CARD BOTTOM GLOW
-     ===================================================== */
-
-  .sport-selector--android
-    .sport-card__glow {
-
-    position: absolute;
-
-    left: 50%;
-    bottom: -1px;
-
-    width: 42px;
-    height: 4px;
-
-    transform: translateX(-50%);
-
-    border-radius: 10px;
-
-    background: #12d7ff;
-
-    box-shadow:
-      0 0 12px #12d7ff,
-      0 0 24px rgba(0, 210, 255, 0.65);
+  .android-app .sport-selector__grid {
+    gap: 7px;
   }
 
-
-  /* =====================================================
-     FOOTER
-     ===================================================== */
-
-  .sport-selector--android .sport-selector__footer {
-
-    position: relative;
-
-    z-index: 4;
-
-    flex: 0 0 72px;
-
-    width: 64%;
-
-    margin:
-      14px auto
-      0;
-
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 22px;
-  }
-
-  .sport-selector--android
-    .sport-selector__footer-button {
-
-    height: 64px;
-
-    display: flex;
-
-    align-items: center;
-
-    padding: 8px 22px;
-
-    border-radius: 18px;
-
-    background:
-      linear-gradient(
-        180deg,
-        rgba(8, 28, 45, 0.92),
-        rgba(2, 16, 28, 0.96)
-      );
-
-    color: #ffffff;
-
-    border: 1px solid #11c9ff;
-
-    box-shadow:
-      0 0 15px rgba(0, 190, 255, 0.12),
-      inset 0 0 20px rgba(0, 170, 240, 0.04);
-
-    cursor: pointer;
-
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .sport-selector--android
-    .sport-selector__footer-button:hover {
-
-    transform: translateY(-2px);
-
-    box-shadow:
-      0 0 25px rgba(0, 205, 255, 0.24);
-  }
-
-
-  /* MORE */
-
-  .sport-selector--android
-    .sport-selector__footer-button--more {
-
-    border-color: #10caff;
-  }
-
-  /* REFEREE */
-
-  .sport-selector--android
-    .sport-selector__footer-button--referee {
-
-    border-color: #ff7218;
-
-    box-shadow:
-      0 0 15px rgba(255, 100, 20, 0.12),
-      inset 0 0 20px rgba(255, 100, 20, 0.04);
-  }
-
-  .sport-selector--android
-    .sport-selector__footer-button--referee:hover {
-
-    box-shadow:
-      0 0 25px rgba(255, 100, 20, 0.24);
-  }
-
-  .sport-selector--android
-    .sport-selector__footer-icon {
-
+  .android-app .sport-card__icon {
     width: 48px;
     height: 48px;
-
-    flex: 0 0 48px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    border: 2px solid #11caff;
-
-    color: #11caff;
-
-    font-size: 20px;
-    font-weight: 900;
+    font-size: 26px;
   }
 
-  .sport-selector--android
-    .sport-selector__footer-button--referee
-    .sport-selector__footer-icon {
-
-    border-color: #ff7218;
-
-    color: #ff7218;
-  }
-
-  .sport-selector--android
-    .sport-selector__footer-text {
-
-    flex: 1;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    margin-left: 14px;
-  }
-
-  .sport-selector--android
-    .sport-selector__footer-text strong {
-
-    font-size: 20px;
-
-    line-height: 1;
-
-    color: #ffffff;
-  }
-
-  .sport-selector--android
-    .sport-selector__footer-text small {
-
-    margin-top: 5px;
-
-    font-size: 8px;
-
-    letter-spacing: 2px;
-
-    color: #11caff;
-  }
-
-  .sport-selector--android
-    .sport-selector__footer-button--referee
-    .sport-selector__footer-text small {
-
-    color: #ff7218;
-  }
-
-  .sport-selector--android
-    .sport-selector__footer-arrow {
-
-    font-size: 32px;
-
-    color: #9fc4d7;
-  }
-
-
-  /* =====================================================
-     VERY SHORT PHONES
-     ===================================================== */
-
-  @media (max-height: 520px) {
-
-    .sport-selector--android {
-      padding: 10px 20px 10px;
-    }
-
-    .sport-selector--android
-      .sport-selector__back {
-
-      top: 12px;
-      left: 18px;
-
-      width: 42px;
-      height: 42px;
-
-      font-size: 27px;
-    }
-
-    .sport-selector--android
-      .sport-selector__brand {
-
-      font-size: 23px;
-    }
-
-    .sport-selector--android
-      .sport-selector__eyebrow {
-
-      font-size: 7px;
-      letter-spacing: 3px;
-    }
-
-    .sport-selector--android
-      .sport-selector__title {
-
-      font-size: 25px;
-    }
-
-    .sport-selector--android
-      .sport-selector__subtitle {
-
-      font-size: 10px;
-    }
-
-    .sport-selector--android
-      .sport-selector__grid {
-
-      gap: 9px;
-    }
-
-    .sport-selector--android
-      .sport-card {
-
-      border-radius: 13px;
-    }
-
-    .sport-selector--android
-      .sport-card__icon {
-
-      width: 52px;
-      height: 52px;
-
-      font-size: 28px;
-    }
-
-    .sport-selector--android
-      .sport-card__name {
-
-      font-size: 16px;
-    }
-
-    .sport-selector--android
-      .sport-card__action {
-
-      font-size: 7px;
-      letter-spacing: 1.5px;
-    }
-
-    .sport-selector--android
-      .sport-selector__footer {
-
-      flex-basis: 52px;
-
-      width: 58%;
-
-      margin-top: 8px;
-
-      gap: 12px;
-    }
-
-    .sport-selector--android
-      .sport-selector__footer-button {
-
-      height: 48px;
-
-      padding: 5px 14px;
-
-      border-radius: 13px;
-    }
-
-    .sport-selector--android
-      .sport-selector__footer-icon {
-
-      width: 34px;
-      height: 34px;
-
-      flex-basis: 34px;
-
-      font-size: 14px;
-    }
-
-    .sport-selector--android
-      .sport-selector__footer-text {
-
-      margin-left: 8px;
-    }
-
-    .sport-selector--android
-      .sport-selector__footer-text strong {
-
-      font-size: 15px;
-    }
-
-    .sport-selector--android
-      .sport-selector__footer-text small {
-
-      font-size: 6px;
-      letter-spacing: 1px;
-    }
-
-    .sport-selector--android
-      .sport-selector__footer-arrow {
-
-      font-size: 23px;
-    }
-  }
-}
-/* =========================================================
-   ANDROID LANDSCAPE - SPORT SELECTOR
-   ========================================================= */
-
-@media (max-width: 900px) and (orientation: landscape) {
-
-  html,
-  body,
-  #root {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-
-  .sport-selector {
-    width: 100%;
-    height: 100dvh;
-    min-height: 0;
-
-    padding: 18px 28px 20px;
-
-    box-sizing: border-box;
-    overflow: hidden;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* Header */
-
-  .sport-selector__header {
-    flex: 0 0 auto;
-    margin-bottom: 14px;
-    text-align: center;
-  }
-
-  .sport-selector__brand {
-    font-size: 28px;
-    margin-bottom: 4px;
-  }
-
-  .sport-selector__eyebrow {
-    font-size: 9px;
-    letter-spacing: 3px;
-  }
-
-  .sport-selector__title {
-    font-size: 34px;
-    margin: 5px 0;
-  }
-
-  .sport-selector__subtitle {
+  .android-app .sport-card__name {
     font-size: 13px;
   }
 
-  /* =====================================================
-     SIX SPORTS IN ONE ROW
-     ===================================================== */
-
-  .sport-selector__grid {
-    width: 100%;
-    max-width: 1450px;
-
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 14px;
-
-    flex: 1 1 auto;
-    min-height: 0;
+  .android-app .sport-card__action {
+    font-size: 6px;
+    letter-spacing: 1px;
   }
 
-  .sport-card {
-    width: 100%;
-    min-width: 0;
-    height: 100%;
-    min-height: 0;
-
-    border-radius: 18px;
+  .android-app .sport-selector__footer {
+    flex-basis: 44px;
+    margin-top: 7px;
+    gap: 9px;
   }
 
-  .sport-card__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .android-app .sport-selector__footer-button {
+    height: 42px;
+    padding: 4px 10px;
+    border-radius: 11px;
   }
 
-  .sport-card__bottom {
-    padding: 12px;
+  .android-app .sport-selector__footer-icon {
+    width: 28px;
+    height: 28px;
+    flex-basis: 28px;
+    font-size: 12px;
   }
 
-  .sport-card__name {
-    font-size: 22px;
+  .android-app .sport-selector__footer-text strong {
+    font-size: 12px;
   }
 
-  .sport-card__action {
-    font-size: 10px;
-    letter-spacing: 2px;
+  .android-app .sport-selector__footer-text small {
+    font-size: 5px;
   }
 
-  .sport-card__icon {
-    font-size: 38px;
-  }
-
-  /* Footer */
-
-  .sport-selector__footer {
-    display: none;
-  }
-}
-@media (orientation: landscape) and (max-height: 500px) {
-
-  html, body, #root {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background: #04111f;
-  }
-
-  .sport-selector {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    padding: 14px 18px;
-    overflow: hidden;
-  }
-
-  .sport-selector__back {
-    top: 14px;
-    left: 14px;
-    width: 54px;
-    height: 54px;
-    border-radius: 16px;
-  }
-}
-@media (max-width: 900px) and (orientation: landscape) {
-
-  .sport-selector {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100vw !important;
-    height: 100dvh !important;
-    min-height: 0 !important;
-    margin: 0 !important;
-    padding: 14px 24px 18px !important;
-    box-sizing: border-box;
-    overflow: hidden !important;
-  }
-
-  .sport-selector__back {
-    position: absolute !important;
-    top: 18px !important;
-    left: 18px !important;
-
-    width: 54px !important;
-    height: 54px !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    z-index: 100 !important;
-
-    border: 1px solid #00c8ff !important;
-    border-radius: 16px !important;
-
-    background: rgba(4, 20, 35, 0.88) !important;
-    color: #ffffff !important;
-
-    font-size: 28px !important;
-    line-height: 1 !important;
-
-    box-shadow:
-      0 0 10px rgba(0, 200, 255, 0.35),
-      inset 0 0 12px rgba(0, 150, 255, 0.12) !important;
-
-    cursor: pointer;
-  }
-
-  .sport-selector__back:hover {
-    background: rgba(0, 170, 230, 0.18) !important;
-    box-shadow:
-      0 0 18px rgba(0, 200, 255, 0.55),
-      inset 0 0 15px rgba(0, 150, 255, 0.2) !important;
-  }
-
-  .sport-selector__grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  .android-app .sport-selector__footer-arrow {
+    font-size: 18px;
   }
 }

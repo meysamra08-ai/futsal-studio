@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { Capacitor } from "@capacitor/core";
 
 import Login from "./pages/Login/Login";
 import SportSelector from "./pages/SportSelector/SportSelector";
 import Workspace from "./pages/Workspace/Workspace";
+
+
 
 type Page = "login" | "sport" | "workspace";
 
@@ -10,28 +13,23 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentPage, setCurrentPage] = useState<Page>("login");
 
+  const isAndroidApp =
+    Capacitor.getPlatform() === "android";
+
   useEffect(() => {
-    const handlePopState = () => {
-      const path = window.location.pathname;
-
-      if (path === "/sport") {
-        setLoggedIn(true);
-        setCurrentPage("sport");
-      } else if (path === "/workspace") {
-        setLoggedIn(true);
-        setCurrentPage("workspace");
-      } else {
-        setLoggedIn(false);
-        setCurrentPage("login");
-      }
-    };
-
-    window.addEventListener("popstate", handlePopState);
+    if (isAndroidApp) {
+      document.documentElement.classList.add("android-app");
+      document.body.classList.add("android-app");
+    } else {
+      document.documentElement.classList.remove("android-app");
+      document.body.classList.remove("android-app");
+    }
 
     return () => {
-      window.removeEventListener("popstate", handlePopState);
+      document.documentElement.classList.remove("android-app");
+      document.body.classList.remove("android-app");
     };
-  }, []);
+  }, [isAndroidApp]);
 
   const navigateTo = (page: Page) => {
     setCurrentPage(page);
@@ -62,28 +60,59 @@ export default function App() {
     }
   };
 
+  /*
+   * LOGIN
+   */
   if (!loggedIn || currentPage === "login") {
     return (
-      <Login
-        onLogin={handleLogin}
-      />
+      <div
+        className={
+          isAndroidApp
+            ? "app-page android-app"
+            : "app-page"
+        }
+      >
+        <Login onLogin={handleLogin} />
+      </div>
     );
   }
 
+  /*
+   * SPORT SELECTOR
+   */
   if (currentPage === "sport") {
     return (
-      <SportSelector
-        onSportSelected={() =>
-          navigateTo("workspace")
+      <div
+        className={
+          isAndroidApp
+            ? "app-page android-app"
+            : "app-page"
         }
-        onBack={handleBack}
-      />
+      >
+        <SportSelector
+          onBack={handleBack}
+          onSportSelected={() =>
+            navigateTo("workspace")
+          }
+        />
+      </div>
     );
   }
 
+  /*
+   * WORKSPACE
+   */
   return (
-    <Workspace
-      onHome={() => navigateTo("sport")}
-    />
+    <div
+      className={
+        isAndroidApp
+          ? "app-page android-app"
+          : "app-page"
+      }
+    >
+      <Workspace
+        onHome={() => navigateTo("sport")}
+      />
+    </div>
   );
 }
