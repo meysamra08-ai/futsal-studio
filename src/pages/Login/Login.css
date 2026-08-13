@@ -413,7 +413,7 @@
    ANDROID PHONE - PORTRAIT
    ========================================================= */
 
-@media (max-width: 600px) and (orientation: portrait) {
+@media (max-width: 900px) {
 
   .login-page {
     width: 100%;

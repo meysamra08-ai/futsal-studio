@@ -806,7 +806,7 @@
    ANDROID PHONE - PORTRAIT
    ========================================================= */
 
-@media (max-width: 600px) and (orientation: portrait) {
+@media (max-width: 900px) {
 
   .sport-selector {
     min-height: 100dvh;
