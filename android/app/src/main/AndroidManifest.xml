@@ -16,15 +16,16 @@
     android:exported="true"
     android:launchMode="singleTask"
     android:screenOrientation="landscape"
-    android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode|navigation"
-    android:theme="@style/Theme.AppCompat.NoActionBar">
+    android:windowFullscreen="true"
+    android:theme="@style/AppTheme"
+    android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode|navigation">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
 
-        </activity>
+</activity>
 
     </application>
 
