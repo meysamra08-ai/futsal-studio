@@ -8,10 +8,12 @@ import "./SportSelector.css";
 
 type SportSelectorProps = {
   onSportSelected: () => void;
+  onBack: () => void;
 };
 
 export default function SportSelector({
   onSportSelected,
+  onBack,
 }: SportSelectorProps) {
   const { currentSport, setCurrentSport } = useApp();
 
@@ -57,13 +59,7 @@ export default function SportSelector({
       <div className="sport-selector__background-overlay" />
 
       {/* BACK BUTTON */}
-      <button
-        type="button"
-        className="sport-selector__back"
-        aria-label="Back"
-      >
-        ←
-      </button>
+      
 
       {/* HEADER */}
       <header className="sport-selector__header">
@@ -176,10 +172,10 @@ export default function SportSelector({
           </span>
 
           <button
-          type="button"
-          className="sport-selector__back"
-          onClick={() => window.history.back()}
-          aria-label="Back"
+  type="button"
+  className="sport-selector__back"
+  onClick={onBack}
+  aria-label="Back"
 >
   ←
 </button>

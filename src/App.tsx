@@ -4,53 +4,37 @@ import Login from "./pages/Login/Login";
 import SportSelector from "./pages/SportSelector/SportSelector";
 import Workspace from "./pages/Workspace/Workspace";
 
-type AppPage = "login" | "sport" | "workspace";
+type Page = "login" | "sport" | "workspace";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [currentPage, setCurrentPage] =
-    useState<AppPage>("login");
+  const [currentPage, setCurrentPage] = useState<Page>("login");
 
   useEffect(() => {
     const handlePopState = () => {
       const path = window.location.pathname;
 
-      if (path.endsWith("/workspace")) {
-        setLoggedIn(true);
-        setCurrentPage("workspace");
-        return;
-      }
-
-      if (path.endsWith("/sport")) {
+      if (path === "/sport") {
         setLoggedIn(true);
         setCurrentPage("sport");
-        return;
+      } else if (path === "/workspace") {
+        setLoggedIn(true);
+        setCurrentPage("workspace");
+      } else {
+        setLoggedIn(false);
+        setCurrentPage("login");
       }
-
-      setLoggedIn(false);
-      setCurrentPage("login");
     };
-
-    handlePopState();
 
     window.addEventListener("popstate", handlePopState);
 
     return () => {
-      window.removeEventListener(
-        "popstate",
-        handlePopState
-      );
+      window.removeEventListener("popstate", handlePopState);
     };
   }, []);
 
-  const navigateTo = (page: AppPage) => {
+  const navigateTo = (page: Page) => {
     setCurrentPage(page);
-
-    if (page === "login") {
-      setLoggedIn(false);
-    } else {
-      setLoggedIn(true);
-    }
 
     const path =
       page === "login"
@@ -88,30 +72,18 @@ export default function App() {
 
   if (currentPage === "sport") {
     return (
-      <div className="app-page">
-        <button
-          type="button"
-          className="app-back-button"
-          onClick={handleBack}
-          aria-label="Back"
-        >
-          ←
-        </button>
-
-        <SportSelector
-          onSportSelected={() =>
-            navigateTo("workspace")
-          }
-        />
-      </div>
+      <SportSelector
+        onSportSelected={() =>
+          navigateTo("workspace")
+        }
+        onBack={handleBack}
+      />
     );
   }
 
- return (
-  <div className="app-page">
+  return (
     <Workspace
       onHome={() => navigateTo("sport")}
     />
-  </div>
-);
+  );
 }

@@ -4,7 +4,7 @@ export const SPORTS: Sport[] = [
   {
     id: "football",
     name: "Football",
-    icon: "⚽️",
+    icon: "⚽",
     courtImage: "/sports/football.png",
   },
   {
@@ -32,21 +32,15 @@ export const SPORTS: Sport[] = [
     courtImage: "/sports/handball.png",
   },
   {
-    id: "hockey",
-    name: "Hockey",
-    icon: "🏑",
-    courtImage: "/sports/hockey.png",
-  },
-  {
     id: "referee",
     name: "Referee",
-    icon: "🟨",
+    icon: "🚩",
     courtImage: "/sports/Referee.png",
   },
   {
     id: "other",
     name: "Other",
-    icon: "＋",
-     courtImage: "/sports/Others.png",
+    icon: "•••",
+    courtImage: "/sports/Others.png",
   },
 ];

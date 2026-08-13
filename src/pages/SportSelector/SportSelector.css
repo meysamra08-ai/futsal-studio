@@ -2068,3 +2068,29 @@
     display: none;
   }
 }
+@media (orientation: landscape) and (max-height: 500px) {
+
+  html, body, #root {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #04111f;
+  }
+
+  .sport-selector {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 14px 18px;
+    overflow: hidden;
+  }
+
+  .sport-selector__back {
+    top: 14px;
+    left: 14px;
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+  }
+}
