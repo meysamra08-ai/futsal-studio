@@ -766,3 +766,39 @@
     animation: none;
   }
 }
+
+/* ===== Android Landscape ===== */
+@media (orientation: landscape) and (max-height: 500px){
+
+  .sport-selector{
+    min-height:100dvh;
+    padding:12px;
+    overflow:auto;
+  }
+
+  .sport-selector__header{
+    margin-bottom:14px;
+  }
+
+  .sport-selector__title{
+    font-size:34px;
+  }
+
+  .sport-selector__subtitle{
+    font-size:14px;
+  }
+
+  .sport-grid{
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+  }
+
+  .sport-card{
+    min-height:165px;
+  }
+
+  .sport-card img{
+    height:95px;
+    object-fit:cover;
+  }
+}

@@ -372,3 +372,40 @@
     font-size: 24px;
   }
 }
+/* ===== Android Landscape ===== */
+@media (orientation: landscape) and (max-height: 500px) {
+
+  .login-page{
+    padding:12px;
+    min-height:100dvh;
+    overflow:auto;
+  }
+
+  .login-card{
+    width:min(96vw,720px);
+    padding:18px;
+    border-radius:22px;
+  }
+
+  .login-logo{
+    width:72px;
+    height:72px;
+  }
+
+  .login-hero h1{
+    font-size:32px;
+  }
+
+  .login-hero p{
+    font-size:14px;
+  }
+
+  .login-form{
+    gap:10px;
+  }
+
+  .login-button{
+    height:46px;
+    font-size:17px;
+  }
+}
