@@ -1,5 +1,7 @@
 import ReactDOM from "react-dom/client";
 
+import "./index.css"; // ← این خط را اضافه کن
+
 import App from "./App";
 
 import { AppProvider } from "./core/contexts/AppContext";
