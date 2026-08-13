@@ -18,7 +18,7 @@ public class MainActivity extends BridgeActivity {
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         hideSystemUI();
     }
@@ -29,16 +29,19 @@ public class MainActivity extends BridgeActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
-            WindowInsetsController controller = window.getInsetsController();
+            WindowInsetsController controller =
+                    window.getInsetsController();
 
             if (controller != null) {
+
                 controller.hide(
                         WindowInsets.Type.statusBars()
                                 | WindowInsets.Type.navigationBars()
                 );
 
                 controller.setSystemBarsBehavior(
-                        WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                        WindowInsetsController
+                                .BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
                 );
             }
 
