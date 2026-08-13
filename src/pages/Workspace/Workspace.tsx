@@ -1,9 +1,6 @@
 import { useState } from "react";
 import MainLayout from "../../shared/layouts/MainLayout";
 import "./Workspace.css";
-import { useEffect } from "react";
-import { Capacitor } from "@capacitor/core";
-import { ScreenOrientation } from "@capacitor/screen-orientation";
 
 type WorkspaceMode = "match" | "training" | null;
 
@@ -14,40 +11,10 @@ interface WorkspaceProps {
 export default function Workspace({
   onHome,
 }: WorkspaceProps) {
-  useEffect(() => {
-    if (!Capacitor.isNativePlatform()) {
-      return;
-    }
+  const [activeWorkspace, setActiveWorkspace] =
+    useState<WorkspaceMode>(null);
 
-    const lockLandscape = async () => {
-      try {
-        await ScreenOrientation.lock({
-          orientation: "landscape",
-        });
-      } catch (error) {
-        console.error(
-          "Failed to lock Android orientation:",
-          error
-        );
-      }
-    };
-
-    lockLandscape();
-
-    return () => {
-      ScreenOrientation.unlock().catch((error) => {
-        console.error(
-          "Failed to unlock orientation:",
-          error
-        );
-      });
-    };
-  }, []);
-
- const [activeWorkspace, setActiveWorkspace] =
-  useState<WorkspaceMode>(null);
-
-if (activeWorkspace) {
+  if (activeWorkspace) {
     return <MainLayout />;
   }
 
@@ -111,7 +78,6 @@ if (activeWorkspace) {
 
       {/* Main cards */}
       <section className="workspace-actions">
-
         {/* Match Coaching */}
         <article className="workspace-card workspace-card--blue">
           <div className="workspace-card__top">
@@ -216,7 +182,6 @@ if (activeWorkspace) {
 
       {/* Bottom navigation */}
       <nav className="workspace-bottom-nav">
-
         {/* Home */}
         <button
           type="button"
@@ -254,7 +219,6 @@ if (activeWorkspace) {
           <span>⚙️</span>
           <small>تنظیمات</small>
         </button>
-
       </nav>
     </main>
   );
