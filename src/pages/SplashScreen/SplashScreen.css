@@ -1,0 +1,222 @@
+/* =========================================
+   SPLASH SCREEN
+========================================= */
+
+.splash-screen{
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  overflow: hidden;
+
+  background-image: url("Splash/Splash-Screen.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* =========================================
+   GLASS PANEL
+========================================= */
+
+.brand-panel{
+  position: absolute;
+  top: 55px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: min(78vw, 920px);
+
+  padding: 26px 40px 24px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-radius: 30px;
+  overflow: hidden;
+
+  background: rgba(5,8,15,.58);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.65),
+    0 0 25px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+/* Black Glow Behind Panel */
+
+.brand-panel::before{
+  content:"";
+  position:absolute;
+  inset:-50px;
+
+  background: radial-gradient(
+      ellipse at center,
+      rgba(0,0,0,.75) 0%,
+      rgba(0,0,0,.45) 55%,
+      rgba(0,0,0,0) 100%
+  );
+
+  z-index:-1;
+  filter: blur(25px);
+}
+
+/* =========================================
+   LOGO
+========================================= */
+
+.brand-logo{
+  width:92px;
+  height:92px;
+
+  object-fit: contain;
+
+  margin-bottom:10px;
+
+  filter:
+    drop-shadow(0 0 8px #00d8ff)
+    drop-shadow(0 0 22px rgba(0,216,255,.75));
+}
+
+/* =========================================
+   TITLE
+========================================= */
+
+.brand-title{
+  margin:0;
+
+  font-size: clamp(38px,4vw,68px);
+  font-weight:900;
+  letter-spacing:2px;
+
+  color:#37d8ff;
+
+  text-shadow:
+    0 0 8px #37d8ff,
+    0 0 20px #00bfff,
+    0 0 36px rgba(0,191,255,.8);
+}
+
+.brand-title span{
+  color:#ff8a1d;
+
+  text-shadow:
+    0 0 8px #ff8a1d,
+    0 0 18px #ff6500,
+    0 0 34px rgba(255,101,0,.9);
+}
+
+/* =========================================
+   SUBTITLE
+========================================= */
+
+.brand-subtitle{
+  margin-top:8px;
+
+  color:#dff8ff;
+
+  font-size:14px;
+  letter-spacing:5px;
+
+  text-shadow:
+    0 0 8px rgba(0,216,255,.5);
+}
+
+/* =========================================
+   LOADING BAR
+========================================= */
+
+.loading-bar{
+  width:min(260px,42vw);
+  height:6px;
+
+  margin-bottom:42px;
+
+  border-radius:999px;
+  overflow:hidden;
+
+  background:rgba(0,0,0,.55);
+
+  border:1px solid rgba(0,216,255,.28);
+
+  box-shadow:
+    0 0 18px rgba(0,0,0,.65),
+    0 0 18px rgba(0,216,255,.18);
+}
+
+.loading-bar span{
+  display:block;
+
+  width:35%;
+  height:100%;
+
+  border-radius:inherit;
+
+  background:linear-gradient(
+      90deg,
+      transparent,
+      #00d8ff,
+      #ffffff,
+      #00d8ff,
+      transparent
+  );
+
+  box-shadow:
+    0 0 10px #00d8ff,
+    0 0 20px #00d8ff;
+
+  animation:loader 1.4s linear infinite;
+}
+
+@keyframes loader{
+
+  from{
+    transform:translateX(-180%);
+  }
+
+  to{
+    transform:translateX(320%);
+  }
+
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width:768px){
+
+  .brand-panel{
+    top:34px;
+    width:90vw;
+    padding:18px;
+  }
+
+  .brand-logo{
+    width:64px;
+    height:64px;
+  }
+
+  .brand-title{
+    font-size:34px;
+  }
+
+  .brand-subtitle{
+    font-size:10px;
+    letter-spacing:3px;
+  }
+
+  .loading-bar{
+    margin-bottom:28px;
+  }
+
+}

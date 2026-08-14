@@ -31,7 +31,6 @@ export default function SportSelector({
     }, 220);
   };
 
-  // فقط این 6 ورزش در صفحه اصلی نمایش داده می‌شوند.
   const mainSports = SPORTS.filter((sport) =>
     [
       "football",
@@ -58,15 +57,24 @@ export default function SportSelector({
 
       <div className="sport-selector__background-overlay" />
 
-      {/* BACK BUTTON */}
-      
+      {/* Back */}
+      <button
+        type="button"
+        className="sport-selector__back"
+        onClick={onBack}
+        aria-label="Back"
+      >
+        ←
+      </button>
 
-      {/* HEADER */}
+      {/* Header */}
       <header className="sport-selector__header">
         <div className="sport-selector__brand">
-          <span className="sport-selector__brand-ball">
-            ⚽
-          </span>
+          <img
+            src="/logo/splashlogo.png"
+            alt="Coach Studio"
+            className="sport-selector__logo"
+          />
 
           <span>
             Coach <b>Studio</b>
@@ -86,14 +94,11 @@ export default function SportSelector({
         </p>
       </header>
 
-      {/* SPORTS */}
+      {/* 8 Cards */}
       <section className="sport-selector__grid">
         {mainSports.map((sport) => {
           const isSelected = currentSport === sport.id;
           const isSelecting = selectingSport === sport.id;
-
-          const sportImage =
-            `/sports/${sport.id}.png`;
 
           return (
             <button
@@ -103,14 +108,14 @@ export default function SportSelector({
                 isSelected ? "sport-card--selected" : ""
               } ${
                 isSelecting ? "sport-card--selecting" : ""
-              } sport-card--${sport.id}`}
+              }`}
               onClick={() => handleSportSelect(sport.id)}
               disabled={selectingSport !== null}
             >
               <img
                 className="sport-card__image"
-                src={sportImage}
-                alt=""
+                src={`/sports/${sport.id}.png`}
+                alt={sport.name}
                 draggable={false}
               />
 
@@ -136,55 +141,74 @@ export default function SportSelector({
             </button>
           );
         })}
+
+        {/* MORE */}
+        <button
+          type="button"
+          className="sport-card sport-card--more"
+        >
+          <img
+  className="sport-card__image"
+  src="/sports/more.png"
+  alt="More"
+/>
+
+<div className="sport-card__overlay" />
+
+          <div className="sport-card__overlay" />
+
+          <div className="sport-card__bottom">
+            <div className="sport-card__icon">•••</div>
+
+            <div className="sport-card__content">
+              <span className="sport-card__name">
+                More
+              </span>
+
+              <span className="sport-card__action">
+                EXPLORE MORE SPORTS
+              </span>
+            </div>
+          </div>
+
+          <span className="sport-card__arrow">→</span>
+          <span className="sport-card__glow" />
+        </button>
+
+        {/* REFEREE */}
+        <button
+          type="button"
+          className="sport-card sport-card--referee"
+          onClick={() => handleSportSelect("referee" as SportId)}
+        >
+          <img
+  className="sport-card__image"
+  src="/sports/referee.png"
+  alt="Referee"
+/>
+
+<div className="sport-card__overlay" />
+
+          <div className="sport-card__overlay" />
+
+          <div className="sport-card__bottom">
+            <div className="sport-card__icon">🚩</div>
+
+            <div className="sport-card__content">
+              <span className="sport-card__name">
+                Referee
+              </span>
+
+              <span className="sport-card__action">
+                REFEREE TOOLS
+              </span>
+            </div>
+          </div>
+
+          <span className="sport-card__arrow">→</span>
+          <span className="sport-card__glow" />
+        </button>
       </section>
-
-      {/* BOTTOM ACTIONS */}
-      <div className="sport-selector__footer">
-        <button
-          type="button"
-          className="sport-selector__footer-button sport-selector__footer-button--more"
-        >
-          <span className="sport-selector__footer-icon">
-            •••
-          </span>
-
-          <span className="sport-selector__footer-text">
-            <strong>More</strong>
-            <small>EXPLORE MORE SPORTS</small>
-          </span>
-
-          <span className="sport-selector__footer-arrow">
-            ›
-          </span>
-        </button>
-
-        <button
-          type="button"
-          className="sport-selector__footer-button sport-selector__footer-button--referee"
-        >
-          <span className="sport-selector__footer-icon">
-            ⚑
-          </span>
-
-          <span className="sport-selector__footer-text">
-            <strong>Referee</strong>
-            <small>REFEREE TOOLS</small>
-          </span>
-
-          <button
-  type="button"
-  className="sport-selector__back"
-  onClick={onBack}
-  aria-label="Back"
->
-  ←
-</button>
-
-          <span className="sport-selector__footer-arrow">
-            ›
-          </span>
-        </button>
-      </div>
     </main>
   );
 }
