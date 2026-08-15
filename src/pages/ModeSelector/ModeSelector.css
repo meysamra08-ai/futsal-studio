@@ -1,15 +1,19 @@
+
 .sport-selector {
   min-height: 100vh;
   width: 100%;
   box-sizing: border-box;
   padding: 48px 24px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  background: #111827 !important;
-  color: #ffffff !important;
+  background: #111827;
+  color: #ffffff;
 }
+
+/* ---------- Header ---------- */
 
 .sport-selector__brand {
   margin-top: 20px;
@@ -18,147 +22,117 @@
   font-size: 34px;
   font-weight: 800;
   letter-spacing: -0.5px;
-  color: #ffffff !important;
+
+  color: #fff;
 }
 
 .sport-selector__subtitle {
-  margin: 0 0 38px;
+  margin: 0 0 36px;
 
-  color: #94a3b8 !important;
   font-size: 17px;
+  color: #94a3b8;
 }
 
-.sport-selector__grid {
+/* ---------- Grid ---------- */
+
+.mode-selector__grid {
   width: min(900px, 100%);
+
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+
   gap: 18px;
 }
 
+/* ---------- Cards ---------- */
+
 .mode-card {
   width: 100%;
-  min-height: 190px;
-  padding: 28px;
+  min-height: 185px;
+
+  padding: 26px;
 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: center;
+  align-items: flex-start;
 
-  box-sizing: border-box;
+  border-radius: 20px;
+  border: 1px solid #334155;
 
-  border: 1px solid #334155 !important;
-  border-radius: 20px !important;
-
-  background: #1e293b !important;
-  color: #f8fafc !important;
-
-  font-family: inherit;
-  font-size: inherit;
-  text-align: left;
-
-  appearance: none;
-  -webkit-appearance: none;
+  background: #1e293b;
+  color: #f8fafc;
 
   cursor: pointer;
 
-  transition:
-    transform 0.18s ease,
-    border-color 0.18s ease,
-    background 0.18s ease,
-    box-shadow 0.18s ease;
+  transition: .18s ease;
 }
 
 .mode-card:hover {
   transform: translateY(-5px);
-  border-color: #3b82f6 !important;
-  background: #26364d !important;
-  color: #ffffff !important;
+
+  border-color: #38bdf8;
+  background: #243447;
 }
 
 .mode-card--selected {
-  border-color: #3b82f6 !important;
-  background: #1d4ed8 !important;
-  color: #ffffff !important;
+  border-color: #38bdf8;
+  background: #0f4c81;
 }
 
-.sport-card {
-  width: 100%;
-  min-height: 150px;
-  padding: 24px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  box-sizing: border-box;
-
-  border: 1px solid #334155 !important;
-  border-radius: 18px !important;
-
-  background: #1e293b !important;
-  color: #f8fafc !important;
-
-  font-family: inherit;
-  font-size: inherit;
-  text-align: center;
-
-  appearance: none;
-  -webkit-appearance: none;
-
-  cursor: pointer;
-
-  transition:
-    transform 0.18s ease,
-    border-color 0.18s ease,
-    background 0.18s ease,
-    box-shadow 0.18s ease;
+.mode-card__icon {
+  font-size: 48px;
+  margin-bottom: 16px;
 }
 
-.sport-card:hover {
-  transform: translateY(-5px);
-  border-color: #3b82f6 !important;
-  background: #26364d !important;
-  color: #ffffff !important;
+.mode-card__title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
-.sport-card--selected {
-  border-color: #3b82f6 !important;
-  background: #1d4ed8 !important;
-  color: #ffffff !important;
+.mode-card__description {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #cbd5e1;
 }
 
-@media (max-width: 420px) {
-  .sport-selector__grid {
-    grid-template-columns: 1fr;
+/* ---------- Mobile Portrait ---------- */
+
+@media (max-width:420px){
+
+  .mode-selector__grid{
+    grid-template-columns:1fr;
   }
-}
-/* ==========================================
-   ANDROID LANDSCAPE ONLY
-   ========================================== */
 
-@media (orientation: landscape) and (max-height: 560px) {
+}
+
+/* =====================================================
+   ANDROID LANDSCAPE ONLY
+   ===================================================== */
+
+@media (orientation: landscape) and (max-height: 560px){
 
   .sport-selector{
     padding: 18px 14px;
+    justify-content: center;
   }
 
   .sport-selector__brand{
+    margin-top: 2px;
+    margin-bottom: 4px;
     font-size: 26px;
-    margin-top: 4px;
-    margin-bottom: 2px;
   }
 
   .sport-selector__subtitle{
+    margin-bottom: 16px;
     font-size: 13px;
-    margin-bottom: 14px;
   }
 
   .mode-selector__grid{
     width: 100%;
     gap: 10px;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3,1fr);
   }
 
   .mode-card{
@@ -174,10 +148,12 @@
 
   .mode-card__title{
     font-size: 15px;
+    margin-bottom: 4px;
   }
 
   .mode-card__description{
     font-size: 11px;
     line-height: 1.35;
   }
+
 }
