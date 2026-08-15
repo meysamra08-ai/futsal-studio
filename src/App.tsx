@@ -17,6 +17,8 @@ export default function App() {
       setShowSplash(false);
     }, 3000);
 
+
+    
     return () => clearTimeout(timer);
   }, []);
 

@@ -134,3 +134,74 @@
     grid-template-columns: 1fr;
   }
 }
+/* ===================================================
+   ANDROID LANDSCAPE ONLY
+   =================================================== */
+
+@media (orientation: landscape) and (max-height: 560px) {
+
+  .mode-selector{
+    padding: 10px 14px;
+    overflow: hidden;
+  }
+
+  .mode-selector__header{
+    margin-bottom: 8px;
+  }
+
+  .mode-selector__title{
+    font-size: 30px;
+  }
+
+  .mode-selector__subtitle{
+    font-size: 13px;
+  }
+
+  /* کارت بزرگ بالا */
+  .mode-card--featured{
+    min-height: 145px;
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .mode-card--featured .mode-card__icon{
+    width: 58px;
+    height: 58px;
+    font-size: 28px;
+  }
+
+  .mode-card--featured .mode-card__title{
+    font-size: 24px;
+  }
+
+  .mode-card--featured .mode-card__description{
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  /* کارت‌های پایین */
+  .mode-selector__grid{
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .mode-card{
+    min-height: 92px;
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .mode-card__icon{
+    width: 42px;
+    height: 42px;
+    font-size: 20px;
+  }
+
+  .mode-card__title{
+    font-size: 15px;
+  }
+
+  .mode-card__description{
+    font-size: 11px;
+  }
+}
