@@ -7,12 +7,18 @@ type ModeSelectorProps = {
 };
 
 export default function ModeSelector({
+  onBack,
   onMatchMode,
   onTrainingMode,
 }: ModeSelectorProps) {
   return (
     <main className="sport-selector">
-      {/* Header */}
+
+      {/* دکمه برگشت */}
+      <button className="back-btn" onClick={onBack}>
+        ←
+      </button>
+
       <header className="sport-selector__header">
         <img
           src="/logo/splashlogo.png"
@@ -33,9 +39,8 @@ export default function ModeSelector({
         </p>
       </header>
 
-      {/* Grid */}
       <section className="mode-selector__grid">
-        {/* Match Coaching */}
+
         <article className="mode-card mode-card--match">
           <div className="mode-card__content">
             <div className="mode-card__badge">⚽</div>
@@ -45,15 +50,14 @@ export default function ModeSelector({
             </h2>
 
             <p className="mode-card__description">
-              طراحی تاکتیک، ترکیب تیم و رفع اشکال لحظه‌ای
-              در جریان مسابقه
+              طراحی تاکتیک، ترکیب تیم و مدیریت مسابقه
             </p>
           </div>
 
           <div className="mode-card__preview">
             <img
               src="/modes/match-preview.png"
-              alt="Match Preview"
+              alt="Match"
             />
           </div>
 
@@ -61,11 +65,10 @@ export default function ModeSelector({
             className="mode-card__button"
             onClick={onMatchMode}
           >
-            ورود به کوچینگ مسابقه →
+            ورود به کوچینگ مسابقه
           </button>
         </article>
 
-        {/* Training */}
         <article className="mode-card mode-card--training">
           <div className="mode-card__content">
             <div className="mode-card__badge">🟢</div>
@@ -75,15 +78,14 @@ export default function ModeSelector({
             </h2>
 
             <p className="mode-card__description">
-              برنامه‌ریزی تمرینات، چیدمان بازیکنان و
-              طراحی جلسه تمرینی
+              برنامه‌ریزی تمرینات و طراحی جلسه تمرینی
             </p>
           </div>
 
           <div className="mode-card__preview">
             <img
               src="/modes/training-preview.png"
-              alt="Training Preview"
+              alt="Training"
             />
           </div>
 
@@ -91,9 +93,10 @@ export default function ModeSelector({
             className="mode-card__button"
             onClick={onTrainingMode}
           >
-            ورود به طراحی تمرین →
+            ورود به طراحی تمرین
           </button>
         </article>
+
       </section>
     </main>
   );
