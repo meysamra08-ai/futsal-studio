@@ -152,3 +152,42 @@
     line-height: 1.3;
   }
 }
+@media screen and (max-height: 500px) {
+
+  .sport-selector{
+    padding: 12px 14px !important;
+  }
+
+  .sport-selector__brand{
+    font-size: 26px !important;
+    margin-top: 4px !important;
+  }
+
+  .sport-selector__subtitle{
+    margin-bottom: 14px !important;
+    font-size: 13px !important;
+  }
+
+  .mode-selector__grid{
+    gap: 10px !important;
+  }
+
+  .mode-card{
+    min-height: 105px !important;
+    padding: 14px !important;
+  }
+
+  .mode-card__icon{
+    font-size: 30px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .mode-card__title{
+    font-size: 15px !important;
+  }
+
+  .mode-card__description{
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+  }
+}
