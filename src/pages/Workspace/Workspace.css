@@ -1774,3 +1774,82 @@
   }
 
 }
+
+/* =========================================================
+   ANDROID ONLY (Windows & Web unchanged)
+   ========================================================= */
+@media (hover: none) and (pointer: coarse) {
+
+  .workspace-home{
+    padding: 18px 16px 90px;
+  }
+
+  .workspace-header{
+    margin-bottom: 18px;
+  }
+
+  .workspace-brand__name{
+    font-size: 18px;
+  }
+
+  .workspace-welcome{
+    margin-bottom: 18px;
+  }
+
+  .workspace-welcome h1{
+    font-size: 30px;
+    line-height: 1.2;
+  }
+
+  .workspace-welcome p{
+    font-size: 14px;
+  }
+
+  .workspace-actions{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  .workspace-card{
+    min-height: 280px;
+    border-radius: 22px;
+  }
+
+  .workspace-card__top{
+    padding:18px;
+  }
+
+  .workspace-card__icon{
+    width:52px;
+    height:52px;
+    font-size:24px;
+  }
+
+  .workspace-card h2{
+    font-size:24px;
+  }
+
+  .workspace-card p{
+    font-size:13px;
+    line-height:1.5;
+  }
+
+  .workspace-card__visual{
+    height:120px;
+    margin:0 18px;
+  }
+
+  .workspace-card__button{
+    margin:18px;
+    height:52px;
+    font-size:15px;
+  }
+
+  .workspace-bottom-nav{
+    left:14px;
+    right:14px;
+    bottom:12px;
+    border-radius:20px;
+  }
+}
