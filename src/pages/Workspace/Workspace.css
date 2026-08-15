@@ -1853,3 +1853,52 @@
     border-radius:20px;
   }
 }
+/* ===== Android APK Only ===== */
+@media (hover: none) and (pointer: coarse) {
+
+  /* هدر */
+  .workspace-header{
+    padding: 0;
+    margin-bottom: 18px;
+  }
+
+  .workspace-menu{
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
+    flex-shrink: 0;
+  }
+
+  .workspace-pro{
+    height: 44px;
+    padding: 0 14px;
+    font-size: 12px;
+  }
+
+  /* عنوان */
+  .workspace-welcome h1{
+    font-size: 34px;
+    line-height: 1.2;
+  }
+
+  /* فقط کارت‌ها */
+  .workspace-actions{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .workspace-card{
+    width: 100%;
+    min-height: 320px;
+  }
+
+  .workspace-card__visual{
+    height: 150px;
+  }
+
+  .workspace-card__button{
+    height: 54px;
+    font-size: 15px;
+  }
+}
