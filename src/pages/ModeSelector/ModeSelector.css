@@ -1,4 +1,3 @@
-
 .sport-selector {
   min-height: 100vh;
   width: 100%;
@@ -8,15 +7,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   background: #111827;
   color: #ffffff;
 }
 
-/* ---------- Header ---------- */
+/* ================= HEADER ================= */
 
 .sport-selector__brand {
-  margin-top: 20px;
+  margin-top: 18px;
   margin-bottom: 8px;
 
   font-size: 34px;
@@ -27,16 +27,16 @@
 }
 
 .sport-selector__subtitle {
-  margin: 0 0 36px;
+  margin: 0 0 34px;
 
   font-size: 17px;
   color: #94a3b8;
 }
 
-/* ---------- Grid ---------- */
+/* ================= GRID ================= */
 
 .mode-selector__grid {
-  width: min(900px, 100%);
+  width: min(920px, 100%);
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -44,7 +44,7 @@
   gap: 18px;
 }
 
-/* ---------- Cards ---------- */
+/* ================= CARD ================= */
 
 .mode-card {
   width: 100%;
@@ -57,14 +57,13 @@
   justify-content: center;
   align-items: flex-start;
 
-  border-radius: 20px;
   border: 1px solid #334155;
+  border-radius: 20px;
 
   background: #1e293b;
   color: #f8fafc;
 
   cursor: pointer;
-
   transition: .18s ease;
 }
 
@@ -72,17 +71,17 @@
   transform: translateY(-5px);
 
   border-color: #38bdf8;
-  background: #243447;
+  background: #26364d;
 }
 
 .mode-card--selected {
   border-color: #38bdf8;
-  background: #0f4c81;
+  background: #1d4ed8;
 }
 
 .mode-card__icon {
-  font-size: 48px;
-  margin-bottom: 16px;
+  font-size: 46px;
+  margin-bottom: 14px;
 }
 
 .mode-card__title {
@@ -93,67 +92,63 @@
 
 .mode-card__description {
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.45;
   color: #cbd5e1;
 }
 
-/* ---------- Mobile Portrait ---------- */
+/* ================= MOBILE ================= */
 
-@media (max-width:420px){
-
-  .mode-selector__grid{
-    grid-template-columns:1fr;
+@media (max-width: 420px) {
+  .mode-selector__grid {
+    grid-template-columns: 1fr;
   }
-
 }
 
-/* =====================================================
-   ANDROID LANDSCAPE ONLY
-   ===================================================== */
+/* ======================================================
+   ANDROID LANDSCAPE ONLY (بدون تغییر ویندوز)
+   ====================================================== */
 
-@media (orientation: landscape) and (max-height: 560px){
+@media (orientation: landscape) and (max-height: 600px) {
 
-  .sport-selector{
-    padding: 18px 14px;
-    justify-content: center;
+  .sport-selector {
+    padding: 14px 12px;
   }
 
-  .sport-selector__brand{
-    margin-top: 2px;
-    margin-bottom: 4px;
+  .sport-selector__brand {
     font-size: 26px;
+    margin-top: 0;
+    margin-bottom: 4px;
   }
 
-  .sport-selector__subtitle{
-    margin-bottom: 16px;
+  .sport-selector__subtitle {
     font-size: 13px;
+    margin-bottom: 16px;
   }
 
-  .mode-selector__grid{
+  .mode-selector__grid {
     width: 100%;
     gap: 10px;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  .mode-card{
-    min-height: 125px;
-    padding: 16px;
+  .mode-card {
+    min-height: 120px;
+    padding: 14px;
     border-radius: 16px;
   }
 
-  .mode-card__icon{
-    font-size: 34px;
+  .mode-card__icon {
+    font-size: 30px;
     margin-bottom: 8px;
   }
 
-  .mode-card__title{
+  .mode-card__title {
     font-size: 15px;
     margin-bottom: 4px;
   }
 
-  .mode-card__description{
+  .mode-card__description {
     font-size: 11px;
-    line-height: 1.35;
+    line-height: 1.3;
   }
-
 }
