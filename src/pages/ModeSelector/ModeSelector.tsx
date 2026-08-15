@@ -7,7 +7,6 @@ type ModeSelectorProps = {
 };
 
 export default function ModeSelector({
-  onBack,
   onMatchMode,
   onTrainingMode,
 }: ModeSelectorProps) {
