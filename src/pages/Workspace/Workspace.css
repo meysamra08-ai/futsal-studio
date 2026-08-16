@@ -1869,29 +1869,25 @@
   font-size:12px;
 }
 /* فقط اندروید */
-.android-ui .workspace-card{
-  padding: 18px;
-  border-radius: 22px;
-  justify-content: space-between;
+.android-ui .workspace-welcome{
+  margin: 4px 0 -18px !important;
+  transform: translateY(-18px);
 }
 
-.android-ui .workspace-card h2{
-  font-size: 20px;
-  margin: 10px 0 6px;
+.android-ui .workspace-welcome h1{
+  font-size: 30px;
+  margin: 4px 0;
 }
 
-
- .workspace-card p{
-  font-size: 12px;
-  line-height: 1.6;
-  opacity: .9;
+.android-ui .workspace-welcome p{
+  margin-top: 2px;
+  font-size: 13px;
 }
 
-.android-ui .workspace-card__button{
-  margin-top: 14px;
-  height: 44px;
-  border-radius: 12px;
+.android-ui .workspace-actions{
+  margin-top: -28px !important;
 }
+
 /* ========= Android Final Fix ========= */
 
 .android-ui .workspace-welcome{
