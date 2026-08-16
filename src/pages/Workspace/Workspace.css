@@ -1864,11 +1864,17 @@
   min-height:260px;
 }
 
+/* فقط اندروید */
+.android-ui .workspace-card{
+  min-height: 185px;   /* ارتفاع کارت */
+  padding: 16px;       /* فاصله داخلی */
+  border-radius: 18px;
+}
 
 /* فقط اندروید */
 .android-ui .workspace-welcome{
   margin: 4px 0 -18px !important;
-  transform: translateY(-30px);
+  transform: translateY(-40px);
 }
 
 .android-ui .workspace-welcome h1{
