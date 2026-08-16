@@ -1,6 +1,10 @@
-import { useState } from "react";
+
+import { useMemo, useState } from "react";
+import { Capacitor } from "@capacitor/core";
 import MainLayout from "../../shared/layouts/MainLayout";
 import "./Workspace.css";
+
+
 
 type WorkspaceMode = "match" | "training" | null;
 
@@ -14,12 +18,17 @@ export default function Workspace({
   const [activeWorkspace, setActiveWorkspace] =
     useState<WorkspaceMode>(null);
 
+    const isAndroid = useMemo(
+  () => Capacitor.getPlatform() === "android",
+  []
+);
+
   if (activeWorkspace) {
     return <MainLayout />;
   }
 
   return (
-    <main className="workspace-home">
+   <main className={`workspace-home ${isAndroid ? "android-ui" : ""}`}>
       {/* Background decoration */}
       <div className="workspace-home__glow workspace-home__glow--blue" />
       <div className="workspace-home__glow workspace-home__glow--green" />
