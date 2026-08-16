@@ -1864,11 +1864,30 @@
   min-height:260px;
 }
 
-.android-ui .workspace-card__visual{
-  height:100px;
-}
-
 .android-ui .workspace-card__button{
   height:42px;
   font-size:12px;
+}
+/* فقط اندروید */
+.android-ui .workspace-card{
+  padding: 18px;
+  border-radius: 22px;
+  justify-content: space-between;
+}
+
+.android-ui .workspace-card h2{
+  font-size: 20px;
+  margin: 10px 0 6px;
+}
+
+.android-ui .workspace-card p{
+  font-size: 12px;
+  line-height: 1.6;
+  opacity: .9;
+}
+
+.android-ui .workspace-card__button{
+  margin-top: 14px;
+  height: 44px;
+  border-radius: 12px;
 }
