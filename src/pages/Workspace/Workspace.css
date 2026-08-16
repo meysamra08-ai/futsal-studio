@@ -1880,7 +1880,8 @@
   margin: 10px 0 6px;
 }
 
-.android-ui .workspace-card p{
+
+ .workspace-card p{
   font-size: 12px;
   line-height: 1.6;
   opacity: .9;
@@ -1890,4 +1891,34 @@
   margin-top: 14px;
   height: 44px;
   border-radius: 12px;
+}
+/* ========= Android Final Fix ========= */
+
+.android-ui .workspace-welcome{
+  margin-bottom: 8px !important;
+}
+
+.android-ui .workspace-actions{
+  margin-top: -18px;
+  gap: 12px;
+}
+
+/* حذف کامل کادر مشکی */
+.android-ui .workspace-card__visual{
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+/* جمع شدن ارتفاع کارت */
+.android-ui .workspace-card{
+  min-height: 210px !important;
+  justify-content: space-between;
+  padding: 18px;
+}
+
+.android-ui .workspace-card__button{
+  margin-top: 12px;
 }
