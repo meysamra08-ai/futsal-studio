@@ -1864,14 +1864,11 @@
   min-height:260px;
 }
 
-.android-ui .workspace-card__button{
-  height:42px;
-  font-size:12px;
-}
+
 /* فقط اندروید */
 .android-ui .workspace-welcome{
   margin: 4px 0 -18px !important;
-  transform: translateY(-18px);
+  transform: translateY(-30px);
 }
 
 .android-ui .workspace-welcome h1{
@@ -1899,22 +1896,10 @@
   gap: 12px;
 }
 
-/* حذف کامل کادر مشکی */
-.android-ui .workspace-card__visual{
-  display: none !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden;
-}
 
 /* جمع شدن ارتفاع کارت */
 .android-ui .workspace-card{
   min-height: 210px !important;
   justify-content: space-between;
   padding: 18px;
-}
-
-.android-ui .workspace-card__button{
-  margin-top: 12px;
 }
