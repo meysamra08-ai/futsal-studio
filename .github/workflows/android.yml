@@ -2,7 +2,8 @@ name: Build Android APK
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -10,29 +11,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
 
-      - run: npm install
-      - run: npm run build
+      - name: Install Dependencies
+        run: npm install
 
-      - uses: actions/setup-java@v4
+      - name: Build Web
+        run: npm run build
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
 
       - name: Build APK
-  working-directory: android
-  run: |
-    chmod +x gradlew
-    ./gradlew clean
-    ./gradlew app:assembleDebug
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew app:assembleDebug
 
-    
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
