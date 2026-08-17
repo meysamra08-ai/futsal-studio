@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { Capacitor } from "@capacitor/core";
 import MainLayout from "../../shared/layouts/MainLayout";
 import "./Workspace.css";
-
+import MousePosition from "../../components/MousePosition";
 
 
 type WorkspaceMode = "match" | "training" | null;
@@ -18,10 +18,12 @@ export default function Workspace({
   const [activeWorkspace, setActiveWorkspace] =
     useState<WorkspaceMode>(null);
 
-    const isAndroid = useMemo(
-  () => Capacitor.getPlatform() === "android",
-  []
-);
+    const isAndroid = useMemo(() => {
+  return (
+    Capacitor.getPlatform() === "android" ||
+    /Android/i.test(navigator.userAgent)
+  );
+}, []);
 
   if (activeWorkspace) {
     return <MainLayout />;
@@ -68,6 +70,15 @@ export default function Workspace({
           <span>♛</span>
           نسخه حرفه‌ای
         </button>
+
+              
+{isAndroid && (
+  <button className="android-floating-back" onClick={onHome}>
+    <span>   BA←CK   </span>
+    
+  </button>
+)}
+
       </header>
 
       {/* Welcome */}
@@ -77,18 +88,21 @@ export default function Workspace({
         </p>
 
         <h1>
-          به <span>Coach Studio</span> خوش آمدید
+         <span>Coach Studio</span>
         </h1>
 
         <p>
-          فعالیت مورد نظر خود را انتخاب کنید
+         SELECTC CARDS
         </p>
       </section>
 
       {/* Main cards */}
       <section className="workspace-actions">
         {/* Match Coaching */}
-        <article className="workspace-card workspace-card--blue">
+        <article
+  className="workspace-card workspace-card--blue"
+  onClick={() => setActiveWorkspace("match")}
+>
           <div className="workspace-card__top">
             <div>
               <div className="workspace-card__icon">
@@ -98,12 +112,13 @@ export default function Workspace({
               <h2>کوچینگ مسابقه</h2>
 
               <p>
-                طراحی تاکتیک، ترکیب تیم و
+              طراحی تاکتیک ، ارائه  راهکارهای لحظه ای حین مسابقه
                 <br />
-                ارائه راهکارهای لحظه‌ای در جریان مسابقه
+               
               </p>
             </div>
           </div>
+
 
           <div className="workspace-card__visual workspace-card__visual--match">
             <div className="tactical-field">
@@ -125,6 +140,7 @@ export default function Workspace({
 
               <span className="ball">
                 ●
+                
               </span>
 
               <div className="tactical-line tactical-line--one" />
@@ -132,20 +148,13 @@ export default function Workspace({
             </div>
           </div>
 
-          <button
-            type="button"
-            className="workspace-card__button"
-            onClick={() =>
-              setActiveWorkspace("match")
-            }
-          >
-            ورود به کوچینگ مسابقه
-            <span>→</span>
-          </button>
         </article>
 
         {/* Training Design */}
-        <article className="workspace-card workspace-card--green">
+        <article
+  className="workspace-card workspace-card--green"
+  onClick={() => setActiveWorkspace("training")}
+>
           <div className="workspace-card__top">
             <div>
               <div className="workspace-card__icon">
@@ -155,9 +164,9 @@ export default function Workspace({
               <h2>طراحی تمرین</h2>
 
               <p>
-                طراحی تمرین، استفاده از تجهیزات
+              طراحی تمرین ، استفاده از تجهیزات و برنامه ریزی جلسات تمرینی 
                 <br />
-                و برنامه‌ریزی جلسات تمرینی
+              
               </p>
             </div>
           </div>
@@ -176,19 +185,10 @@ export default function Workspace({
             </div>
           </div>
 
-          <button
-            type="button"
-            className="workspace-card__button"
-            onClick={() =>
-              setActiveWorkspace("training")
-            }
-          >
-            ورود به طراحی تمرین
-            <span>→</span>
-          </button>
         </article>
       </section>
 
+    
       {/* Bottom navigation */}
       <nav className="workspace-bottom-nav">
         {/* Home */}
@@ -229,6 +229,8 @@ export default function Workspace({
           <small>تنظیمات</small>
         </button>
       </nav>
+
+      <MousePosition />
     </main>
   );
 }

@@ -304,7 +304,15 @@
    PRO BUTTON
    ========================================================= */
 
+
 .workspace-pro {
+
+  position: fixed;
+
+  left: 740px;     /* X = فاصله از چپ */
+  top: 25\5px;     /* Y = فاصله از بالا */
+
+  justify-self: end;
   justify-self: end;
 
   border: 1px solid rgba(255,193,7,0.27);
@@ -893,8 +901,8 @@
 
 
 .player--1 {
-  left: 27%;
-  top: 45%;
+  left:58%;
+  top: 40%;
 }
 
 
@@ -1776,128 +1784,506 @@
 }
 
 /* =========================================================
-   ANDROID ONLY (Windows & Web unchanged)
+   ANDROID UI ONLY
+   Coach Studio Android Layout
    ========================================================= */
-@media (hover: none) and (pointer: coarse) {
 
-  .workspace-home{
-    padding: 18px 16px 90px;
-  }
+.android-ui{
 
-  .workspace-header{
-    margin-bottom: 18px;
-  }
+  /*═══════════════════════════════════════
+    1) عنوان صفحه
+  ═══════════════════════════════════════*/
+  --title-x: 220px;
+  --title-y: -20px;
 
-  .workspace-brand__name{
-    font-size: 18px;
-  }
+  /*═══════════════════════════════════════
+    2) موقعیت کارت‌ها
+  ═══════════════════════════════════════*/
+  --match-x: 490px;
+  --match-y: 80px;
 
-  .workspace-welcome{
-    margin-bottom: 18px;
-  }
+  --training-x: 30px;
+  --training-y: 80px;
 
-  .workspace-welcome h1{
-    font-size: 30px;
-    line-height: 1.2;
-  }
+  /*═══════════════════════════════════════
+    3) ابعاد کارت‌ها
+  ═══════════════════════════════════════*/
+  --card-width: 340px;
+  --card-height: 260px;
+  --card-radius: 22px;
+  --card-padding: 16px;
 
-  .workspace-welcome p{
-    font-size: 14px;
-  }
+  /*═══════════════════════════════════════
+    4) آیکون‌ها
+  ═══════════════════════════════════════*/
+  --icon-size: 30px;
 
-  .workspace-actions{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:16px;
-  }
+  --match-icon-x: -25px;
+  --match-icon-y: -25px;
 
-  .workspace-card{
-    min-height: 280px;
-    border-radius: 22px;
-  }
+  --training-icon-x: -25px;
+  --training-icon-y: -25px;
 
-  .workspace-card__top{
-    padding:18px;
-  }
+  /*═══════════════════════════════════════
+    5) عنوان کارت‌ها
+  ═══════════════════════════════════════*/
+  --title-size: 17px;
 
-  .workspace-card__icon{
-    width:52px;
-    height:52px;
-    font-size:24px;
-  }
+  --match-title-x: 180px;
+  --match-title-y: -60px;
 
-  .workspace-card h2{
-    font-size:24px;
-  }
+  --training-title-x: 180px;
+  --training-title-y: -60px;
 
-  .workspace-card p{
-    font-size:13px;
-    line-height:1.5;
-  }
+  /*═══════════════════════════════════════
+    6) متن توضیحات
+  ═══════════════════════════════════════*/
+  --text-size: 11px;
 
-  .workspace-card__visual{
-    height:120px;
-    margin:0 18px;
-  }
+  --match-text-x: 40px;
+  --match-text-y: -55px;
 
-  .workspace-card__button{
-    margin:18px;
-    height:52px;
-    font-size:15px;
-  }
+  --training-text-x: 14px;
+  --training-text-y: -55px;
 
-  .workspace-bottom-nav{
-    left:14px;
-    right:14px;
-    bottom:12px;
-    border-radius:20px;
-  }
-}
-/* فقط اندروید */
-.android-ui .workspace-actions{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-}
+  /*═══════════════════════════════════════
+    7) زمین گرافیکی (کاملاً جدا)
+  ═══════════════════════════════════════*/
 
-.android-ui .workspace-card{
-  min-height:260px;
-}
+  /* کوچینگ مسابقه */
+  --match-visual-height: 160px;
+  --match-visual-scale: 1;
+  --match-visual-x: 0px;
+  --match-visual-y: -70px;
 
-/* فقط اندروید */
-.android-ui .workspace-card{
-  min-height:150px;   /* ارتفاع کارت */
-  padding: 16px;       /* فاصله داخلی */
-  border-radius: 18px;
+  /* طراحی تمرین */
+  --training-visual-height: 160px;
+  --training-visual-scale: 1;
+  --training-visual-x: 0px;
+  --training-visual-y: -70px;
+
+  /*═══════════════════════════════════════
+    8) دکمه ورود
+  ═══════════════════════════════════════*/
+  --button-width: 40%;
+  --button-height: 40px;
+  --button-font: 13px;
+
+  --match-button-x: 15px;
+  --match-button-y: 155px;
+
+  --training-button-x: 15px;
+  --training-button-y: 155px;
 }
 
-/* فقط اندروید */
+/* =========================================================
+   صفحه
+   ========================================================= */
+
+.android-ui.workspace-home{
+  padding:16px 14px 90px;
+}
+
+/* =========================================================
+   عنوان صفحه
+   ========================================================= */
+
 .android-ui .workspace-welcome{
-  margin: 4px 0 -18px !important;
-  transform: translateY(-55px);
+  position:fixed;
+  left:var(--title-x);
+  top:var(--title-y);
+  width:420px;
+  text-align:center;
 }
 
 .android-ui .workspace-welcome h1{
-  font-size: 30px;
-  margin: 4px 0;
+  font-size:45px;
+  line-height:1.15;
+  margin:1px 0;
 }
 
 .android-ui .workspace-welcome p{
-  margin-top: 2px;
-  font-size: 13px;
+  font-size:13px;
 }
 
-.android-ui .workspace-actions{
-  margin-top: -28px !important;
-}
+/* =========================================================
+   کارت‌ها
+   ========================================================= */
 
-/* ========= Android Final Fix ========= */
-
-
-
-/* جمع شدن ارتفاع کارت */
 .android-ui .workspace-card{
-  min-height: 210px !important;
-  justify-content: space-between;
-  padding: 18px;
+  position:fixed;
+  width:var(--card-width);
+  min-height:var(--card-height);
+  padding:var(--card-padding);
+  border-radius:var(--card-radius);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+
+.android-ui .workspace-card--blue{
+  left:var(--match-x);
+  top:var(--match-y);
+}
+
+.android-ui .workspace-card--green{
+  left:var(--training-x);
+  top:var(--training-y);
+}
+
+/* =========================================================
+   آیکون‌ها
+   ========================================================= */
+
+.android-ui .workspace-card__icon{
+  width:var(--icon-size);
+  height:var(--icon-size);
+  font-size:28px;
+}
+
+.android-ui .workspace-card--blue .workspace-card__icon{
+  transform:translate(var(--match-icon-x),var(--match-icon-y));
+}
+
+.android-ui .workspace-card--green .workspace-card__icon{
+  transform:translate(var(--training-icon-x),var(--training-icon-y));
+}
+
+/* =========================================================
+   عنوان کارت
+   ========================================================= */
+
+.android-ui .workspace-card h2{
+  font-size:var(--title-size);
+  margin:0;
+}
+
+.android-ui .workspace-card--blue h2{
+  transform:translate(var(--match-title-x),var(--match-title-y));
+}
+
+.android-ui .workspace-card--green h2{
+  transform:translate(var(--training-title-x),var(--training-title-y));
+}
+
+/* =========================================================
+   توضیحات
+   ========================================================= */
+
+.android-ui .workspace-card p{
+  font-size:var(--text-size);
+  line-height:1.35;
+  margin:0;
+}
+
+.android-ui .workspace-card--blue p{
+  transform:translate(var(--match-text-x),var(--match-text-y));
+}
+
+.android-ui .workspace-card--green p{
+  transform:translate(var(--training-text-x),var(--training-text-y));
+}
+
+/* =========================================================
+   زمین گرافیکی کوچینگ
+   ========================================================= */
+
+.android-ui .workspace-card--blue .workspace-card__visual{
+  height:var(--match-visual-height);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform:translate(var(--match-visual-x),var(--match-visual-y));
+}
+
+.android-ui .workspace-card--blue .workspace-card__visual>*{
+  transform:scale(var(--match-visual-scale));
+  transform-origin:center;
+}
+
+/* =========================================================
+   زمین گرافیکی طراحی تمرین
+   ========================================================= */
+
+.android-ui .workspace-card--green .workspace-card__visual{
+  height:var(--training-visual-height);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform:translate(var(--training-visual-x),var(--training-visual-y));
+}
+
+.android-ui .workspace-card--green .workspace-card__visual>*{
+  transform:scale(var(--training-visual-scale));
+  transform-origin:center;
+}
+
+/* =========================================================
+   دکمه ورود
+   ========================================================= */
+
+.android-ui .workspace-card__button{
+  position:absolute;
+  width:var(--button-width);
+  height:var(--button-height);
+  font-size:var(--button-font);
+  border-radius:12px;
+}
+
+.android-ui .workspace-card--blue .workspace-card__button{
+  left:var(--match-button-x);
+  top:var(--match-button-y);
+}
+
+.android-ui .workspace-card--green .workspace-card__button{
+  left:var(--training-button-x);
+  top:var(--training-button-y);
+}
+
+/* =========================================================
+   منوی پایین
+   ========================================================= */
+
+.android-ui .workspace-bottom-nav{
+  left:12px;
+  right:12px;
+  bottom:10px;
+  border-radius:18px;
+}
+
+/* حذف باکس پایین فقط در اندروید */
+.android-ui .workspace-bottom-nav{
+  display: none !important;
+}
+
+/* حذف منوی همبرگری فقط در اندروید */
+.android-ui .workspace-menu,
+.android-ui .menu-button,
+.android-ui .header-menu,
+.android-ui .workspace-header button:first-child{
+  display: none !important;
+}
+
+/* ===== Android Floating Back Button ===== */
+
+.android-ui .android-floating-back{
+  position: fixed;
+
+  left: 20px;     /* X = فاصله از چپ */
+  top: 25\5px;     /* Y = فاصله از بالا */
+
+  justify-self: end;
+
+  border: 1px solid rgba(255,193,7,0.27);     /*خط دور*/
+  border-radius: 13px;         /*گردی دور خط */
+   padding: 9px 13px;
+
+
+  color: #ffd86a;
+
+  background: linear-gradient(
+    8deg,
+    rgba(255,190,0,0.18),
+    rgba(120,80,0,0.12)
+  );
+
+  box-shadow:
+    0 0 22px rgba(255,180,0,0.08),
+    inset 0 1px rgba(255,255,255,0.08);
+
+  font-size: 15px;
+  font-weight: 300;
+  cursor: pointer;
+
+  z-index: 999;
+}
+
+/* =========================================================
+   ANDROID ONLY - Graphic Field Positions
+   ========================================================= */
+
+.android-ui{
+
+  /* ===== بازیکن‌های کوچینگ ===== */
+  --p1-x: -800%;
+  --p1-y: 12%;
+
+  --p2-x: -350%;
+  --p2-y: 5%;
+
+  --p3-x: 72%;
+  --p3-y: -200%;
+
+  --p4-x: 45%;
+  --p4-y: 110%;
+
+  /* ===== توپ ===== */
+  --ball-x: 50%;
+  --ball-y: 50%;
+
+  /* ===== مخروط‌های تمرین ===== */
+  --cone1-x: -300%;
+  --cone1-y: -250%;
+
+  --cone2-x: 78%;
+  --cone2-y: 22%;
+
+  --cone3-x: 35%;
+  --cone3-y: 50%;
+
+  --cone4-x: 78%;
+  --cone4-y: 72%;
+
+  --cone5-x: 48%;
+  --cone5-y: 82%;
+
+  /* ===== بازیکن‌های تمرین ===== */
+  --tp1-x: 450%;
+  --tp1-y: 260%;
+
+  --tp2-x: 250%;
+  --tp2-y: 58%;
+
+  --tp3-x: 68%;
+  --tp3-y: 900%;
+}
+
+/* ---------- بازیکن‌های کوچینگ ---------- */
+
+.android-ui .player--1{
+  left: var(--p1-x);
+  top: var(--p1-y);
+}
+
+.android-ui .player--2{
+  left: var(--p2-x);
+  top: var(--p2-y);
+}
+
+.android-ui .player--3{
+  left: var(--p3-x);
+  top: var(--p3-y);
+}
+
+.android-ui .player--4{
+  left: var(--p4-x);
+  top: var(--p4-y);
+}
+
+/* توپ */
+.android-ui .ball{
+  left: var(--ball-x);
+  top: var(--ball-y);
+}
+
+/* ---------- مخروط‌ها ---------- */
+
+.android-ui .cone--1{
+  left: var(--cone1-x);
+  top: var(--cone1-y);
+}
+
+.android-ui .cone--2{
+  left: var(--cone2-x);
+  top: var(--cone2-y);
+}
+
+.android-ui .cone--3{
+  left: var(--cone3-x);
+  top: var(--cone3-y);
+}
+
+.android-ui .cone--4{
+  left: var(--cone4-x);
+  top: var(--cone4-y);
+}
+
+.android-ui .cone--5{
+  left: var(--cone5-x);
+  top: var(--cone5-y);
+}
+
+/* ---------- بازیکن‌های تمرین ---------- */
+
+.android-ui .training-player--1{
+  left: var(--tp1-x);
+  top: var(--tp1-y);
+}
+
+.android-ui .training-player--2{
+  left: var(--tp2-x);
+  top: var(--tp2-y);
+}
+
+.android-ui .training-player--3{
+  left: var(--tp3-x);
+  top: var(--tp3-y);
+}
+
+/* =====================================================
+   ANDROID ONLY - Training Field Positions
+   ===================================================== */
+
+.android-ui .training-field{
+  position: relative;
+}
+
+/* ========= مخروط‌ها ========= */
+
+.android-ui .training-field .cone--1{
+  left:150% !important;
+  top:12% !important;
+  right:auto !important;
+  bottom:auto !important;
+}
+
+.android-ui .training-field .cone--2{
+  left:78% !important;
+  top:18% !important;
+  right:auto !important;
+  bottom:auto !important;
+}
+
+.android-ui .training-field .cone--3{
+  left:30% !important;
+  top:48% !important;
+  right:auto !important;
+  bottom:auto !important;
+}
+
+.android-ui .training-field .cone--4{
+  left:76% !important;
+  top:70% !important;
+  right:auto !important;
+  bottom:auto !important;
+}
+
+.android-ui .training-field .cone--5{
+  left:48% !important;
+  top:84% !important;
+  right:auto !important;
+  bottom:auto !important;
+}
+
+/* ========= بازیکن‌ها ========= */
+
+.android-ui .training-field .training-player--1{
+  left:150% !important;
+  top:360% !important;
+  right:auto !important;
+  bottom:auto !important;
+}
+
+.android-ui .training-field .training-player--2{
+  left:18% !important;
+  top:58% !important;
+  right:auto !important;
+  bottom:auto !important;
+}
+
+.android-ui .training-field .training-player--3{
+  left:66% !important;
+  top:76% !important;
+  right:auto !important;
+  bottom:auto !important;
 }
