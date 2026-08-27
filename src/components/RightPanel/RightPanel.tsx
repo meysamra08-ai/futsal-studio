@@ -5,6 +5,7 @@ import EquipmentPanel from "./EquipmentPanel";
 import CourtPanel from "./CourtPanel";
 import PlayersPanel from "./PlayersPanel";
 import BallPanel from "../Ball/BallPanel";
+import DrawingTab from "../Equipment/DrawingTab";
 
 export default function RightPanel() {
   const { activePanel } = useUI();
@@ -28,10 +29,8 @@ export default function RightPanel() {
       {activePanel === "court" && <CourtPanel />}
 
       {activePanel === "draw" && (
-        <div style={{ padding: 20 }}>
-          Draw Tools
-        </div>
-      )}
+  <DrawingTab />
+)}
 
       {activePanel === "animation" && (
         <div style={{ padding: 20 }}>

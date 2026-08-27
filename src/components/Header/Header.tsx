@@ -1,16 +1,23 @@
 import "./Header.css";
-import Toolbar from "../Toolbar/Toolbar";
 
 export default function Header() {
   return (
-    <header className="header">
-      <div className="logo">
-        ⚽ Coach Studio
+    <div className="header">
+      <div className="header__logo">
+        <span className="logo">⚽</span>
+        <div>
+          <h1>Coach Studio</h1>
+          <small>Professional Tactical Board</small>
+        </div>
       </div>
 
-      <div className="actions">
-        <Toolbar />
+      <div className="header__actions">
+        <button>📂</button>
+        <button>💾</button>
+        <button>⬇</button>
+        <button>↶</button>
+        <button>↷</button>
       </div>
-    </header>
+    </div>
   );
 }

@@ -68,6 +68,8 @@ export default function SportSelector({
       </button>
 
       {/* Header */}
+
+    
       <header className="sport-selector__header">
         <div className="sport-selector__brand">
           <img
@@ -92,6 +94,8 @@ export default function SportSelector({
         <p className="sport-selector__subtitle">
           Select a sport to open its coaching workspace
         </p>
+
+      
       </header>
 
       {/* 8 Cards */}
@@ -188,6 +192,7 @@ export default function SportSelector({
 />
 
 <div className="sport-card__overlay" />
+
 
           <div className="sport-card__overlay" />
 

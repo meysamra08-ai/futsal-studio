@@ -1,9 +1,14 @@
-import { useState } from "react";
+import {
+  useRef,
+  useState,
+  type MouseEvent,
+  type PointerEvent,
+} from "react";
+
+import { Capacitor } from "@capacitor/core";
 
 import { useBoard } from "../../core/contexts/BoardContext";
 import { useUI } from "../../core/contexts/UIContext";
-
-import futsalCourt from "../../assest/courts/futsal.png";
 
 import {
   DndContext,
@@ -12,11 +17,59 @@ import {
 
 import DraggableObject from "../Board/DraggableObject";
 
+import "./CourtCanvas.css";
+
+
+/* =========================================================
+   Drawing Point
+   ========================================================= */
+
+type DrawingPoint = {
+  x: number;
+  y: number;
+};
+
+
+/* =========================================================
+   Drawing
+   ========================================================= */
+
+type Drawing = {
+  id: string;
+
+  tool:
+    | "line"
+    | "arrow"
+    | "dashedLine"
+    | "dashedArrow"
+    | "curve"
+    | "curveArrow";
+
+  points: DrawingPoint[];
+
+  color: string;
+
+  width: number;
+
+  opacity: number;
+};
+
+
 export default function CourtCanvas() {
+
   const {
     activeTool,
     mode,
+
+    activePanel,
+
+    drawingTool,
+    lineColor,
+    lineWidth,
+    lineOpacity,
+    drawingLocked,
   } = useUI();
+
 
   const {
     objects,
@@ -24,16 +77,69 @@ export default function CourtCanvas() {
     moveObject,
   } = useBoard();
 
-  const [courtRatio, setCourtRatio] = useState(16 / 9);
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, delta } = event;
+  /* =========================================================
+     Android Detection
+     ========================================================= */
 
-    const obj = objects.find(
-      (item) => item.id === active.id
-    );
+  const isAndroid =
+    Capacitor.getPlatform() === "android";
+
+
+  /* =========================================================
+     Court Ratio
+     ========================================================= */
+
+  const [
+    courtRatio,
+    setCourtRatio,
+  ] = useState(16 / 9);
+
+
+  /* =========================================================
+     Drawing State
+     فقط Web / Windows
+     ========================================================= */
+
+  const [
+    drawings,
+    setDrawings,
+  ] = useState<Drawing[]>([]);
+
+
+  const [
+    drawingInProgress,
+    setDrawingInProgress,
+  ] = useState<Drawing | null>(null);
+
+
+  const drawingPointerDown =
+    useRef(false);
+
+
+  /* =========================================================
+     Drag Object
+     ========================================================= */
+
+  const handleDragEnd = (
+    event: DragEndEvent
+  ) => {
+
+    const {
+      active,
+      delta,
+    } = event;
+
+
+    const obj =
+      objects.find(
+        (item) =>
+          item.id === active.id
+      );
+
 
     if (!obj) return;
+
 
     moveObject(
       obj.id,
@@ -42,21 +148,44 @@ export default function CourtCanvas() {
     );
   };
 
+
+  /* =========================================================
+     Court Click
+     ========================================================= */
+
   const handleCourtClick = (
-    event: React.MouseEvent<HTMLDivElement>
+    event: MouseEvent<HTMLDivElement>
   ) => {
+
+    /*
+     * وقتی پنل خطوط فعال است،
+     * کلیک روی زمین نباید بازیکن
+     * یا تجهیزات جدید اضافه کند.
+     */
+
+    if (activePanel === "draw") {
+      return;
+    }
+
+
     if (mode !== "add") return;
 
     if (!activeTool) return;
 
+
     const rect =
       event.currentTarget.getBoundingClientRect();
 
+
     const x =
-      event.clientX - rect.left;
+      event.clientX -
+      rect.left;
+
 
     const y =
-      event.clientY - rect.top;
+      event.clientY -
+      rect.top;
+
 
     addObject(
       activeTool as any,
@@ -65,17 +194,804 @@ export default function CourtCanvas() {
     );
   };
 
+
+  /* =========================================================
+     Drawing Mode
+     ========================================================= */
+
+  const isDrawingMode =
+    !isAndroid &&
+    activePanel === "draw" &&
+    !drawingLocked;
+
+
+  /* =========================================================
+     Pointer → Court Coordinates
+     ========================================================= */
+
+  const getDrawingPoint = (
+    event: PointerEvent<SVGSVGElement>
+  ): DrawingPoint | null => {
+
+    const svg =
+      event.currentTarget;
+
+
+    const rect =
+      svg.getBoundingClientRect();
+
+
+    if (
+      rect.width <= 0 ||
+      rect.height <= 0
+    ) {
+      return null;
+    }
+
+
+    return {
+      x:
+        event.clientX -
+        rect.left,
+
+      y:
+        event.clientY -
+        rect.top,
+    };
+  };
+
+
+  /* =========================================================
+     Start Drawing
+     ========================================================= */
+
+  const handleDrawingPointerDown = (
+    event: PointerEvent<SVGSVGElement>
+  ) => {
+
+    if (!isDrawingMode) {
+      return;
+    }
+
+
+    event.preventDefault();
+
+    event.stopPropagation();
+
+
+    const point =
+      getDrawingPoint(event);
+
+
+    if (!point) return;
+
+
+    drawingPointerDown.current =
+      true;
+
+
+    const newDrawing: Drawing = {
+
+      id:
+        crypto.randomUUID(),
+
+      tool:
+        drawingTool,
+
+      points:
+        [point],
+
+      color:
+        lineColor,
+
+      width:
+        lineWidth,
+
+      opacity:
+        lineOpacity / 100,
+    };
+
+
+    setDrawingInProgress(
+      newDrawing
+    );
+
+
+    event.currentTarget.setPointerCapture(
+      event.pointerId
+    );
+  };
+
+
+  /* =========================================================
+     Drawing Move
+     ========================================================= */
+
+  const handleDrawingPointerMove = (
+    event: PointerEvent<SVGSVGElement>
+  ) => {
+
+    if (
+      !drawingPointerDown.current
+    ) {
+      return;
+    }
+
+
+    if (!drawingInProgress) {
+      return;
+    }
+
+
+    event.preventDefault();
+
+    event.stopPropagation();
+
+
+    const point =
+      getDrawingPoint(event);
+
+
+    if (!point) return;
+
+
+    const isCurve =
+      drawingInProgress.tool ===
+        "curve" ||
+      drawingInProgress.tool ===
+        "curveArrow";
+
+
+    if (isCurve) {
+
+      setDrawingInProgress(
+        (previous) => {
+
+          if (!previous) {
+            return null;
+          }
+
+
+          return {
+            ...previous,
+
+            points: [
+              ...previous.points,
+              point,
+            ],
+          };
+        }
+      );
+
+
+      return;
+    }
+
+
+    setDrawingInProgress(
+      (previous) => {
+
+        if (!previous) {
+          return null;
+        }
+
+
+        return {
+          ...previous,
+
+          points: [
+            previous.points[0],
+            point,
+          ],
+        };
+      }
+    );
+  };
+
+
+  /* =========================================================
+     Finish Drawing
+     ========================================================= */
+
+  const finishDrawing = (
+    event?: PointerEvent<SVGSVGElement>
+  ) => {
+
+    if (
+      !drawingPointerDown.current
+    ) {
+      return;
+    }
+
+
+    drawingPointerDown.current =
+      false;
+
+
+    if (event) {
+
+      event.preventDefault();
+
+      event.stopPropagation();
+
+
+      try {
+
+        event.currentTarget.releasePointerCapture(
+          event.pointerId
+        );
+
+      } catch {
+        /*
+         * PointerCapture ممکن است
+         * قبلاً آزاد شده باشد.
+         */
+      }
+    }
+
+
+    setDrawingInProgress(
+      (current) => {
+
+        if (!current) {
+          return null;
+        }
+
+
+        if (
+          current.points.length < 2
+        ) {
+          return null;
+        }
+
+
+        setDrawings(
+          (previous) => [
+            ...previous,
+            current,
+          ]
+        );
+
+
+        return null;
+      }
+    );
+  };
+
+
+  /* =========================================================
+     Clear Drawings
+     ========================================================= */
+
+
+  /* =========================================================
+     Dash Style
+     ========================================================= */
+
+  const getDashArray = (
+    tool: Drawing["tool"]
+  ) => {
+
+    if (
+      tool === "dashedLine" ||
+      tool === "dashedArrow"
+    ) {
+      return "12 10";
+    }
+
+
+    return undefined;
+  };
+
+
+  /* =========================================================
+     Arrow Marker
+     ========================================================= */
+
+  const ArrowMarker = ({
+    id,
+    color,
+  }: {
+    id: string;
+    color: string;
+  }) => {
+
+    return (
+      <marker
+        id={id}
+        markerWidth="12"
+        markerHeight="12"
+        refX="9"
+        refY="5"
+        orient="auto"
+        markerUnits="strokeWidth"
+      >
+
+        <path
+          d="M 0 0 L 10 5 L 0 10 z"
+          fill={color}
+        />
+
+      </marker>
+    );
+  };
+
+
+  /* =========================================================
+     Curve Path
+     ========================================================= */
+
+  const buildCurvePath = (
+    points: DrawingPoint[]
+  ) => {
+
+    if (points.length === 0) {
+      return "";
+    }
+
+
+    if (points.length === 1) {
+
+      return `
+        M
+        ${points[0].x}
+        ${points[0].y}
+      `;
+    }
+
+
+    let path =
+      `M ${points[0].x} ${points[0].y}`;
+
+
+    for (
+      let index = 1;
+      index < points.length;
+      index++
+    ) {
+
+      const previous =
+        points[index - 1];
+
+      const current =
+        points[index];
+
+
+      const controlX =
+        previous.x;
+
+      const controlY =
+        previous.y;
+
+
+      const endX =
+        (previous.x +
+          current.x) /
+        2;
+
+
+      const endY =
+        (previous.y +
+          current.y) /
+        2;
+
+
+      path +=
+        ` Q ${controlX} ${controlY} ${endX} ${endY}`;
+    }
+
+
+    const last =
+      points[points.length - 1];
+
+
+    path +=
+      ` L ${last.x} ${last.y}`;
+
+
+    return path;
+  };
+
+
+  /* =========================================================
+     Render Drawing
+     ========================================================= */
+
+  const renderDrawing = (
+    drawing: Drawing,
+    preview = false
+  ) => {
+
+    const {
+      id,
+      tool,
+      points,
+      color,
+      width,
+      opacity,
+    } = drawing;
+
+
+    if (
+      points.length < 2
+    ) {
+      return null;
+    }
+
+
+    const first =
+      points[0];
+
+
+    const last =
+      points[
+        points.length - 1
+      ];
+
+
+    const isArrow =
+      tool === "arrow" ||
+      tool === "dashedArrow" ||
+      tool === "curveArrow";
+
+
+    const isCurve =
+      tool === "curve" ||
+      tool === "curveArrow";
+
+
+    const dashArray =
+      getDashArray(tool);
+
+
+    /* =====================================================
+       Curve
+       ===================================================== */
+
+    if (isCurve) {
+
+      return (
+        <path
+          key={
+            preview
+              ? "preview-curve"
+              : id
+          }
+
+          d={
+            buildCurvePath(
+              points
+            )
+          }
+
+          fill="none"
+
+          stroke={color}
+
+          strokeWidth={width}
+
+          strokeLinecap="round"
+
+          strokeLinejoin="round"
+
+          strokeDasharray={
+            dashArray
+          }
+
+          opacity={opacity}
+
+          markerEnd={
+            isArrow
+              ? `url(#arrow-${id})`
+              : undefined
+          }
+        />
+      );
+    }
+
+
+    /* =====================================================
+       Straight Line
+       ===================================================== */
+
+    return (
+      <line
+        key={
+          preview
+            ? "preview-line"
+            : id
+        }
+
+        x1={first.x}
+
+        y1={first.y}
+
+        x2={last.x}
+
+        y2={last.y}
+
+        stroke={color}
+
+        strokeWidth={width}
+
+        strokeLinecap="round"
+
+        strokeDasharray={
+          dashArray
+        }
+
+        opacity={opacity}
+
+        markerEnd={
+          isArrow
+            ? `url(#arrow-${id})`
+            : undefined
+        }
+      />
+    );
+  };
+
+
+  /* =========================================================
+     Drawing Layer
+     فقط Web / Windows
+     ========================================================= */
+
+  const DrawingLayer = () => {
+
+    if (isAndroid) {
+      return null;
+    }
+
+
+    return (
+      <svg
+        width="100%"
+        height="100%"
+
+        style={{
+          position: "absolute",
+
+          inset: 0,
+
+          zIndex: 20,
+
+          pointerEvents:
+            isDrawingMode
+              ? "auto"
+              : "none",
+
+          touchAction:
+            "none",
+
+          userSelect:
+            "none",
+        }}
+
+        onPointerDown={
+          handleDrawingPointerDown
+        }
+
+        onPointerMove={
+          handleDrawingPointerMove
+        }
+
+        onPointerUp={
+          finishDrawing
+        }
+
+        onPointerCancel={
+          finishDrawing
+        }
+      >
+
+        {/* =========================================
+            Arrow Markers
+            ========================================= */}
+
+        <defs>
+
+          {drawings.map(
+            (drawing) => {
+
+              const isArrow =
+                drawing.tool ===
+                  "arrow" ||
+                drawing.tool ===
+                  "dashedArrow" ||
+                drawing.tool ===
+                  "curveArrow";
+
+
+              if (!isArrow) {
+                return null;
+              }
+
+
+              return (
+                <ArrowMarker
+                  key={
+                    `marker-${drawing.id}`
+                  }
+
+                  id={
+                    `arrow-${drawing.id}`
+                  }
+
+                  color={
+                    drawing.color
+                  }
+                />
+              );
+            }
+          )}
+
+
+          {drawingInProgress &&
+            (
+              drawingInProgress.tool ===
+                "arrow" ||
+              drawingInProgress.tool ===
+                "dashedArrow" ||
+              drawingInProgress.tool ===
+                "curveArrow"
+            ) && (
+
+              <ArrowMarker
+                id="arrow-preview"
+                color={
+                  drawingInProgress.color
+                }
+              />
+
+            )}
+
+        </defs>
+
+
+        {/* =========================================
+            Final Drawings
+            ========================================= */}
+
+        {drawings.map(
+          (drawing) =>
+            renderDrawing(
+              drawing
+            )
+        )}
+
+
+        {/* =========================================
+            Drawing Preview
+            ========================================= */}
+
+        {drawingInProgress &&
+          renderDrawing(
+            drawingInProgress,
+            true
+          )}
+
+      </svg>
+    );
+  };
+
+
+  /* =========================================================
+     ANDROID
+     ========================================================= */
+
+  if (isAndroid) {
+
+    return (
+      <DndContext
+        onDragEnd={
+          handleDragEnd
+        }
+      >
+
+        <div
+          className=
+            "android-court-stage"
+        >
+
+          <div
+            className=
+              "android-court-frame"
+
+            onClick={
+              handleCourtClick
+            }
+          >
+
+            {/* =========================================
+                Android Court
+                ========================================= */}
+
+            <img
+              className=
+                "android-court-image"
+
+              src="/courts/futsal.png"
+
+              alt="Futsal Court"
+
+              draggable={false}
+
+              onLoad={(event) => {
+
+                const image =
+                  event.currentTarget;
+
+
+                if (
+                  image.naturalWidth >
+                    0 &&
+                  image.naturalHeight >
+                    0
+                ) {
+
+                  setCourtRatio(
+                    image.naturalWidth /
+                      image.naturalHeight
+                  );
+                }
+
+              }}
+            />
+
+
+            {/* =========================================
+                Board Objects
+                ========================================= */}
+
+            <div
+              className=
+                "android-court-objects"
+            >
+
+              {objects.map(
+                (obj) => (
+
+                  <DraggableObject
+                    key={obj.id}
+                    object={obj}
+                  />
+
+                )
+              )}
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </DndContext>
+    );
+  }
+
+
+  /* =========================================================
+     WEB / WINDOWS
+     ========================================================= */
+
   return (
     <DndContext
-      onDragEnd={handleDragEnd}
+      onDragEnd={
+        handleDragEnd
+      }
     >
+
       <div
         style={{
           width: "100%",
+
           height: "100%",
 
           display: "flex",
+
           alignItems: "center",
+
           justifyContent: "center",
 
           position: "relative",
@@ -88,18 +1004,24 @@ export default function CourtCanvas() {
         }}
       >
 
-        {/* =========================
-            COURT SURFACE
-        ========================= */}
-
         <div
-          onClick={handleCourtClick}
+          onClick={
+            handleCourtClick
+          }
+
           style={{
             position: "relative",
 
-            width: `min(100%, calc((100dvh - 100px) * ${courtRatio}))`,
+            width: `min(
+              100%,
+              calc(
+                (100dvh - 100px)
+                * ${courtRatio}
+              )
+            )`,
 
-            aspectRatio: `${courtRatio}`,
+            aspectRatio:
+              `${courtRatio}`,
 
             maxHeight: "100%",
 
@@ -114,32 +1036,47 @@ export default function CourtCanvas() {
           }}
         >
 
-          {/* Court image */}
+          {/* =========================================
+              Court Image
+              مسیر صحیح:
+              public/courts/futsal.png
+              ========================================= */}
 
           <img
-            src={futsalCourt}
+            src="/courts/futsal.png"
+
             alt="Futsal Court"
+
             draggable={false}
+
             onLoad={(event) => {
+
               const image =
                 event.currentTarget;
 
+
               if (
-                image.naturalWidth > 0 &&
-                image.naturalHeight > 0
+                image.naturalWidth >
+                  0 &&
+                image.naturalHeight >
+                  0
               ) {
+
                 setCourtRatio(
                   image.naturalWidth /
                     image.naturalHeight
                 );
               }
+
             }}
+
             style={{
               position: "absolute",
 
               inset: 0,
 
               width: "100%",
+
               height: "100%",
 
               objectFit: "fill",
@@ -150,19 +1087,59 @@ export default function CourtCanvas() {
             }}
           />
 
-          {/* =========================
-              BOARD OBJECTS
-          ========================= */}
 
-          {objects.map((obj) => (
-            <DraggableObject
-              key={obj.id}
-              object={obj}
-            />
-          ))}
+          {/* =========================================
+              Drawing Layer
+              ========================================= */}
+
+          <DrawingLayer />
+
+
+          {/* =========================================
+              Board Objects
+              ========================================= */}
+
+          <div
+            style={{
+              position:
+                "absolute",
+
+              inset: 0,
+
+              zIndex: 30,
+
+              pointerEvents:
+                "none",
+            }}
+          >
+
+            {objects.map(
+              (obj) => (
+
+                <div
+                  key={obj.id}
+
+                  style={{
+                    pointerEvents:
+                      "auto",
+                  }}
+                >
+
+                  <DraggableObject
+                    object={obj}
+                  />
+
+                </div>
+
+              )
+            )}
+
+          </div>
 
         </div>
+
       </div>
+
     </DndContext>
   );
 }
