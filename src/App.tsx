@@ -4,8 +4,9 @@ import SplashScreen from "./pages/SplashScreen/SplashScreen";
 import Login from "./pages/Login/Login";
 import SportSelector from "./pages/SportSelector/SportSelector";
 import Workspace from "./pages/Workspace/Workspace";
+import RefereeWorkspace from "./pages/RefereeWorkspace/RefereeWorkspace";
 
-type Page = "login" | "sport" | "workspace";
+type Page = "login" | "sport" | "referee" | "workspace";
 
 export default function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -49,8 +50,13 @@ export default function App() {
       <SportSelector
         onBack={handleBack}
         onSportSelected={() => navigateTo("workspace")}
+        onRefereeSelected={() => navigateTo("referee")}
       />
     );
+  }
+
+  if (currentPage === "referee") {
+    return <RefereeWorkspace onHome={() => navigateTo("sport")} />;
   }
 
   return <Workspace onHome={() => navigateTo("sport")} />;

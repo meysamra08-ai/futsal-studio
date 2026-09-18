@@ -868,3 +868,4 @@ and (max-width: 700px) {
     transition: none !important;
   }
 }
+.sport-card--referee .sport-card__image{opacity:1;filter:none}.sport-card--referee .sport-card__overlay{background:linear-gradient(180deg,rgba(0,0,0,.02) 15%,rgba(0,0,0,.10) 55%,rgba(0,0,0,.78) 100%)}.sport-card--referee .sport-card__bottom{z-index:6}.sport-card--referee .sport-card__arrow{z-index:7}

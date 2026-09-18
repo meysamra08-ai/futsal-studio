@@ -8,11 +8,13 @@ import "./SportSelector.css";
 
 type SportSelectorProps = {
   onSportSelected: () => void;
+  onRefereeSelected: () => void;
   onBack: () => void;
 };
 
 export default function SportSelector({
   onSportSelected,
+  onRefereeSelected,
   onBack,
 }: SportSelectorProps) {
   const { currentSport, setCurrentSport } = useApp();
@@ -23,6 +25,11 @@ export default function SportSelector({
   const isAndroid = Capacitor.getPlatform() === "android";
 
   const handleSportSelect = (sportId: SportId) => {
+    if (sportId === ("referee" as SportId)) {
+      onRefereeSelected();
+      return;
+    }
+
     setCurrentSport(sportId);
     setSelectingSport(sportId);
 
@@ -186,27 +193,24 @@ export default function SportSelector({
           onClick={() => handleSportSelect("referee" as SportId)}
         >
           <img
-  className="sport-card__image"
-  src="/sports/referee.png"
-  alt="Referee"
-/>
+            className="sport-card__image"
+            src="/sports/referee.png"
+            alt="Referee"
+          />
 
-<div className="sport-card__overlay" />
+          <div className="sport-card__overlay sport-card__overlay--referee" />
 
+          <div className="sport-card__referee-title">
+            <span className="sport-card__referee-icon">🚩</span>
+            <span>REFEREE SCOREBOARD</span>
+          </div>
 
-          <div className="sport-card__overlay" />
+        
 
-          <div className="sport-card__bottom">
-            <div className="sport-card__icon">🚩</div>
-
+          <div className="sport-card__bottom sport-card__bottom--referee">
             <div className="sport-card__content">
-              <span className="sport-card__name">
-                Referee
-              </span>
-
-              <span className="sport-card__action">
-                REFEREE TOOLS
-              </span>
+              <span className="sport-card__name">Referee</span>
+              <span className="sport-card__action">REFEREE TOOLS</span>
             </div>
           </div>
 

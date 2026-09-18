@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Capacitor } from "@capacitor/core";
 
 import Header from "../../components/Header/Header";
@@ -28,44 +29,68 @@ export default function MainLayout() {
     platform === "android" ||
     /Android/i.test(navigator.userAgent);
 
+  /*
+   * مدیریت انیمیشن فقط یک حالت Layout است.
+   * در حالت عادی false است و هیچ تغییری در Layout فعلی ایجاد نمی‌کند.
+   */
+  const [isAnimationManagementOpen, setIsAnimationManagementOpen] =
+    useState(false);
+
+  const managementLayoutStyle = !isAndroid && isAnimationManagementOpen
+    ? {
+        gridTemplateColumns: "minmax(0, 1fr)",
+        gridTemplateRows: "minmax(0, 1fr)",
+        overflow: "hidden" as const,
+        width: "100%",
+        height: "100vh",
+        minWidth: 0,
+        minHeight: 0,
+        background: "#0B1420",
+        maxHeight: "100vh",
+      }
+    : undefined;
+
   return (
     <div
       className={
         isAndroid
           ? "main-layout android-layout"
-          : "main-layout"
+          : isAnimationManagementOpen
+            ? "main-layout animation-management-layout"
+            : "main-layout"
       }
+      style={managementLayoutStyle}
     >
-
       {/* =================================================
           Header
           ================================================= */}
 
-      <header className="main-layout__header">
-        <Header />
-      </header>
-
+      {!isAnimationManagementOpen && (
+        <header className="main-layout__header">
+          <Header />
+        </header>
+      )}
 
       {/* =================================================
           Sidebar
           فقط Web / Windows
           ================================================= */}
 
-      {!isAndroid && (
+      {!isAndroid && !isAnimationManagementOpen && (
         <aside className="main-layout__sidebar">
           <Sidebar />
         </aside>
       )}
 
-
       {/* =================================================
           Court
           ================================================= */}
 
-      <main className="main-layout__court">
-        <CourtCanvas />
-      </main>
-
+      {!isAnimationManagementOpen && (
+        <main className="main-layout__court">
+          <CourtCanvas />
+        </main>
+      )}
 
       {/* =================================================
           Right Panel
@@ -73,21 +98,41 @@ export default function MainLayout() {
           ================================================= */}
 
       {!isAndroid && (
-        <aside className="main-layout__right-panel">
-          <RightPanel />
+        <aside
+          className="main-layout__right-panel"
+          style={
+            isAnimationManagementOpen
+              ? {
+                  gridColumn: "1",
+                  gridRow: "1",
+                  display: "flex",
+                  minWidth: 0,
+                  minHeight: 0,
+                  overflow: "hidden",
+                  border: 0,
+                  boxShadow: "none",
+                }
+              : undefined
+          }
+        >
+          <RightPanel
+            isAnimationManagementOpen={isAnimationManagementOpen}
+            onOpenAnimationManagement={() =>
+              setIsAnimationManagementOpen(true)
+            }
+            onCloseAnimationManagement={() =>
+              setIsAnimationManagementOpen(false)
+            }
+          />
         </aside>
       )}
-
 
       {/* =================================================
           Android Bottom Tool Panel
           فقط Android
           ================================================= */}
 
-      {isAndroid && (
-        <AndroidToolPanel />
-      )}
-
+      {isAndroid && <AndroidToolPanel />}
     </div>
   );
 }

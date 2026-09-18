@@ -2,6 +2,7 @@
 import { useMemo, useState } from "react";
 import { Capacitor } from "@capacitor/core";
 import MainLayout from "../../shared/layouts/MainLayout";
+
 import "./Workspace.css";
 import MousePosition from "../../components/MousePosition";
 
@@ -26,8 +27,8 @@ export default function Workspace({
 }, []);
 
   if (activeWorkspace) {
-    return <MainLayout />;
-  }
+  return <MainLayout />;
+}
 
   return (
    <main className={`workspace-home ${isAndroid ? "android-ui" : ""}`}>

@@ -1,0 +1,6698 @@
+:root {
+  --ref-bg: #071019;
+  --ref-panel: #0d1720;
+  --ref-panel-2: #101b24;
+  --ref-border: #22303b;
+  --ref-yellow: #f3c500;
+  --ref-yellow-dark: #786400;
+  --ref-red: #ff2727;
+  --ref-green: #35d96b;
+  --ref-text: #f1f3f5;
+  --ref-muted: #7e8992;
+}
+
+.referee-app {
+  min-height: 100vh;
+  box-sizing: border-box;
+  background:
+    radial-gradient(circle at 55% 10%, rgba(32, 57, 73, .17), transparent 32%),
+    #071019;
+  color: var(--ref-text);
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  direction: rtl;
+}
+
+.referee-header {
+  min-height: 82px;
+  box-sizing: border-box;
+  padding: 12px 28px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+  border-bottom: 1px solid #17232c;
+  background: rgba(5, 13, 20, .84);
+}
+
+.referee-brand {
+  justify-self: start;
+  direction: ltr;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.referee-brand__mark {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: #32d467;
+  color: #06110a;
+  font: 950 15px/1 Arial, sans-serif;
+  transform: skew(-8deg);
+}
+
+.referee-brand strong {
+  display: block;
+  color: #e9f0f3;
+  font: 850 18px/1 Arial, sans-serif;
+}
+
+.referee-brand span {
+  display: block;
+  margin-top: 4px;
+  color: #63717b;
+  font: 800 7px/1 Arial, sans-serif;
+  letter-spacing: 1.6px;
+}
+
+/* ============================================================
+   HEADER TITLE CONTROLS
+   فقط اعداد این قسمت را تغییر بده تا اندازه و موقعیت نوشته‌ها عوض شود.
+   scoreboard-x: مثبت = راست / منفی = چپ
+   scoreboard-y: مثبت = پایین / منفی = بالا
+   software-x:   مثبت = راست / منفی = چپ
+   software-y:   مثبت = پایین / منفی = بالا
+   ============================================================ */
+.referee-header__title {
+  /* SCOREBOARD */
+  --scoreboard-size: 30px;
+  --scoreboard-weight: 950;
+  --scoreboard-x: 0px;
+  --scoreboard-y: 0px;
+
+  /* Futsal Studio */
+  --software-size: 18px;
+  --software-weight: 900;
+  --software-x: 0px;
+  --software-y: 0px;
+
+  justify-self: center;
+  width: 100%;
+  text-align: center;
+  direction: ltr;
+}
+
+.referee-header__title h1 {
+  margin: 0;
+  color: var(--ref-yellow);
+  font-family: "Arial Narrow", "Roboto Condensed", "Segoe UI", sans-serif;
+  font-size: var(--scoreboard-size);
+  font-weight: var(--scoreboard-weight);
+  line-height: 1;
+  letter-spacing: 1.4px;
+  text-align: center;
+  transform: translate(var(--scoreboard-x), var(--scoreboard-y));
+  text-shadow: 0 0 12px rgba(243, 197, 0, .28);
+}
+
+.referee-header__title span {
+  display: block;
+  margin-top: 5px;
+  color: var(--ref-yellow);
+  font-family: "Arial Narrow", "Roboto Condensed", "Segoe UI", sans-serif;
+  font-size: var(--software-size);
+  font-weight: var(--software-weight);
+  line-height: 1;
+  letter-spacing: .5px;
+  text-align: right;
+  padding-right: 3px;
+  transform: translate(var(--software-x), var(--software-y));
+  text-shadow: 0 0 8px rgba(243, 197, 0, .2);
+}
+
+.referee-header__back {
+  justify-self: end;
+  min-width: 96px;
+  min-height: 40px;
+  border: 1px solid #293640;
+  border-radius: 8px;
+  background: #0d1720;
+  color: #cbd2d7;
+  cursor: pointer;
+  font: 650 12px/1 "Segoe UI", sans-serif;
+}
+
+.referee-header__back span {
+  margin-right: 6px;
+  font-size: 17px;
+}
+
+.referee-layout {
+  display: grid;
+  grid-template-columns: 92px minmax(580px, 1fr) 365px;
+  min-height: calc(100vh - 82px);
+  direction: ltr;
+}
+
+.referee-sidebar {
+  padding: 18px 7px;
+  border-right: 1px solid #17232c;
+  background: #081118;
+  direction: rtl;
+}
+
+.sidebar__section-title {
+  padding: 5px 4px 13px;
+  color: #56636c;
+  text-align: center;
+  font-size: 8px;
+}
+
+.sidebar-item {
+  width: 100%;
+  min-height: 76px;
+  margin-bottom: 5px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: #8b959c;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.sidebar-item span {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.sidebar-item strong {
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.sidebar-item--active {
+  border-color: #7c6900;
+  background: linear-gradient(180deg, rgba(22, 79, 46, .9), rgba(9, 40, 27, .9));
+  color: #f3f6f7;
+}
+
+.referee-main {
+  min-width: 0;
+  padding: 28px 26px 30px;
+  direction: rtl;
+  overflow: hidden;
+}
+
+.scoreboard-card {
+  width: min(100%, 920px);
+  margin: 0 auto;
+  overflow: hidden;
+  border: 2px solid var(--ref-yellow);
+  border-radius: 18px;
+  background: #010202;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, .34);
+  direction: ltr;
+}
+
+.scoreboard-top {
+  min-height: 126px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 26px;
+  padding: 14px 30px;
+  border-bottom: 1px solid var(--ref-yellow-dark);
+}
+
+.team-column {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-name-input {
+  width: min(100%, 300px);
+  box-sizing: border-box;
+  border: 0;
+  border-bottom: 2px solid #5c4c00;
+  outline: 0;
+  background: transparent;
+  color: var(--ref-yellow);
+  text-align: center;
+  font: 900 clamp(25px, 3vw, 42px)/1.05 "Arial Narrow", "Segoe UI", sans-serif;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+}
+
+.team-name-input:focus {
+  border-bottom-color: var(--ref-yellow);
+}
+
+.team-caption {
+  margin-top: 7px;
+  color: #6e777e;
+  font: 800 8px/1 Arial, sans-serif;
+  letter-spacing: 2px;
+}
+
+.clock-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.digital-clock {
+  min-width: 260px;
+  padding: 7px 12px;
+  border: 0;
+  background: transparent;
+  color: #ff1f1f;
+  cursor: pointer;
+  font: 950 clamp(62px, 7vw, 94px)/.78 "Arial Narrow", "Roboto Condensed", "Segoe UI", sans-serif;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: -2px;
+  text-shadow: 0 0 2px rgba(255, 30, 30, .58), 0 0 12px rgba(255, 0, 0, .13);
+}
+
+.digital-clock--running {
+  color: #ff3030;
+}
+
+.clock-status {
+  color: #713838;
+  font: 800 7px/1 Arial, sans-serif;
+  letter-spacing: 2px;
+}
+
+.scoreboard-meta {
+  min-height: 48px;
+  display: grid;
+  grid-template-columns: 1fr 90px 1fr;
+  align-items: center;
+  border-bottom: 1px solid var(--ref-yellow-dark);
+}
+
+.foul-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: var(--ref-yellow);
+}
+
+.foul-control small {
+  font: 800 8px/1 Arial, sans-serif;
+  letter-spacing: 1px;
+}
+
+.foul-control span {
+  min-width: 14px;
+  font: 900 15px/1 "Arial Narrow", sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.foul-control button {
+  width: 27px;
+  height: 27px;
+  border: 1px solid var(--ref-red);
+  background: #030303;
+  color: var(--ref-red);
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.period-control {
+  border: 0;
+  background: transparent;
+  color: var(--ref-red);
+  cursor: pointer;
+}
+
+.period-control small {
+  display: block;
+  margin-bottom: 3px;
+  color: #7d4646;
+  font: 800 7px/1 Arial, sans-serif;
+  letter-spacing: 1px;
+}
+
+.period-control strong {
+  font: 900 27px/1 "Segoe UI", sans-serif;
+  font-style: italic;
+}
+
+.score-row {
+  min-height: 205px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 86px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--ref-yellow-dark);
+}
+
+.score-team {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  align-items: center;
+  gap: 15px;
+}
+
+.score-team--guest {
+  grid-template-columns: minmax(0, 1fr) 58px;
+}
+
+.score-number {
+  color: var(--ref-yellow);
+  text-align: center;
+  font: 950 clamp(94px, 11vw, 150px)/.76 "Arial Narrow", "Roboto Condensed", "Segoe UI", sans-serif;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: -3px;
+  text-shadow: 0 0 1px rgba(255, 197, 26, .25);
+}
+
+.score-adjust {
+  display: flex;
+  flex-direction: column;
+}
+
+.score-adjust button {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--ref-red);
+  background: #030303;
+  color: var(--ref-red);
+  cursor: pointer;
+  font: 400 27px/1 "Segoe UI", sans-serif;
+}
+
+.score-adjust button + button {
+  border-top: 0;
+}
+
+.timeout-indicator {
+  width: 78px;
+  min-height: 66px;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border: 2px solid #5a5a5a;
+  border-radius: 12px;
+  color: #8d959a;
+  background: #070707;
+}
+
+.timeout-indicator span {
+  font: 800 7px/1 Arial, sans-serif;
+  letter-spacing: 1px;
+}
+
+.timeout-indicator strong {
+  color: #c2c7ca;
+  font: 900 16px/1 "Arial Narrow", "Segoe UI", sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.timeout-indicator small {
+  color: #626b71;
+  font: 800 6px/1 Arial, sans-serif;
+  letter-spacing: .7px;
+}
+
+.timeout-indicator--active {
+  border-color: #ff1eea;
+  color: #ff1eea;
+  box-shadow: 0 0 12px rgba(255, 30, 234, .12);
+}
+
+.timeout-indicator--active strong {
+  color: #ff1eea;
+  font-size: 18px;
+}
+
+.timeout-indicator--active small {
+  color: #b34aa8;
+}
+
+.scoreboard-actions {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 7px 8px;
+  padding: 12px;
+}
+
+.scoreboard-action {
+  min-width: 76px;
+  min-height: 39px;
+  padding: 0 12px;
+  border: 1px solid #665500;
+  border-radius: 6px;
+  background: #070707;
+  color: #e8bf16;
+  cursor: pointer;
+  font: 700 11px/1 "Segoe UI", sans-serif;
+}
+
+.scoreboard-action--primary {
+  border-color: #249d48;
+  color: #4be473;
+}
+
+.scoreboard-action:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.match-settings {
+  width: min(100%, 870px);
+  box-sizing: border-box;
+  margin: 28px auto 0;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  align-items: end;
+  border: 1px solid #24323d;
+  border-radius: 13px;
+  background: linear-gradient(180deg, #101a23, #0b141c);
+}
+
+.settings-title {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.settings-step {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #39d96b;
+  color: #07120a;
+  font: 900 14px/1 Arial, sans-serif;
+}
+
+.settings-title strong,
+.settings-title span {
+  display: block;
+}
+
+.settings-title strong {
+  font-size: 12px;
+}
+
+.settings-title em {
+  color: #75818a;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.settings-title span {
+  margin-top: 5px;
+  color: #75818a;
+  font-size: 9px;
+}
+
+.settings-field {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.settings-field > span {
+  color: #89939a;
+  font-size: 9px;
+}
+
+.settings-field input,
+.settings-field select {
+  width: 100%;
+  min-height: 42px;
+  box-sizing: border-box;
+  border: 1px solid #2a3741;
+  border-radius: 8px;
+  outline: 0;
+  background: #0b141c;
+  color: #dfe4e7;
+  padding: 0 10px;
+  font: 600 11px/1 "Segoe UI", sans-serif;
+}
+
+/* Match information fields: Persian/Titr and slightly larger text. */
+.settings-field--match-name input,
+.settings-field--match-date input,
+.settings-field--match-time input {
+  font-family: var(--persian-font);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.settings-field--match-name input {
+  direction: rtl;
+  text-align: right;
+}
+
+.settings-field--match-date input {
+  direction: rtl;
+  text-align: right;
+  font-variant-numeric: lining-nums;
+}
+
+.settings-field--match-time input {
+  direction: rtl;
+  text-align: right;
+  font-variant-numeric: lining-nums;
+}
+
+.events-panel {
+  min-width: 0;
+  padding: 18px 18px 24px;
+  border-left: 1px solid #17232c;
+  background: linear-gradient(180deg, #0a131b, #081119);
+  direction: rtl;
+}
+
+.events-panel__head {
+  min-height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid #1c2a34;
+}
+
+.events-panel__head span {
+  color: #7c8790;
+  font-size: 9px;
+}
+
+.events-panel__head h2 {
+  margin: 7px 0 0;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.events-panel__icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #33414a;
+  border-radius: 8px;
+  color: #cbd2d6;
+  font-size: 20px;
+}
+
+.event-group {
+  margin-top: 16px;
+  overflow: hidden;
+  border: 1px solid #24323b;
+  border-radius: 9px;
+  background: #0d1720;
+}
+
+.event-group header {
+  min-height: 48px;
+  box-sizing: border-box;
+  padding: 0 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.event-group header strong {
+  font-size: 12px;
+}
+
+.event-group header button,
+.event-group header > div {
+  min-width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  font-weight: 800;
+}
+
+.event-group--goals {
+  border-color: #17623b;
+}
+
+.event-group--goals header {
+  background: linear-gradient(90deg, #103e27, #0f2e20);
+  color: #f2f4f4;
+}
+
+.event-group--goals header button {
+  border: 1px solid #2ac765;
+  color: #49dd79;
+  cursor: pointer;
+}
+
+
+
+.event-group__body {
+  padding: 0 11px;
+}
+
+.event-group__empty {
+  padding: 18px 4px;
+  color: #68747d;
+  font-size: 10px;
+  text-align: center;
+}
+
+.compact-event {
+  min-height: 47px;
+  display: grid;
+  grid-template-columns: 45px minmax(0, 1fr) 22px;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #1a252d;
+}
+
+.compact-event:last-child {
+  border-bottom: 0;
+}
+
+.compact-event span {
+  color: #b4bcc1;
+  font: 700 11px/1 "Arial Narrow", sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.compact-event strong {
+  overflow: hidden;
+  color: #d8dde0;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.compact-event i {
+  color: #2c80d6;
+  font-style: normal;
+  font-size: 14px;
+}
+
+.event-group--yellow .compact-event i {
+  color: #f5c91a;
+}
+
+.event-group--red .compact-event i {
+  color: #ff3030;
+}
+
+.event-summary {
+  margin-top: 16px;
+  overflow: hidden;
+  border: 1px solid #24323b;
+  border-radius: 9px;
+  background: #0c161e;
+}
+
+.event-summary header {
+  padding: 14px;
+  border-bottom: 1px solid #1e2a32;
+  text-align: right;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.summary-grid > div {
+  min-height: 78px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-left: 1px solid #1e2a32;
+}
+
+.summary-grid > div:last-child {
+  border-left: 0;
+}
+
+.summary-grid span {
+  color: #7c878f;
+  font-size: 9px;
+}
+
+.summary-grid strong {
+  font: 900 29px/1 "Arial Narrow", "Segoe UI", sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.summary-green { color: #39d96b; }
+.summary-yellow { color: #f5c91a; }
+.summary-red { color: #ff3434; }
+
+.event-actions-panel {
+  margin-top: 16px;
+  padding: 13px;
+  border: 1px solid #24323b;
+  border-radius: 9px;
+  background: #0d1720;
+}
+
+.event-actions-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.event-actions-panel__head strong {
+  font-size: 11px;
+}
+
+.event-actions-panel__head button {
+  border: 0;
+  background: transparent;
+  color: #77828a;
+  cursor: pointer;
+  font-size: 9px;
+}
+
+.event-actions-panel__head button:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+.event-action-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.event-action-row button {
+  min-height: 38px;
+  border: 1px solid #2a3740;
+  border-radius: 6px;
+  background: #091117;
+  color: #d8dde0;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+@media (max-width: 1100px) {
+  .referee-layout {
+    grid-template-columns: 74px minmax(0, 1fr);
+  }
+
+  .events-panel {
+    grid-column: 2;
+    border-left: 0;
+    border-top: 1px solid #17232c;
+  }
+
+  .events-panel {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .events-panel__head,
+  .event-actions-panel {
+    grid-column: 1 / -1;
+  }
+
+  .event-group,
+  .event-summary {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .referee-header {
+    grid-template-columns: 1fr auto;
+    padding: 10px 14px;
+  }
+
+  .referee-header__title {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .referee-brand {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .referee-header__back {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .referee-layout {
+    display: block;
+  }
+
+  .referee-sidebar {
+    display: none;
+  }
+
+  .referee-main {
+    padding: 14px 8px 20px;
+  }
+
+  .scoreboard-top {
+    min-height: 105px;
+    gap: 5px;
+    padding: 9px;
+  }
+
+  .team-name-input {
+    font-size: 19px;
+  }
+
+  .digital-clock {
+    min-width: 0;
+    padding: 5px;
+    font-size: 40px;
+    letter-spacing: -1px;
+  }
+
+  .scoreboard-meta {
+    grid-template-columns: 1fr 58px 1fr;
+  }
+
+  .score-row {
+    min-height: 165px;
+    grid-template-columns: 1fr 52px 1fr;
+    gap: 3px;
+    padding: 10px 7px;
+  }
+
+  .score-team,
+  .score-team--guest {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 5px;
+  }
+
+  .score-team--guest {
+    grid-template-columns: minmax(0, 1fr) 34px;
+  }
+
+  .score-number {
+    font-size: 74px;
+    letter-spacing: -1px;
+  }
+
+  .timeout-indicator {
+    width: 46px;
+    min-height: 48px;
+    border-radius: 9px;
+  }
+
+  .timeout-indicator span {
+    font-size: 5px;
+  }
+
+  .timeout-indicator strong {
+    font-size: 10px;
+  }
+
+  .timeout-indicator small {
+    font-size: 5px;
+  }
+
+  .timeout-indicator--active strong {
+    font-size: 11px;
+  }
+
+  .score-adjust button {
+    width: 32px;
+    height: 34px;
+    font-size: 21px;
+  }
+
+  .home-indicator {
+    width: 44px;
+    height: 44px;
+    border-width: 2px;
+    font-size: 28px;
+  }
+
+  .timeout-indicator {
+    width: 48px;
+    min-height: 48px;
+    border-width: 2px;
+  }
+
+  .timeout-indicator strong {
+    font-size: 11px;
+  }
+
+  .timeout-indicator--active strong {
+    font-size: 12px;
+  }
+
+  .scoreboard-actions {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 5px;
+  }
+
+  .scoreboard-action {
+    min-width: 70px;
+    min-height: 38px;
+    padding: 0 8px;
+  }
+
+  .match-settings {
+    grid-template-columns: repeat(4, minmax(150px, 1fr));
+    margin-top: 14px;
+    padding: 13px;
+    overflow-x: auto;
+  }
+
+  .events-panel {
+    display: block;
+    padding: 12px 8px 20px;
+  }
+
+  .event-group,
+  .event-summary {
+    margin-top: 10px;
+  }
+}
+
+
+
+
+/* Refined scoreboard controls */
+.clock-display-wrap {
+  display: grid;
+  grid-template-columns: 58px auto 58px;
+  align-items: center;
+  gap: 4px;
+}
+
+.clock-adjust {
+  min-width: 52px;
+  min-height: 34px;
+  border: 1px solid #655400;
+  border-radius: 6px;
+  background: #080808;
+  color: #d9b91b;
+  cursor: pointer;
+  font: 800 10px/1 "Arial Narrow", "Segoe UI", sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.clock-adjust:hover {
+  border-color: #d0ad00;
+  color: #ffd72d;
+}
+
+.clock-adjust:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+.clock-adjust--minus {
+  justify-self: end;
+}
+
+.clock-adjust--plus {
+  justify-self: start;
+}
+
+.scoreboard-center-actions {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.scoreboard-center-actions .scoreboard-action--primary {
+  min-width: 86px;
+}
+
+
+.scoreboard-action--timeout-home {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+}
+
+.scoreboard-action--timeout-guest {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+}
+
+.scoreboard-action--rest {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: center;
+  min-width: 70px;
+  border-color: #7b3030;
+  color: #ff8989;
+}
+
+/* Timeout duration menu sits OUTSIDE and directly below the small timeout display. */
+.timeout-display-wrap {
+  width: 78px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  justify-self: center;
+  align-self: center;
+  gap: 5px;
+}
+
+.timeout-indicator {
+  width: 78px;
+  min-height: 66px;
+  padding: 6px 4px;
+  box-sizing: border-box;
+}
+
+.timeout-duration-select {
+  width: 58px;
+  height: 20px;
+  margin-top: 0;
+  padding: 0 3px;
+  border: 1px solid #4c410b;
+  border-radius: 5px;
+  outline: 0;
+  background: #090909;
+  color: #e1bc1a;
+  cursor: pointer;
+  font: 800 8px/1 "Arial Narrow", "Segoe UI", sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.timeout-duration-select:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 760px) {
+  .clock-display-wrap {
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2px;
+  }
+
+  .clock-adjust {
+    min-width: 39px;
+    min-height: 29px;
+    font-size: 8px;
+  }
+
+  .scoreboard-actions {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+ .scoreboard-center-actions {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .scoreboard-center-actions .scoreboard-action--primary {
+    min-width: 82px;
+  }
+
+}
+
+.rest-warning-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, .72);
+  backdrop-filter: blur(6px);
+  direction: rtl;
+}
+
+.rest-warning {
+  width: min(390px, 100%);
+  box-sizing: border-box;
+  padding: 24px;
+  border: 1px solid #923434;
+  border-radius: 16px;
+  background: #0d151d;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, .55);
+  text-align: center;
+}
+
+.rest-warning__icon {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 12px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #ff3b3b;
+  border-radius: 50%;
+  color: #ff4b4b;
+  font: 900 28px/1 "Segoe UI", sans-serif;
+}
+
+.rest-warning__eyebrow {
+  color: #a66b6b;
+  font: 800 8px/1 Arial, sans-serif;
+  letter-spacing: 2px;
+}
+
+.rest-warning h2 {
+  margin: 8px 0 7px;
+  color: #f5f6f7;
+  font-size: 20px;
+  font-weight: 850;
+}
+
+.rest-warning p {
+  margin: 0 auto;
+  max-width: 310px;
+  color: #89949c;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.rest-warning p strong {
+  color: #ff4a4a;
+  font-family: "Arial Narrow", sans-serif;
+}
+
+.rest-warning__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.rest-warning__actions button {
+  min-height: 44px;
+  border-radius: 7px;
+  cursor: pointer;
+  font: 750 12px/1 "Segoe UI", sans-serif;
+}
+
+.rest-warning__cancel {
+  border: 1px solid #34414b;
+  background: #0a1117;
+  color: #c0c7cb;
+}
+
+.rest-warning__confirm {
+  border: 1px solid #b83232;
+  background: #541c1c;
+  color: #ffb0b0;
+}
+
+
+/* Final control layout */
+.scoreboard-actions {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 7px;
+  padding: 12px;
+}
+
+.scoreboard-action--timeout-home {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+}
+
+.scoreboard-center-actions {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.scoreboard-center-actions .scoreboard-action--primary {
+  min-width: 86px;
+}
+
+
+.scoreboard-action--timeout-guest {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+}
+
+.scoreboard-action--rest {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: center;
+  min-width: 70px;
+  border-color: #7b3030;
+  color: #ff8989;
+}
+
+/* Timeout duration menu is outside the display and directly underneath it. */
+.timeout-display-wrap {
+  width: 78px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: center;
+  gap: 5px;
+}
+
+.timeout-duration-select {
+  position: static;
+  display: block;
+  width: 58px;
+  height: 20px;
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .scoreboard-actions {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+  }
+
+  .scoreboard-center-actions {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .scoreboard-action--timeout-home {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: center;
+  }
+
+  .scoreboard-action--timeout-guest {
+    grid-column: 1;
+    grid-row: 3;
+    justify-self: center;
+  }
+
+  .scoreboard-action--rest {
+    grid-column: 1;
+    grid-row: 4;
+  }
+}
+
+
+/* Timer minute/second adjustment controls */
+.clock-display-wrap {
+  display: grid;
+  grid-template-columns: 34px minmax(170px, auto) 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.clock-adjust-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.clock-adjust {
+  width: 34px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid #6d5800;
+  background: #080808;
+  color: #ffc51a;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.clock-adjust:hover:not(:disabled) {
+  border-color: #ffc51a;
+  background: #151515;
+}
+
+.clock-adjust:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.digital-clock {
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  .clock-display-wrap {
+    grid-template-columns: 28px minmax(130px, auto) 28px;
+    gap: 5px;
+  }
+
+  .clock-adjust {
+    width: 28px;
+    height: 25px;
+    font-size: 16px;
+  }
+}
+
+
+/* Smaller minute/second adjustment buttons */
+.clock-adjust-group {
+  width: 26px;
+  gap: 2px;
+}
+
+.clock-adjust-group .clock-adjust {
+  width: 26px;
+  min-width: 26px;
+  height: 22px;
+  min-height: 22px;
+  padding: 0;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1;
+}
+
+@media (max-width: 760px) {
+  .clock-adjust-group {
+    width: 24px;
+  }
+
+  .clock-adjust-group .clock-adjust {
+    width: 24px;
+    min-width: 24px;
+    height: 20px;
+    min-height: 20px;
+    font-size: 11px;
+  }
+}
+
+
+/* Final small timer controls with a little vertical spacing */
+.clock-adjust-group {
+  gap: 6px;
+}
+
+.clock-adjust-group .clock-adjust {
+  width: 26px;
+  min-width: 26px;
+  height: 22px;
+  min-height: 22px;
+  padding: 0;
+  font-size: 12px;
+}
+
+
+/* More spacing between the small + / - timer controls */
+.clock-adjust-group {
+  gap: 10px;
+}
+
+
+/* Final spacing between minute/second + and - controls */
+.clock-adjust-group {
+  gap: 10px;
+}
+
+
+/* Rest is directly beside Start */
+.scoreboard-center-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.scoreboard-action--rest {
+  grid-column: auto;
+  grid-row: auto;
+  justify-self: auto;
+  min-width: 70px;
+}
+
+@media (max-width: 760px) {
+  .scoreboard-center-actions {
+    grid-column: 1;
+    grid-row: 1;
+    flex-wrap: nowrap;
+  }
+}
+
+
+/* Persian UI typography */
+:root {
+  --persian-font: "B Titr", "BTitr", Titr, Tahoma, sans-serif;
+}
+
+/* Persian text only: Latin text and scoreboard typography stay unchanged. */
+.referee-header__title span,
+.referee-header__title h1,
+.referee-header__back,
+.referee-header__sport,
+.sidebar__section-title,
+.sidebar-item strong,
+.team-name-input,
+.team-caption,
+.foul-control small,
+.period-control small,
+.match-settings,
+.settings-field span,
+.events-panel__head span,
+.events-panel__head h2,
+.event-group header strong,
+.event-group__empty,
+.event-summary header,
+.event-summary .summary-grid span,
+.event-actions-panel__head strong,
+.event-actions-panel__head button,
+.rest-warning,
+.rest-warning__eyebrow,
+.rest-warning h2,
+.rest-warning p,
+.rest-warning__cancel,
+.rest-warning__confirm {
+  font-family: var(--persian-font);
+}
+
+/* Preserve Latin/number styling. */
+.digital-clock,
+.clock-status,
+.score-number,
+.referee-brand__mark,
+.referee-brand strong,
+.referee-brand span,
+.timeout-indicator,
+.timeout-duration-select,
+.clock-adjust,
+.scoreboard-action,
+.sidebar-item span,
+.event-group__empty,
+.compact-event,
+.compact-event span {
+  font-family: "Arial Narrow", "Roboto Condensed", "Segoe UI", sans-serif;
+}
+
+/* Sport selection action */
+.referee-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.referee-header__sport {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid #6d5800;
+  border-radius: 7px;
+  background: #090909;
+  color: #ffc51a;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.referee-header__sport:hover {
+  border-color: #ffc51a;
+  background: #151515;
+}
+
+@media (max-width: 760px) {
+  .referee-header__actions {
+    gap: 5px;
+  }
+
+  .referee-header__sport {
+    min-height: 34px;
+    padding: 0 9px;
+  }
+}
+
+
+/* Header actions: back stays in its original position, sport selection beside it. */
+.referee-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  direction: rtl;
+}
+
+
+/* Header navigation: move both action buttons fully to the left. */
+.referee-header {
+  position: relative;
+}
+
+.referee-header__actions {
+  position: absolute;
+  left: 18px;
+  right: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  direction: ltr;
+}
+
+@media (max-width: 760px) {
+  .referee-header__actions {
+    left: 10px;
+    gap: 8px;
+  }
+}
+
+
+/* Larger timeout display and timeout-duration selector */
+.timeout-display-wrap {
+  width: 92px;
+  gap: 8px;
+}
+
+.timeout-indicator {
+  width: 92px;
+  min-height: 78px;
+  padding: 10px 8px;
+}
+
+.timeout-indicator strong {
+  font-size: 25px;
+}
+
+.timeout-duration-select {
+  width: 72px;
+  height: 27px;
+  font-size: 13px;
+}
+
+@media (max-width: 760px) {
+  .timeout-display-wrap {
+    width: 82px;
+  }
+
+  .timeout-indicator {
+    width: 82px;
+    min-height: 70px;
+  }
+
+  .timeout-duration-select {
+    width: 68px;
+    height: 25px;
+  }
+}
+
+/* Center the main scoreboard title after removing the eyebrow. */
+.referee-header__title {
+  justify-self: center;
+  width: 100%;
+  text-align: center;
+}
+
+/* فقط کادر گل‌زننده‌ها فعلاً مخفی است */
+.event-group--goals {
+  display: none !important;
+}
+
+/* ثبت کارت بر اساس تیم و شماره بازیکن */
+.card-registration-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.card-registration {
+  padding: 10px;
+  border: 1px solid #293640;
+  border-radius: 8px;
+  background: #091117;
+}
+
+.card-registration--yellow {
+  border-color: #5d510e;
+}
+
+.card-registration--red {
+  border-color: #6e2525;
+}
+
+.card-registration__title {
+  margin-bottom: 9px;
+  color: #dfe4e7;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.card-registration--yellow .card-registration__title {
+  color: #f5c91a;
+}
+
+.card-registration--red .card-registration__title {
+  color: #ff3434;
+}
+
+.card-registration__team {
+  padding: 8px 0;
+  border-top: 1px solid #1b2730;
+}
+
+.card-registration__team:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.card-registration__team > strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #8f9aa2;
+  font: 800 8px/1 Arial, sans-serif;
+  letter-spacing: 1px;
+}
+
+.card-registration__controls {
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
+  gap: 6px;
+}
+
+.card-registration__controls input {
+  width: 100%;
+  min-height: 34px;
+  box-sizing: border-box;
+  border: 1px solid #2a3740;
+  border-radius: 6px;
+  outline: 0;
+  background: #070d12;
+  color: #e7ebed;
+  text-align: center;
+  font: 800 11px/1 "Segoe UI", Tahoma, sans-serif;
+}
+
+.card-registration__controls input:focus {
+  border-color: #596773;
+}
+
+.card-registration__controls button {
+  min-height: 34px;
+  border: 1px solid #2a3740;
+  border-radius: 6px;
+  background: #0d1720;
+  color: #d8dde0;
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.card-registration--yellow .card-registration__controls button {
+  border-color: #6c5c0b;
+  color: #f5c91a;
+}
+
+.card-registration--red .card-registration__controls button {
+  border-color: #762b2b;
+  color: #ff4646;
+}
+
+.card-registration__controls button:hover {
+  filter: brightness(1.15);
+}
+
+@media (max-width: 760px) {
+  .card-registration-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* جای ثابت و از قبل تعیین‌شده برای کادرهای کارت */
+.event-actions-panel {
+  min-height: 230px;
+  box-sizing: border-box;
+}
+
+.card-registration-grid {
+  min-height: 188px;
+  height: 188px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.card-registration {
+  height: 188px;
+  min-height: 188px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-registration__team {
+  flex: 1 1 0;
+}
+
+@media (max-width: 760px) {
+  .card-registration-grid {
+    height: auto;
+    min-height: 0;
+  }
+
+  .card-registration {
+    height: 188px;
+    min-height: 188px;
+  }
+}
+
+/* =========================================================
+   Players / referee report
+   ========================================================= */
+.referee-layout--players {
+  grid-template-columns: 92px minmax(0, 1fr);
+}
+
+.referee-layout--players .events-panel {
+  display: none;
+}
+
+.referee-main--players {
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 28px 26px 30px;
+  scrollbar-width: auto;
+  scrollbar-color: #6d5800 #0b141c;
+
+  overflow: visible;
+  height: auto;
+  max-height: none;
+}
+
+.referee-main--players::-webkit-scrollbar {
+  width: 12px;
+}
+
+.referee-main--players::-webkit-scrollbar-track {
+  background: #0b141c;
+}
+
+.referee-main--players::-webkit-scrollbar-thumb {
+  background: #6d5800;
+  border-radius: 8px;
+  border: 2px solid #0b141c;
+}
+
+.referee-main--players::-webkit-scrollbar-thumb:hover {
+  background: #a88b00;
+}
+
+.players-panel {
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  direction: rtl;
+}
+
+.players-panel__head {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 0 2px 14px;
+  border-bottom: 1px solid #26343d;
+}
+
+.players-panel__head > div {
+  min-width: 0;
+}
+
+.players-panel__head span {
+  display: block;
+  margin-bottom: 5px;
+  color: #75818a;
+  font: 700 10px/1.4 var(--persian-font);
+}
+
+.players-panel__head h2 {
+  margin: 0;
+  color: #f0f3f4;
+  font: 900 20px/1.35 var(--persian-font);
+}
+
+.players-panel__print {
+  min-width: 118px;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid #7c6900;
+  border-radius: 8px;
+  background: #0c0c0c;
+  color: #ffc51a;
+  cursor: pointer;
+  font: 900 13px/1 var(--persian-font);
+}
+
+.players-panel__print:hover {
+  border-color: #ffc51a;
+  background: #171717;
+}
+
+.players-report-meta {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.players-report-meta > div {
+  min-width: 0;
+  min-height: 58px;
+  box-sizing: border-box;
+  padding: 9px 12px;
+  border: 1px solid #27343d;
+  border-radius: 8px;
+  background: #0b141c;
+}
+
+.players-report-meta span {
+  display: block;
+  margin-bottom: 5px;
+  color: #71808a;
+  font: 700 9px/1.3 var(--persian-font);
+}
+
+.players-report-meta strong {
+  display: block;
+  overflow: hidden;
+  color: #e6ebed;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 900 13px/1.4 var(--persian-font);
+}
+
+.players-teams {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.players-team-table {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #293640;
+  border-radius: 10px;
+  background: #0a131a;
+
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+
+.players-team-table__title {
+  min-height: 46px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  border-bottom: 2px solid #6d5800;
+  background: #0d171f;
+  color: #f0f3f4;
+  text-align: center;
+  font: 900 15px/1.2 var(--persian-font);
+}
+
+.players-table-wrap {
+
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+
+.players-table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  direction: rtl;
+  color: #dfe4e7;
+  font-family: var(--persian-font);
+}
+
+.players-table th,
+.players-table td {
+  height: 48px;
+  box-sizing: border-box;
+  padding: 5px 7px;
+  border-left: 1px solid #26343d;
+  border-bottom: 1px solid #26343d;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.players-table th:last-child,
+.players-table td:last-child {
+  border-left: 0;
+}
+
+.players-table th {
+  background: #111c25;
+  color: #aeb8bd;
+  font: 900 10px/1.4 var(--persian-font);
+}
+
+.players-table td {
+  background: #0a141b;
+  font: 800 11px/1.35 var(--persian-font);
+}
+
+.players-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.players-table th:nth-child(1),
+.players-table td:nth-child(1) {
+  width: 54px;
+}
+
+.players-table th:nth-child(2),
+.players-table td:nth-child(2) {
+  width: 42%;
+}
+
+.players-table th:nth-child(3),
+.players-table td:nth-child(3) {
+  width: 68px;
+}
+
+.players-table th:nth-child(4),
+.players-table td:nth-child(4),
+.players-table th:nth-child(5),
+.players-table td:nth-child(5) {
+  width: 120px;
+}
+
+.players-table__name,
+.players-table__number {
+  width: 100%;
+  height: 34px;
+  box-sizing: border-box;
+  border: 1px solid #2a3741;
+  border-radius: 5px;
+  outline: 0;
+  background: #071018;
+  color: #eef2f3;
+  text-align: center;
+  font-family: var(--persian-font);
+  font-weight: 800;
+}
+
+.players-table__name {
+  padding: 0 7px;
+  font-size: 11px;
+  direction: rtl;
+}
+
+.players-table__number {
+  padding: 0 4px;
+  font-size: 12px;
+  direction: ltr;
+}
+
+.players-table__name:focus,
+.players-table__number:focus {
+  border-color: #8b7300;
+  box-shadow: 0 0 0 2px rgba(255, 197, 26, .08);
+}
+
+.players-report-note {
+  margin-top: 12px;
+  color: #6f7c84;
+  text-align: right;
+  font: 700 9px/1.7 var(--persian-font);
+}
+
+/* Print version: the report becomes a clean Persian referee sheet. */
+
+/* Referee report continuation — based on the supplied referee-sheet layout. */
+.referee-report-continuation {
+  margin-top: 18px;
+  direction: rtl;
+  color: #dfe4e7;
+  font-family: var(--persian-font);
+}
+
+.report-line-grid,
+.report-two-team-grid,
+.report-results-grid,
+.report-officials {
+  display: grid;
+  gap: 10px;
+}
+
+.report-line-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 10px;
+}
+
+.report-line-grid label,
+.report-box,
+.report-results-grid label,
+.report-officials label {
+  min-width: 0;
+}
+
+.report-line-grid label,
+.report-results-grid label,
+.report-officials label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.report-line-grid span,
+.report-results-grid span,
+.report-officials span {
+  white-space: nowrap;
+  color: #aeb8bd;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.report-line-grid input,
+.report-results-grid input,
+.report-officials input,
+.report-box input,
+.report-goals-box input {
+  width: 100%;
+  min-width: 0;
+  height: 34px;
+  box-sizing: border-box;
+  border: 1px solid #2a3741;
+  border-radius: 5px;
+  outline: 0;
+  background: #071018;
+  color: #eef2f3;
+  font-family: var(--persian-font);
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.report-two-team-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 10px;
+}
+
+.report-box {
+  border: 1px solid #293640;
+  background: #0a131a;
+  overflow: hidden;
+}
+
+.report-box h3,
+.report-goals-box h3 {
+  margin: 0;
+  min-height: 38px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #293640;
+  background: #0d171f;
+  color: #f0f3f4;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.report-timeout-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding: 10px;
+}
+
+.report-timeout-row label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.report-timeout-row input {
+  max-width: 100px;
+}
+
+.fouls-grid {
+  display: grid;
+  grid-template-columns: 72px repeat(5, minmax(0, 1fr));
+}
+
+.fouls-grid span,
+.fouls-grid input {
+  min-height: 34px;
+  border-left: 1px solid #293640;
+  border-bottom: 1px solid #293640;
+}
+
+.fouls-grid span {
+  display: grid;
+  place-items: center;
+  padding: 0 5px;
+  color: #aeb8bd;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.fouls-grid input {
+  width: 100%;
+  box-sizing: border-box;
+  border-top: 0;
+  border-right: 0;
+  border-radius: 0;
+  text-align: center;
+}
+
+.report-goals-box {
+  margin-bottom: 10px;
+  overflow: hidden;
+  border: 1px solid #293640;
+  background: #0a131a;
+}
+
+.report-goals-box table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  direction: rtl;
+}
+
+.report-goals-box th,
+.report-goals-box td {
+  height: 34px;
+  padding: 4px 6px;
+  border-left: 1px solid #293640;
+  border-bottom: 1px solid #293640;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 9px;
+}
+
+.report-goals-box th {
+  color: #aeb8bd;
+  background: #111c25;
+  font-weight: 900;
+}
+
+.report-goals-box td {
+  color: #dfe4e7;
+}
+
+.report-goals-box tr:last-child td {
+  border-bottom: 0;
+}
+
+.report-results-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 10px;
+}
+
+.report-results-grid label,
+.report-officials label {
+  padding: 8px;
+  border: 1px solid #293640;
+  background: #0a131a;
+}
+
+.report-officials {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 10px;
+}
+
+.report-signatures {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  min-height: 120px;
+  border: 1px solid #293640;
+  background: #0a131a;
+}
+
+.report-signatures > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 8px 20px;
+  border-left: 1px solid #293640;
+}
+
+.report-signatures > div:last-child {
+  border-left: 0;
+}
+
+.report-signatures strong {
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.report-signatures span {
+  font-size: 10px;
+  font-weight: 800;
+}
+
+
+
+@media (max-width: 1050px) {
+  .players-report-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .players-teams {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .referee-layout--players {
+    display: block;
+  }
+
+  .players-panel {
+    width: 100%;
+  }
+
+  .players-panel__head {
+    align-items: flex-start;
+  }
+
+  .players-panel__head h2 {
+    font-size: 17px;
+  }
+
+  .players-report-meta {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .players-teams {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* گزارش بازیکنان - اطلاعات سربرگ و ستون گل زده */
+.players-report-meta {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 14px 0 10px;
+}
+.players-report-meta > div,
+.players-report-meta > label,
+.players-report-colors > label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.players-report-meta span,
+.players-report-colors span {
+  font-family: var(--persian-font);
+  font-size: 11px;
+  color: #8f9aa3;
+}
+.players-report-meta strong {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border: 1px solid #263640;
+  border-radius: 7px;
+  background: #0b141c;
+  box-sizing: border-box;
+}
+.players-report-meta input,
+.players-report-colors input {
+  width: 100%;
+  min-height: 38px;
+  box-sizing: border-box;
+  border: 1px solid #263640;
+  border-radius: 7px;
+  background: #0b141c;
+  color: #e6ebee;
+  padding: 0 10px;
+  font-family: var(--persian-font);
+  font-size: 14px;
+  font-weight: 700;
+  outline: none;
+}
+.players-report-colors {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.players-table__goals {
+  width: 54px;
+  min-height: 32px;
+  text-align: center;
+  border: 1px solid #2a3741;
+  border-radius: 6px;
+  background: #0b141c;
+  color: #e6ebee;
+  font-family: var(--persian-font);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+  .players-report-meta { grid-template-columns: repeat(2, minmax(150px, 1fr)); }
+}
+@media (max-width: 600px) {
+  .players-report-meta, .players-report-colors { grid-template-columns: 1fr; }
+}
+
+/* =========================================================
+   FINAL PRINT LAYOUT — referee report
+   The report intentionally flows across pages if necessary.
+   Nothing in the lower part is clipped or hidden.
+   ========================================================= */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm;
+  }
+
+  html, body {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  .referee-main--players,
+  .referee-main--players * {
+    visibility: visible !important;
+  }
+
+  .referee-main--players {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  .players-panel {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .players-panel__head {
+    display: flex !important;
+    min-height: 0 !important;
+    margin: 0 0 3mm !important;
+    padding: 0 0 2mm !important;
+    border-bottom: 1px solid #000 !important;
+  }
+
+  .players-panel__head span,
+  .players-panel__head h2,
+  .players-report-meta span,
+  .players-report-meta strong,
+  .players-report-colors span,
+  .players-report-note,
+  .players-team-table__title,
+  .players-table th,
+  .players-table td,
+  .report-line-grid span,
+  .report-results-grid span,
+  .report-officials span,
+  .report-box h3,
+  .report-goals-box h3,
+  .report-goals-box th,
+  .report-goals-box td,
+  .report-signatures strong,
+  .report-signatures span {
+    color: #000 !important;
+  }
+
+  .players-panel__head h2 {
+    font-size: 15pt !important;
+    margin: 0 !important;
+  }
+
+  .players-panel__head span {
+    font-size: 8pt !important;
+  }
+
+  .players-panel__print {
+    display: none !important;
+  }
+
+  /* Header fields */
+  .players-report-meta {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 2mm !important;
+    margin: 0 0 2mm !important;
+  }
+
+  .players-report-meta > label,
+  .players-report-meta > div,
+  .players-report-colors > label {
+    display: flex !important;
+    min-height: 9mm !important;
+    height: 9mm !important;
+    box-sizing: border-box !important;
+    padding: 1mm 2mm !important;
+    border: 1px solid #000 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+  }
+
+  .players-report-meta span,
+  .players-report-colors span {
+    margin: 0 0 .5mm !important;
+    font-size: 6.5pt !important;
+    line-height: 1 !important;
+  }
+
+  .players-report-meta strong,
+  .players-report-meta input,
+  .players-report-colors input {
+    min-height: 5mm !important;
+    height: 5mm !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 8pt !important;
+    line-height: 1.1 !important;
+  }
+
+  .players-report-colors {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 2mm !important;
+    margin: 0 0 3mm !important;
+  }
+
+  /* 12-player tables */
+  .players-teams {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 3mm !important;
+    align-items: start !important;
+    margin: 0 !important;
+  }
+
+  .players-team-table {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    border: 1px solid #000 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .players-team-table__title {
+    min-height: 7mm !important;
+    height: 7mm !important;
+    padding: 0 2mm !important;
+    border-bottom: 1px solid #000 !important;
+    background: #fff !important;
+    font-size: 9pt !important;
+  }
+
+  .players-table-wrap {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .players-table {
+    display: table !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+    background: #fff !important;
+    font-size: 6.5pt !important;
+  }
+
+  .players-table th,
+  .players-table td {
+    height: 6.6mm !important;
+    min-height: 6.6mm !important;
+    padding: .5mm .8mm !important;
+    box-sizing: border-box !important;
+    border-left: 1px solid #000 !important;
+    border-bottom: 1px solid #000 !important;
+    background: #fff !important;
+    color: #000 !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    overflow: hidden !important;
+  }
+
+  .players-table th {
+    height: 7mm !important;
+    font-size: 6.5pt !important;
+    white-space: nowrap !important;
+  }
+
+  .players-table td {
+    font-size: 6.5pt !important;
+  }
+
+  .players-table__name,
+  .players-table__number,
+  .players-table__goals {
+    width: 100% !important;
+    height: 5mm !important;
+    min-height: 5mm !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 6.5pt !important;
+  }
+
+  .players-report-note {
+    margin: 2mm 0 0 !important;
+    font-size: 6pt !important;
+  }
+
+  /* Lower form — always visible and allowed to continue to page 2. */
+  .referee-report-continuation {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 4mm 0 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    color: #000 !important;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  .report-line-grid,
+  .report-two-team-grid,
+  .report-results-grid,
+  .report-officials {
+    display: grid !important;
+    gap: 2mm !important;
+    margin: 0 0 2mm !important;
+  }
+
+  .report-line-grid,
+  .report-officials {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .report-two-team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .report-results-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .report-line-grid label,
+  .report-results-grid label,
+  .report-officials label {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.5mm !important;
+    min-height: 7mm !important;
+    padding: 1mm !important;
+    border: 1px solid #000 !important;
+    background: #fff !important;
+    box-sizing: border-box !important;
+  }
+
+  .report-line-grid span,
+  .report-results-grid span,
+  .report-officials span {
+    font-size: 6.5pt !important;
+    white-space: nowrap !important;
+  }
+
+  .report-line-grid input,
+  .report-results-grid input,
+  .report-officials input,
+  .report-box input,
+  .report-goals-box input {
+    height: 5mm !important;
+    min-height: 5mm !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 6.5pt !important;
+  }
+
+  .report-box {
+    border: 1px solid #000 !important;
+    background: #fff !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .report-box h3,
+  .report-goals-box h3 {
+    min-height: 6mm !important;
+    height: 6mm !important;
+    padding: 0 2mm !important;
+    border-bottom: 1px solid #000 !important;
+    background: #fff !important;
+    font-size: 7.5pt !important;
+  }
+
+  .report-timeout-row {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 2mm !important;
+    padding: 2mm !important;
+  }
+
+  .report-timeout-row label {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1mm !important;
+    font-size: 6.5pt !important;
+  }
+
+  .fouls-grid {
+    display: grid !important;
+    grid-template-columns: 15mm repeat(5, minmax(0, 1fr)) !important;
+  }
+
+  .fouls-grid span,
+  .fouls-grid input {
+    height: 6mm !important;
+    min-height: 6mm !important;
+    border-color: #000 !important;
+  }
+
+  .fouls-grid span {
+    font-size: 6pt !important;
+    color: #000 !important;
+  }
+
+  .report-goals-box {
+    margin: 0 0 2mm !important;
+    border: 1px solid #000 !important;
+    background: #fff !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .report-goals-box table {
+    width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+  }
+
+  .report-goals-box th,
+  .report-goals-box td {
+    height: 6mm !important;
+    padding: .5mm !important;
+    border-color: #000 !important;
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 6pt !important;
+  }
+
+  .report-signatures {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    min-height: 30mm !important;
+    height: 30mm !important;
+    border: 1px solid #000 !important;
+    background: #fff !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .report-signatures > div {
+    padding: 2mm 1mm 5mm !important;
+    border-color: #000 !important;
+  }
+}
+
+
+/* Player list/table: no internal scrollbar — the page itself can continue naturally. */
+.players-report,
+.players-teams,
+.players-team-table,
+.players-table-wrap {
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+
+.players-table {
+  width: 100%;
+  height: auto;
+}
+
+@media print {
+  .referee-main--players,
+  .players-panel,
+  .players-teams,
+  .players-team-table,
+  .players-table-wrap,
+  .players-table {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
+
+
+/* Compact player table columns so the full table fits horizontally without scrolling. */
+.players-table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.players-table th,
+.players-table td {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.players-table th:nth-child(1),
+.players-table td:nth-child(1) {
+  width: 7%;
+}
+
+.players-table th:nth-child(2),
+.players-table td:nth-child(2) {
+  width: 39%;
+}
+
+.players-table th:nth-child(3),
+.players-table td:nth-child(3),
+.players-table th:nth-child(4),
+.players-table td:nth-child(4),
+.players-table th:nth-child(5),
+.players-table td:nth-child(5) {
+  width: 18%;
+}
+
+.players-table th:nth-child(3),
+.players-table td:nth-child(3),
+.players-table th:nth-child(4),
+.players-table td:nth-child(4),
+.players-table th:nth-child(5),
+.players-table td:nth-child(5) {
+  padding-left: 3px;
+  padding-right: 3px;
+  white-space: nowrap;
+}
+
+.players-table th:nth-child(3),
+.players-table th:nth-child(4),
+.players-table th:nth-child(5) {
+  font-size: 9px;
+}
+
+.players-table td:nth-child(3),
+.players-table td:nth-child(4),
+.players-table td:nth-child(5) {
+  font-size: 10px;
+}
+
+.players-table__number,
+.players-table__goals {
+  width: 100%;
+  min-width: 0;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+@media (max-width: 900px) {
+  .players-table th:nth-child(1),
+  .players-table td:nth-child(1) {
+    width: 7%;
+  }
+
+  .players-table th:nth-child(2),
+  .players-table td:nth-child(2) {
+    width: 36%;
+  }
+
+  .players-table th:nth-child(3),
+  .players-table td:nth-child(3),
+  .players-table th:nth-child(4),
+  .players-table td:nth-child(4),
+  .players-table th:nth-child(5),
+  .players-table td:nth-child(5) {
+    width: 19%;
+  }
+
+  .players-table th:nth-child(3),
+  .players-table th:nth-child(4),
+  .players-table th:nth-child(5) {
+    font-size: 8px;
+  }
+}
+
+/* =========================================================
+   FINAL FIX — player report columns + natural page scrolling
+   ========================================================= */
+
+.referee-app {
+  overflow: visible !important;
+}
+
+.referee-layout--players {
+  min-height: auto !important;
+  height: auto !important;
+  align-items: start;
+}
+
+.referee-main--players {
+  min-width: 0 !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+  box-sizing: border-box;
+}
+
+.players-panel,
+.players-teams,
+.players-team-table,
+.players-table-wrap {
+  min-width: 0 !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  box-sizing: border-box;
+}
+
+/* Exactly 6 columns — including the red-card column. */
+.players-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  table-layout: fixed !important;
+  border-collapse: collapse !important;
+}
+
+.players-table th,
+.players-table td {
+  min-width: 0 !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+  overflow: hidden;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.players-table th:nth-child(1),
+.players-table td:nth-child(1) {
+  width: 7% !important;
+}
+
+.players-table th:nth-child(2),
+.players-table td:nth-child(2) {
+  width: 37% !important;
+}
+
+.players-table th:nth-child(3),
+.players-table td:nth-child(3) {
+  width: 9% !important;
+}
+
+.players-table th:nth-child(4),
+.players-table td:nth-child(4) {
+  width: 11% !important;
+}
+
+.players-table th:nth-child(5),
+.players-table td:nth-child(5) {
+  width: 18% !important;
+}
+
+.players-table th:nth-child(6),
+.players-table td:nth-child(6) {
+  width: 18% !important;
+}
+
+.players-table th:nth-child(3),
+.players-table th:nth-child(4),
+.players-table th:nth-child(5),
+.players-table th:nth-child(6) {
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+  font-size: 9px !important;
+  line-height: 1.25 !important;
+}
+
+.players-table td:nth-child(3),
+.players-table td:nth-child(4),
+.players-table td:nth-child(5),
+.players-table td:nth-child(6) {
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+  font-size: 10px !important;
+  line-height: 1.25 !important;
+}
+
+.players-table__name,
+.players-table__number,
+.players-table__goals {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.players-table__goals {
+  padding-left: 1px !important;
+  padding-right: 1px !important;
+  font-size: 10px !important;
+}
+
+@media (max-width: 1050px) {
+  .referee-layout--players {
+    min-height: auto !important;
+  }
+
+  .players-table {
+    min-width: 0 !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .referee-layout--players {
+    display: block !important;
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  .referee-main--players {
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+  }
+
+  .players-table th:nth-child(1),
+  .players-table td:nth-child(1) {
+    width: 7% !important;
+  }
+
+  .players-table th:nth-child(2),
+  .players-table td:nth-child(2) {
+    width: 35% !important;
+  }
+
+  .players-table th:nth-child(3),
+  .players-table td:nth-child(3) {
+    width: 9% !important;
+  }
+
+  .players-table th:nth-child(4),
+  .players-table td:nth-child(4) {
+    width: 11% !important;
+  }
+
+  .players-table th:nth-child(5),
+  .players-table td:nth-child(5),
+  .players-table th:nth-child(6),
+  .players-table td:nth-child(6) {
+    width: 19% !important;
+  }
+}
+
+/* ===== REAL compact header: exact classes used by RefereeWorkspace ===== */
+.players-report-meta {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+  margin-bottom: 8px !important;
+}
+
+.players-report-meta > label,
+.players-report-meta > div,
+.players-report-colors > label {
+  min-width: 0 !important;
+  gap: 3px !important;
+}
+
+.players-report-meta span,
+.players-report-colors span {
+  font-size: 10px !important;
+  line-height: 1.1 !important;
+  white-space: nowrap;
+}
+
+.players-report-meta input,
+.players-report-colors input,
+.players-report-meta strong {
+  min-height: 29px !important;
+  height: 29px !important;
+  padding: 0 7px !important;
+  font-size: 12px !important;
+  border-radius: 5px !important;
+}
+
+.players-report-colors {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+  margin-bottom: 9px !important;
+}
+
+@media print {
+  /* Make the header substantially shorter on A4. */
+  .players-report-meta {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 1.2mm !important;
+    margin: 0 0 1.2mm !important;
+  }
+
+  .players-report-meta > label,
+  .players-report-meta > div,
+  .players-report-colors > label {
+    min-height: 6.2mm !important;
+    height: 6.2mm !important;
+    padding: .7mm 1.2mm !important;
+    gap: .4mm !important;
+  }
+
+  .players-report-meta span,
+  .players-report-colors span {
+    margin: 0 !important;
+    font-size: 5.8pt !important;
+    line-height: 1 !important;
+  }
+
+  .players-report-meta input,
+  .players-report-colors input,
+  .players-report-meta strong {
+    min-height: 3.7mm !important;
+    height: 3.7mm !important;
+    padding: 0 1mm !important;
+    font-size: 6.8pt !important;
+    line-height: 1 !important;
+  }
+
+  .players-report-colors {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1.2mm !important;
+    margin: 0 0 1.5mm !important;
+  }
+
+  .players-panel__head {
+    min-height: 0 !important;
+    margin-bottom: 1.5mm !important;
+    padding-bottom: 1.2mm !important;
+  }
+
+  .players-panel__head h2 {
+    font-size: 10pt !important;
+  }
+
+  .players-panel__head span {
+    font-size: 6.5pt !important;
+    margin-bottom: 1mm !important;
+  }
+}
+
+/* ===== Report header: age / venue / city / day / date / time in ONE row ===== */
+.players-report-meta {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  width: 100% !important;
+  gap: 5px !important;
+  align-items: end !important;
+}
+
+.players-report-meta > label,
+.players-report-meta > div {
+  min-width: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.players-report-meta > label {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+}
+
+.players-report-meta > label > span,
+.players-report-meta > div > span {
+  display: block !important;
+  white-space: nowrap !important;
+  font-size: 10px !important;
+}
+
+.players-report-meta > label > input,
+.players-report-meta > div > strong {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+@media print {
+  .players-report-meta {
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    gap: 1.5mm !important;
+    width: 100% !important;
+  }
+
+  .players-report-meta > label {
+    gap: .5mm !important;
+  }
+
+  .players-report-meta > label > span,
+  .players-report-meta > div > span {
+    font-size: 6pt !important;
+    white-space: nowrap !important;
+  }
+
+  .players-report-meta > label > input,
+  .players-report-meta > div > strong {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 5.5mm !important;
+    min-height: 5.5mm !important;
+    padding: .7mm 1mm !important;
+    font-size: 7pt !important;
+  }
+}
+
+/* ===== Match + Result + HOME jersey + GUEST jersey: exact second row ===== */
+.players-report-meta--match-row {
+  grid-template-columns: 1.35fr .95fr 1fr 1fr !important;
+  gap: 5px !important;
+  margin-top: 5px !important;
+  margin-bottom: 8px !important;
+  align-items: end !important;
+}
+
+.players-report-meta--match-row > div,
+.players-report-meta--match-row > label {
+  min-width: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.players-report-meta--match-row > label {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+}
+
+.players-report-meta--match-row span {
+  display: block !important;
+  white-space: nowrap !important;
+  font-size: 10px !important;
+}
+
+.players-report-meta--match-row strong,
+.players-report-meta--match-row input {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  min-height: 29px !important;
+  height: 29px !important;
+  padding: 0 7px !important;
+  font-size: 12px !important;
+  border-radius: 5px !important;
+}
+
+@media print {
+  .players-report-meta--match-row {
+    grid-template-columns: 1.35fr .95fr 1fr 1fr !important;
+    gap: 1.5mm !important;
+    margin-top: 1.2mm !important;
+    margin-bottom: 1.5mm !important;
+  }
+
+  .players-report-meta--match-row > label {
+    gap: .5mm !important;
+  }
+
+  .players-report-meta--match-row span {
+    font-size: 6pt !important;
+    white-space: nowrap !important;
+  }
+
+  .players-report-meta--match-row strong,
+  .players-report-meta--match-row input {
+    height: 5.5mm !important;
+    min-height: 5.5mm !important;
+    padding: .7mm 1mm !important;
+    font-size: 7pt !important;
+  }
+}
+
+
+/* ===== Final player/report + scoreboard polish ===== */
+
+/* Graphical vertical scrollbar: thin gold gradient, no horizontal scrollbar. */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #d8a91e #0a1117;
+}
+
+body,
+.referee-app {
+  scrollbar-width: thin;
+  scrollbar-color: #d8a91e #0a1117;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a1117;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ffe27a 0%, #d8a91e 45%, #8d6510 100%);
+  border: 2px solid #0a1117;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #fff0a8 0%, #f0c63a 45%, #a87916 100%);
+}
+
+/* All editable information fields in Scoreboard use Titr/Persian font. */
+.match-settings .settings-field input,
+.match-settings .settings-field select,
+.match-settings .settings-field input.settings-input--persian {
+  font-family: var(--persian-font) !important;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.match-settings .settings-field > span {
+  font-family: var(--persian-font);
+}
+
+/* Goal scorer registration menu, matching the yellow/red card menus. */
+.card-registration-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card-registration--goal {
+  border-color: #2d8f52;
+  background: linear-gradient(180deg, #0d1914, #0b1410);
+}
+
+.card-registration--goal .card-registration__title {
+  color: #54df7d;
+  border-bottom-color: #245936;
+}
+
+.card-registration--goal .card-registration__controls button {
+  border-color: #2d8f52;
+  color: #54df7d;
+}
+
+.card-registration--goal .card-registration__controls button:hover {
+  background: #12351f;
+  border-color: #54df7d;
+}
+
+@media (max-width: 1050px) {
+  .card-registration-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  html,
+  body {
+    overflow: visible !important;
+  }
+
+  ::-webkit-scrollbar {
+    width: auto;
+    height: auto;
+  }
+}
+
+
+/* Linked report header: read-only values sourced directly from Scoreboard. */
+.players-report-meta:first-of-type {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.players-report-linked-field {
+  min-width: 0;
+  min-height: 58px;
+  box-sizing: border-box;
+  padding: 9px 12px;
+  border: 1px solid #27343d;
+  border-radius: 8px;
+  background: #0b141c;
+}
+
+.players-report-linked-field span {
+  display: block;
+  margin-bottom: 5px;
+  color: #71808a;
+  font: 700 9px/1.3 var(--persian-font);
+}
+
+.players-report-linked-field strong {
+  display: block;
+  overflow: hidden;
+  color: #e6ebed;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 900 13px/1.4 var(--persian-font);
+}
+
+@media (max-width: 1050px) {
+  .players-report-meta:first-of-type {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .players-report-meta:first-of-type,
+  .players-report-meta--match-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Final layout fix: goal-scorer card stays above the yellow/red cards,
+   and HOME/GUEST controls sit side-by-side inside the single card. */
+.event-actions-panel .card-registration-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: auto auto;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.event-actions-panel .goal-registration {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.event-actions-panel .goal-registration .card-registration__team {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.event-actions-panel .goal-registration .card-registration__controls {
+  flex: 1 1 auto;
+  justify-content: flex-end;
+}
+
+.event-actions-panel .card-registration--yellow {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.event-actions-panel .card-registration--red {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+@media (max-width: 760px) {
+  .event-actions-panel .card-registration-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .event-actions-panel .goal-registration {
+    grid-column: 1 / -1;
+  }
+
+  .event-actions-panel .goal-registration .card-registration__team {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* =========================================================
+   FINAL CARD REGISTRATION LAYOUT FIX
+   One goal card on top + yellow/red cards side-by-side below.
+   ========================================================= */
+.event-actions-panel .card-registration-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: stretch;
+  gap: 10px;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.event-actions-panel .card-registration-grid > .goal-registration {
+  order: 1;
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 0;
+  height: auto !important;
+  min-height: 0 !important;
+  box-sizing: border-box;
+}
+
+.event-actions-panel .card-registration-grid > .card-registration--yellow,
+.event-actions-panel .card-registration-grid > .card-registration--red {
+  order: 2;
+  flex: 1 1 calc(50% - 5px);
+  width: calc(50% - 5px);
+  min-width: 0;
+  height: 188px;
+  min-height: 188px;
+  box-sizing: border-box;
+}
+
+/* HOME / GUEST inside the single goal card stay next to each other. */
+.event-actions-panel .goal-registration .card-registration__team {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.event-actions-panel .goal-registration .card-registration__team > strong {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.event-actions-panel .goal-registration .card-registration__controls {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 78px minmax(0, 150px);
+  justify-content: end;
+  gap: 6px;
+}
+
+@media (max-width: 760px) {
+  .event-actions-panel .card-registration-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .event-actions-panel .card-registration-grid > .goal-registration {
+    grid-column: 1 / -1;
+    width: auto;
+  }
+
+  .event-actions-panel .card-registration-grid > .card-registration--yellow,
+  .event-actions-panel .card-registration-grid > .card-registration--red {
+    width: auto;
+    height: 188px;
+    min-height: 188px;
+  }
+}
+
+
+/* =========================================================
+   GRAPHIC EVENT CARDS
+   Goal scorers on top + Yellow/Red below
+   ========================================================= */
+
+.event-actions-panel .card-registration-grid {
+  position: relative;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px;
+  padding: 2px;
+  overflow: visible;
+}
+
+/* Shared premium card surface */
+.event-actions-panel .card-registration-grid > .card-registration {
+  position: relative;
+  overflow: hidden;
+  border-radius: 11px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.035), transparent 38%),
+    linear-gradient(180deg, #0d171f 0%, #080f15 100%);
+  box-shadow:
+    0 8px 18px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.035);
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+.event-actions-panel .card-registration-grid > .card-registration::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  opacity: .95;
+}
+
+.event-actions-panel .card-registration-grid > .card-registration:hover {
+  transform: translateY(-1px);
+}
+
+/* Goal scorer: one wide card at the top */
+.event-actions-panel .card-registration-grid > .goal-registration {
+  order: 1;
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 0;
+  height: auto !important;
+  min-height: 104px !important;
+  padding: 12px 14px;
+  box-sizing: border-box;
+  border: 1px solid #806800;
+  background:
+    radial-gradient(circle at 50% -30%, rgba(255,210,50,.13), transparent 52%),
+    linear-gradient(180deg, #111a1b 0%, #090f12 100%);
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.28),
+    inset 0 0 24px rgba(255,196,0,.025);
+}
+
+.event-actions-panel .card-registration-grid > .goal-registration::before {
+  background: linear-gradient(90deg, transparent, #ffd21a, transparent);
+}
+
+.event-actions-panel .goal-registration .card-registration__title {
+  position: relative;
+  margin: 0 0 10px;
+  padding: 0 0 8px;
+  border-bottom: 1px solid rgba(255,210,26,.20);
+  color: #ffd21a;
+  text-align: center;
+  font-family: var(--persian-font);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.event-actions-panel .goal-registration .card-registration__team {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 7px 10px;
+  border: 1px solid #26343b;
+  border-radius: 8px;
+  background: rgba(5,10,14,.55);
+}
+
+.event-actions-panel .goal-registration .card-registration__team:first-of-type {
+  border-top: 1px solid #26343b;
+  padding-top: 7px;
+}
+
+.event-actions-panel .goal-registration .card-registration__team > strong {
+  margin: 0;
+  color: #d8dde0;
+  font: 900 10px/1 "Arial Narrow", "Segoe UI", sans-serif;
+  letter-spacing: 1.2px;
+}
+
+.event-actions-panel .goal-registration .card-registration__controls {
+  display: grid;
+  grid-template-columns: 74px minmax(82px, 112px);
+  justify-content: end;
+  gap: 6px;
+}
+
+.event-actions-panel .goal-registration .card-registration__controls input {
+  min-height: 32px;
+  border-color: #39464c;
+  background: #060b0f;
+}
+
+.event-actions-panel .goal-registration .card-registration__controls input:focus {
+  border-color: #d8ad19;
+  box-shadow: 0 0 0 2px rgba(216,173,25,.10);
+}
+
+.event-actions-panel .goal-registration .card-registration__controls button {
+  min-height: 32px;
+  border-color: #806800;
+  background: linear-gradient(180deg, #17180f, #0b100e);
+  color: #ffd21a;
+  font-family: var(--persian-font);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.event-actions-panel .goal-registration .card-registration__controls button:hover {
+  border-color: #ffd21a;
+  background: #1b1a0d;
+  box-shadow: 0 0 10px rgba(255,210,26,.12);
+}
+
+/* Yellow / Red: two compact graphical cards below */
+.event-actions-panel .card-registration-grid > .card-registration--yellow,
+.event-actions-panel .card-registration-grid > .card-registration--red {
+  order: 2;
+  flex: 1 1 calc(50% - 6px);
+  width: calc(50% - 6px);
+  min-width: 0;
+  height: 188px;
+  min-height: 188px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.event-actions-panel .card-registration-grid > .card-registration--yellow {
+  border: 1px solid #74620a;
+  background:
+    radial-gradient(circle at 50% -20%, rgba(255,213,34,.10), transparent 55%),
+    linear-gradient(180deg, #15180d 0%, #090f12 100%);
+  box-shadow: 0 8px 20px rgba(0,0,0,.26), inset 0 0 20px rgba(255,210,26,.025);
+}
+
+.event-actions-panel .card-registration-grid > .card-registration--yellow::before {
+  background: linear-gradient(90deg, transparent, #f5c91a, transparent);
+}
+
+.event-actions-panel .card-registration-grid > .card-registration--red {
+  border: 1px solid #762b2b;
+  background:
+    radial-gradient(circle at 50% -20%, rgba(255,58,58,.10), transparent 55%),
+    linear-gradient(180deg, #180e10 0%, #090f12 100%);
+  box-shadow: 0 8px 20px rgba(0,0,0,.26), inset 0 0 20px rgba(255,45,45,.025);
+}
+
+.event-actions-panel .card-registration-grid > .card-registration--red::before {
+  background: linear-gradient(90deg, transparent, #ff3f3f, transparent);
+}
+
+.event-actions-panel .card-registration--yellow .card-registration__title,
+.event-actions-panel .card-registration--red .card-registration__title {
+  position: relative;
+  margin: 0 0 8px;
+  padding: 0 0 8px;
+  text-align: center;
+  font-family: var(--persian-font);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.event-actions-panel .card-registration--yellow .card-registration__title {
+  color: #ffd21a;
+  border-bottom: 1px solid rgba(245,201,26,.18);
+}
+
+.event-actions-panel .card-registration--red .card-registration__title {
+  color: #ff4646;
+  border-bottom: 1px solid rgba(255,70,70,.18);
+}
+
+.event-actions-panel .card-registration--yellow .card-registration__team,
+.event-actions-panel .card-registration--red .card-registration__team {
+  padding: 9px 0;
+}
+
+.event-actions-panel .card-registration--yellow .card-registration__team > strong,
+.event-actions-panel .card-registration--red .card-registration__team > strong {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  color: #aab3b8;
+  font: 900 9px/1 "Arial Narrow", "Segoe UI", sans-serif;
+  letter-spacing: 1.2px;
+}
+
+.event-actions-panel .card-registration--yellow .card-registration__team > strong::after,
+.event-actions-panel .card-registration--red .card-registration__team > strong::after {
+  content: "";
+  width: 7px;
+  height: 10px;
+  border-radius: 1px;
+}
+
+.event-actions-panel .card-registration--yellow .card-registration__team > strong::after {
+  background: #f5c91a;
+  box-shadow: 0 0 7px rgba(245,201,26,.22);
+}
+
+.event-actions-panel .card-registration--red .card-registration__team > strong::after {
+  background: #ff3d3d;
+  box-shadow: 0 0 7px rgba(255,61,61,.22);
+}
+
+.event-actions-panel .card-registration--yellow .card-registration__controls input,
+.event-actions-panel .card-registration--red .card-registration__controls input {
+  min-height: 34px;
+  background: #060b0f;
+}
+
+.event-actions-panel .card-registration--yellow .card-registration__controls input:focus {
+  border-color: #f5c91a;
+  box-shadow: 0 0 0 2px rgba(245,201,26,.10);
+}
+
+.event-actions-panel .card-registration--red .card-registration__controls input:focus {
+  border-color: #ff4646;
+  box-shadow: 0 0 0 2px rgba(255,70,70,.10);
+}
+
+.event-actions-panel .card-registration--yellow .card-registration__controls button,
+.event-actions-panel .card-registration--red .card-registration__controls button {
+  font-family: var(--persian-font);
+  font-size: 9px;
+  font-weight: 900;
+  transition: .15s ease;
+}
+
+.event-actions-panel .card-registration--yellow .card-registration__controls button:hover {
+  background: rgba(245,201,26,.07);
+  box-shadow: 0 0 10px rgba(245,201,26,.10);
+}
+
+.event-actions-panel .card-registration--red .card-registration__controls button:hover {
+  background: rgba(255,70,70,.07);
+  box-shadow: 0 0 10px rgba(255,70,70,.10);
+}
+
+/* Responsive: keep the three cards readable */
+@media (max-width: 760px) {
+  .event-actions-panel .card-registration-grid {
+    gap: 9px;
+  }
+
+  .event-actions-panel .card-registration-grid > .goal-registration {
+    min-height: 132px !important;
+  }
+
+  .event-actions-panel .goal-registration .card-registration__team {
+    padding: 7px;
+  }
+
+  .event-actions-panel .goal-registration .card-registration__controls {
+    grid-template-columns: 70px minmax(78px, 1fr);
+  }
+
+  .event-actions-panel .card-registration-grid > .card-registration--yellow,
+  .event-actions-panel .card-registration-grid > .card-registration--red {
+    width: calc(50% - 4.5px);
+    flex-basis: calc(50% - 4.5px);
+    height: 188px;
+    min-height: 188px;
+  }
+}
+
+@media (max-width: 520px) {
+  .event-actions-panel .card-registration-grid > .card-registration--yellow,
+  .event-actions-panel .card-registration-grid > .card-registration--red {
+    flex-basis: 100%;
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   MATCH INFORMATION PANEL — SCOREBOARD STYLE
+   The form below the scoreboard now visually belongs to
+   the same control system: dark double-tone surfaces,
+   gold digital accents, thin inner highlights.
+   ========================================================= */
+
+.match-settings {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #4f4218 !important;
+  border-radius: 12px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 210, 26, .035), transparent 18%),
+    linear-gradient(180deg, #0b1319 0%, #070d12 100%) !important;
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.035),
+    inset 0 -1px 0 rgba(255,210,26,.045) !important;
+}
+
+.match-settings::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d8ad19, #ffe27a, #d8ad19, transparent);
+  opacity: .8;
+}
+
+.match-settings__title,
+.match-settings h3,
+.match-settings .section-title {
+  color: #f2d05a !important;
+  font-family: var(--persian-font) !important;
+  text-shadow: 0 0 10px rgba(255,210,26,.08);
+}
+
+.match-settings .settings-grid,
+.match-settings .settings-row {
+  gap: 10px !important;
+}
+
+.match-settings .settings-field {
+  position: relative;
+  min-width: 0;
+  padding: 9px 10px 11px !important;
+  border: 1px solid #26343c !important;
+  border-radius: 8px !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.025), transparent 42%),
+    #080f14 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.025),
+    inset 0 -2px 0 rgba(216,173,25,.035);
+}
+
+.match-settings .settings-field::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  bottom: 5px;
+  height: 2px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, transparent, #9b7710, #f1c934, #9b7710, transparent);
+  opacity: .62;
+  pointer-events: none;
+}
+
+.match-settings .settings-field > span {
+  display: block;
+  margin-bottom: 6px;
+  color: #bfc7ca !important;
+  font-family: var(--persian-font) !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+}
+
+.match-settings .settings-field input,
+.match-settings .settings-field select,
+.match-settings .settings-field textarea {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  min-height: 34px;
+  padding: 6px 9px;
+  border: 1px solid #34424a !important;
+  border-radius: 6px !important;
+  outline: none;
+  background:
+    linear-gradient(180deg, #101a20 0%, #070d12 100%) !important;
+  color: #eef2f3 !important;
+  font-family: var(--persian-font) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.025),
+    0 2px 7px rgba(0,0,0,.18);
+  transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+
+.match-settings .settings-field input:hover,
+.match-settings .settings-field select:hover,
+.match-settings .settings-field textarea:hover {
+  border-color: #66551b !important;
+}
+
+.match-settings .settings-field input:focus,
+.match-settings .settings-field select:focus,
+.match-settings .settings-field textarea:focus {
+  border-color: #d8ad19 !important;
+  box-shadow:
+    0 0 0 2px rgba(216,173,25,.10),
+    0 0 14px rgba(216,173,25,.07),
+    inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+.match-settings .settings-field input::placeholder,
+.match-settings .settings-field textarea::placeholder {
+  color: #68747a !important;
+  font-family: var(--persian-font) !important;
+}
+
+.match-settings .settings-field select {
+  cursor: pointer;
+  appearance: auto;
+}
+
+.match-settings .settings-field input[type="date"],
+.match-settings .settings-field input[type="time"] {
+  color-scheme: dark;
+}
+
+/* Make the complete settings block feel like one scoreboard module. */
+.match-settings .settings-grid > *,
+.match-settings .settings-row > * {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .match-settings .settings-grid,
+  .match-settings .settings-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .match-settings .settings-grid,
+  .match-settings .settings-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  .match-settings .settings-field {
+    padding: 8px 9px 10px !important;
+  }
+}
+
+
+/* FINAL FIX: explicit rows for match settings.
+   No nth-child dependency. */
+.match-settings {
+  display: block !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.match-settings__row {
+  display: grid !important;
+  width: 100%;
+  min-width: 0;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+.match-settings__row--top {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  margin-bottom: 8px;
+}
+
+.match-settings__row--compact {
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+}
+
+.match-settings__row .settings-field {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box;
+}
+
+.match-settings__row--compact .settings-field {
+  padding: 6px 7px 8px !important;
+}
+
+.match-settings__row--compact .settings-field > span {
+  font-size: 8.5px !important;
+  white-space: nowrap;
+  margin-bottom: 3px !important;
+}
+
+.match-settings__row--compact .settings-field input,
+.match-settings__row--compact .settings-field select {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  padding: 3px 6px !important;
+  font-size: 10px !important;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .match-settings__row--top {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .match-settings__row--compact {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .match-settings__row--top,
+  .match-settings__row--compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* =========================================================
+   FINAL BORDER MATCH — MATCH SETTINGS = SCOREBOARD FRAME
+   The information form uses the same complete border language
+   as the main scoreboard: continuous gold frame, no broken
+   corners, and full borders on every input module.
+   ========================================================= */
+.match-settings {
+  border: 2px solid var(--ref-yellow) !important;
+  border-radius: 18px !important;
+  background: #010202 !important;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, .34) !important;
+}
+
+.match-settings::before {
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  height: 1px !important;
+  background: var(--ref-yellow-dark) !important;
+  opacity: 1 !important;
+}
+
+.match-settings__row--top {
+  margin-bottom: 8px !important;
+}
+
+.match-settings .settings-field {
+  border: 1px solid var(--ref-yellow-dark) !important;
+  border-radius: 8px !important;
+  background: #070a0c !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 210, 26, .025) !important;
+}
+
+.match-settings .settings-field::after {
+  display: none !important;
+}
+
+.match-settings .settings-field input,
+.match-settings .settings-field select,
+.match-settings .settings-field textarea {
+  border: 1px solid #5c4c00 !important;
+  border-radius: 5px !important;
+  background: #010202 !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 210, 26, .018) !important;
+}
+
+.match-settings .settings-field input:hover,
+.match-settings .settings-field select:hover,
+.match-settings .settings-field textarea:hover {
+  border-color: #8c7300 !important;
+}
+
+.match-settings .settings-field input:focus,
+.match-settings .settings-field select:focus,
+.match-settings .settings-field textarea:focus {
+  border-color: var(--ref-yellow) !important;
+  box-shadow: 0 0 0 1px rgba(255, 210, 26, .12) !important;
+}
+
+/* Keep the form's horizontal separators in the same language as
+   the scoreboard's internal divider lines. */
+.match-settings__row + .match-settings__row {
+  border-top: 1px solid var(--ref-yellow-dark);
+  padding-top: 8px;
+}
+
+/* Goal count in Players is read-only and is derived only from goal-scorer events. */
+.players-table__goal-times {
+  white-space: normal;
+  min-width: 120px;
+  line-height: 1.6;
+  font-family: "Arial Narrow", "Roboto Condensed", "Segoe UI", sans-serif;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.players-table__goals--readonly {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  min-height: 32px;
+  box-sizing: border-box;
+  text-align: center;
+  border: 1px solid #2a3741;
+  border-radius: 6px;
+  background: #0b141c;
+  color: #e6ebee;
+  font-family: var(--persian-font);
+  font-size: 14px;
+  font-weight: 800;
+  user-select: none;
+  cursor: default;
+}
+
+.goal-registration .card-registration__controls button:disabled {
+  opacity: .42;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   Players page scrollbar — full page, no inner table scrollbar
+   ========================================================= */
+.referee-layout--players {
+  height: calc(100vh - 55px) !important;
+  min-height: 0 !important;
+  max-height: calc(100vh - 55px) !important;
+  overflow: hidden !important;
+}
+
+.referee-main--players {
+  min-width: 0 !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #d8a91e #0a1117 !important;
+  scrollbar-gutter: stable;
+}
+
+.referee-main--players::-webkit-scrollbar {
+  width: 9px !important;
+  height: 0 !important;
+}
+
+.referee-main--players::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, #071018, #0d171f, #071018) !important;
+  border-left: 1px solid rgba(216, 169, 30, .10);
+  border-radius: 999px;
+}
+
+.referee-main--players::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ffe27a 0%, #d8a91e 45%, #8d6510 100%) !important;
+  border: 2px solid #0a1117 !important;
+  border-radius: 999px !important;
+  box-shadow: 0 0 7px rgba(216, 169, 30, .18);
+}
+
+.referee-main--players::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #fff1aa 0%, #efc33b 45%, #a87916 100%) !important;
+}
+
+.referee-main--players .players-panel,
+.referee-main--players .players-teams,
+.referee-main--players .players-team-table,
+.referee-main--players .players-table-wrap {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+@media print {
+  .referee-layout--players {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .referee-main--players {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
+
+/* Final Players table compact columns: keep all 7 columns visible, including dismissal time. */
+.players-table {
+  min-width: 0 !important;
+  table-layout: fixed !important;
+}
+
+.players-table th:nth-child(1),
+.players-table td:nth-child(1) { width: 45px !important; }
+.players-table th:nth-child(2),
+.players-table td:nth-child(2) { width: 30% !important; }
+.players-table th:nth-child(3),
+.players-table td:nth-child(3) { width: 55px !important; }
+.players-table th:nth-child(4),
+.players-table td:nth-child(4) { width: 65px !important; }
+.players-table th:nth-child(5),
+.players-table td:nth-child(5) { width: 90px !important; }
+.players-table th:nth-child(6),
+.players-table td:nth-child(6) { width: 85px !important; }
+.players-table th:nth-child(7),
+.players-table td:nth-child(7) { width: 85px !important; }
+
+.players-table th,
+.players-table td {
+  padding: 4px 5px !important;
+  height: 44px !important;
+}
+
+.players-table__goal-times {
+  min-width: 0 !important;
+  width: auto !important;
+  font-size: 10px !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+}
+
+/* ===== Players report lower form: compact side-by-side fields ONLY ===== */
+.referee-main--players .referee-report-continuation {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.referee-main--players .referee-report-continuation .report-line-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 7px !important;
+  margin-bottom: 8px !important;
+}
+
+.referee-main--players .referee-report-continuation .report-line-grid label {
+  min-width: 0 !important;
+  gap: 5px !important;
+  padding: 6px 7px !important;
+  box-sizing: border-box !important;
+}
+
+.referee-main--players .referee-report-continuation .report-line-grid input {
+  height: 29px !important;
+  min-height: 29px !important;
+  padding: 0 6px !important;
+}
+
+.referee-main--players .referee-report-continuation .report-two-team-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 7px !important;
+  margin-bottom: 8px !important;
+}
+
+.referee-main--players .referee-report-continuation .report-box {
+  min-width: 0 !important;
+  padding: 8px !important;
+  box-sizing: border-box !important;
+}
+
+.referee-main--players .referee-report-continuation .report-box h3 {
+  margin: 0 0 6px !important;
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+}
+
+.referee-main--players .referee-report-continuation .report-timeout-row {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+}
+
+.referee-main--players .referee-report-continuation .report-timeout-row label {
+  min-width: 0 !important;
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 5px !important;
+  font-size: 9px !important;
+  white-space: nowrap !important;
+}
+
+.referee-main--players .referee-report-continuation .report-timeout-row input {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 27px !important;
+  min-height: 27px !important;
+  padding: 0 5px !important;
+  box-sizing: border-box !important;
+}
+
+.referee-main--players .referee-report-continuation .fouls-grid {
+  display: grid !important;
+  grid-template-columns: auto repeat(5, minmax(24px, 1fr)) !important;
+  gap: 4px !important;
+  align-items: center !important;
+}
+
+.referee-main--players .referee-report-continuation .fouls-grid span {
+  font-size: 8px !important;
+  white-space: nowrap !important;
+}
+
+.referee-main--players .referee-report-continuation .fouls-grid input {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 24px !important;
+  min-height: 24px !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.referee-main--players .referee-report-continuation .report-results-grid,
+.referee-main--players .referee-report-continuation .report-officials {
+  gap: 7px !important;
+  margin-bottom: 8px !important;
+}
+
+.referee-main--players .referee-report-continuation .report-results-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.referee-main--players .referee-report-continuation .report-officials {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+@media (max-width: 900px) {
+  .referee-main--players .referee-report-continuation .report-line-grid,
+  .referee-main--players .referee-report-continuation .report-officials {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .referee-main--players .referee-report-continuation .report-results-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Players report only: keep HOME/GUEST timeout and foul fields in one compact row. */
+.referee-report-continuation .report-four-box-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  min-width: 0;
+}
+
+.referee-report-continuation .report-four-box-grid .report-box {
+  min-width: 0;
+}
+
+.referee-report-continuation .report-four-box-grid .report-box h3 {
+  min-height: 32px;
+  padding: 0 6px;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.referee-report-continuation .report-four-box-grid .report-timeout-row {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+  padding: 6px;
+}
+
+.referee-report-continuation .report-four-box-grid .report-timeout-row label {
+  gap: 3px;
+  font-size: 8px;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.referee-report-continuation .report-four-box-grid .report-timeout-row input {
+  max-width: none;
+  height: 27px;
+  font-size: 9px;
+}
+
+.referee-report-continuation .report-four-box-grid .fouls-grid {
+  grid-template-columns: 48px repeat(5, minmax(0, 1fr));
+}
+
+.referee-report-continuation .report-four-box-grid .fouls-grid span,
+.referee-report-continuation .report-four-box-grid .fouls-grid input {
+  min-height: 27px;
+}
+
+@media (max-width: 900px) {
+  .referee-report-continuation .report-four-box-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .referee-report-continuation .report-four-box-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Players report: keep all result fields in one compact row, matching the fields above. */
+.referee-main--players .referee-report-continuation .report-results-grid {
+  display: grid !important;
+  grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+  gap: 7px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  margin-bottom: 8px !important;
+}
+
+.referee-main--players .referee-report-continuation .report-results-grid label {
+  min-width: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.referee-main--players .referee-report-continuation .report-results-grid label span {
+  display: block !important;
+  font-size: 8px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.referee-main--players .referee-report-continuation .report-results-grid input {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 27px !important;
+  min-height: 27px !important;
+  padding: 0 5px !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 1100px) {
+  .referee-main--players .referee-report-continuation .report-results-grid {
+    grid-template-columns: repeat(7, minmax(72px, 1fr)) !important;
+    overflow-x: auto !important;
+  }
+}
+
+
+/* Players report: compact single-line match information */
+.players-report-meta.players-report-meta--single-row {
+  display: grid !important;
+  grid-template-columns: repeat(9, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+  width: 100% !important;
+  margin: 10px 0 8px !important;
+  box-sizing: border-box !important;
+}
+.players-report-meta.players-report-meta--single-row > div {
+  min-width: 0 !important;
+  min-height: 48px !important;
+  padding: 6px 7px !important;
+  box-sizing: border-box !important;
+}
+.players-report-meta.players-report-meta--single-row span {
+  font-size: 8px !important;
+  margin-bottom: 3px !important;
+  white-space: nowrap !important;
+}
+.players-report-meta.players-report-meta--single-row strong {
+  min-height: 28px !important;
+  padding: 0 6px !important;
+  font-size: 10px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+.players-report-match-name {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin: 0 0 10px !important;
+  min-height: 28px !important;
+  padding: 4px 10px !important;
+  border: 1px solid #263640 !important;
+  border-radius: 7px !important;
+  background: #0b141c !important;
+  box-sizing: border-box !important;
+}
+.players-report-match-name span {
+  font: 700 9px/1.3 var(--persian-font) !important;
+  color: #71808a !important;
+}
+.players-report-match-name strong {
+  font: 900 11px/1.3 var(--persian-font) !important;
+  color: #e6ebed !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+@media (max-width: 1100px) {
+  .players-report-meta.players-report-meta--single-row {
+    grid-template-columns: repeat(9, minmax(72px, 1fr)) !important;
+    overflow-x: auto !important;
+  }
+}
+
+
+/* Compact Players header fields: keep Match first and fit all fields in one row. */
+.players-report-meta.players-report-meta--single-row {
+  display: grid !important;
+  grid-template-columns: 1.45fr repeat(8, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+  width: 100% !important;
+  margin: 10px 0 12px !important;
+}
+.players-report-meta.players-report-meta--single-row > div {
+  min-width: 0 !important;
+  min-height: 48px !important;
+  padding: 6px 7px !important;
+  box-sizing: border-box !important;
+}
+.players-report-meta.players-report-meta--single-row span {
+  font-size: 8px !important;
+  margin-bottom: 3px !important;
+  white-space: nowrap !important;
+}
+.players-report-meta.players-report-meta--single-row strong {
+  min-height: 26px !important;
+  height: 26px !important;
+  padding: 0 6px !important;
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+}
+@media (max-width: 1050px) {
+  .players-report-meta.players-report-meta--single-row {
+    grid-template-columns: 1.3fr repeat(8, minmax(0, 1fr)) !important;
+    gap: 4px !important;
+  }
+  .players-report-meta.players-report-meta--single-row > div {
+    padding: 5px 5px !important;
+  }
+  .players-report-meta.players-report-meta--single-row span {
+    font-size: 7.5px !important;
+  }
+  .players-report-meta.players-report-meta--single-row strong {
+    font-size: 9px !important;
+  }
+}
+
+/* Final compact sizing for Players top information row. */
+.players-report-meta.players-report-meta--single-row {
+  grid-template-columns: 1.45fr 1fr 1fr 1fr .72fr .9fr .72fr 1.15fr .9fr .9fr !important;
+  gap: 5px !important;
+}
+.players-report-meta.players-report-meta--single-row > div {
+  min-width: 0 !important;
+  padding: 5px 5px !important;
+}
+.players-report-meta.players-report-meta--single-row span {
+  font-size: 7.5px !important;
+  margin-bottom: 2px !important;
+}
+.players-report-meta.players-report-meta--single-row strong {
+  min-height: 24px !important;
+  height: 24px !important;
+  padding: 0 4px !important;
+  font-size: 9px !important;
+}
+
+/* Day and match-time fields are intentionally narrower to keep jersey colors on the same line. */
+.players-report-meta.players-report-meta--single-row > div:nth-child(5),
+.players-report-meta.players-report-meta--single-row > div:nth-child(7) {
+  padding-left: 3px !important;
+  padding-right: 3px !important;
+}
+.players-report-meta.players-report-meta--single-row > div:nth-child(5) span,
+.players-report-meta.players-report-meta--single-row > div:nth-child(7) span {
+  font-size: 7px !important;
+}
+.players-report-meta.players-report-meta--single-row > div:nth-child(5) strong,
+.players-report-meta.players-report-meta--single-row > div:nth-child(7) strong {
+  font-size: 8.5px !important;
+}
+
+@media (max-width: 1050px) {
+  .players-report-meta.players-report-meta--single-row {
+    grid-template-columns: 1.35fr .95fr .95fr .95fr .65fr .82fr .65fr 1.05fr .82fr .82fr !important;
+    gap: 3px !important;
+  }
+  .players-report-meta.players-report-meta--single-row > div {
+    padding: 4px 4px !important;
+  }
+  .players-report-meta.players-report-meta--single-row span {
+    font-size: 7px !important;
+  }
+  .players-report-meta.players-report-meta--single-row strong {
+    font-size: 8.5px !important;
+  }
+}
+
+/* Align the Match field vertically with the other fields in the Players report. */
+.players-report-meta.players-report-meta--single-row .players-report-match-name {
+  margin-top: 0 !important;
+  transform: none !important;
+  align-self: stretch !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+}
+.players-report-meta.players-report-meta--single-row .players-report-match-name > span {
+  display: block !important;
+  height: auto !important;
+  line-height: 1.2 !important;
+  margin-top: 0 !important;
+  margin-bottom: 2px !important;
+}
+.players-report-meta.players-report-meta--single-row .players-report-match-name > strong {
+  display: flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+  margin-top: 0 !important;
+}
+
+/* Final adjustment: make Venue and City fields narrower so the full top row stays aligned. */
+.players-report-meta.players-report-meta--single-row {
+  grid-template-columns: 1.45fr 1fr .72fr .72fr .62fr .78fr .62fr 1.05fr .88fr .88fr !important;
+}
+.players-report-meta.players-report-meta--single-row > div:nth-child(3),
+.players-report-meta.players-report-meta--single-row > div:nth-child(4) {
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+}
+.players-report-meta.players-report-meta--single-row > div:nth-child(3) span,
+.players-report-meta.players-report-meta--single-row > div:nth-child(4) span {
+  font-size: 7px !important;
+}
+.players-report-meta.players-report-meta--single-row > div:nth-child(3) strong,
+.players-report-meta.players-report-meta--single-row > div:nth-child(4) strong {
+  font-size: 8.5px !important;
+  padding-left: 3px !important;
+  padding-right: 3px !important;
+}
+
+@media (max-width: 1050px) {
+  .players-report-meta.players-report-meta--single-row {
+    grid-template-columns: 1.3fr .9fr .62fr .62fr .56fr .72fr .56fr .98fr .78fr .78fr !important;
+  }
+  .players-report-meta.players-report-meta--single-row > div:nth-child(3),
+  .players-report-meta.players-report-meta--single-row > div:nth-child(4) {
+    padding-left: 3px !important;
+    padding-right: 3px !important;
+  }
+}
+
+
+/* =========================================================
+   PRINT REPORT — A4 / گزارش داوری
+   These rules are isolated to print media and do not alter
+   the normal scoreboard/dashboard appearance.
+   ========================================================= */
+@page {
+  size: A4 landscape;
+  margin: 8mm;
+}
+
+.print-report-header {
+  display: none;
+}
+
+@media print {
+  html,
+  body {
+    width: 297mm;
+    min-height: 210mm;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .referee-app {
+    min-height: auto !important;
+    height: auto !important;
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  .referee-header,
+  .referee-sidebar,
+  .events-panel,
+  .players-panel__head,
+  .players-report-note,
+  .players-panel__print,
+  .rest-warning-backdrop,
+  .print-report-logo__picker input[type="file"] {
+    display: none !important;
+  }
+
+  .referee-layout,
+  .referee-layout--players {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .referee-main,
+  .referee-main--players {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #fff !important;
+  }
+
+  .players-panel {
+    display: block !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #fff !important;
+    color: #111 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .print-report-header {
+    display: grid !important;
+    grid-template-columns: 25mm 1fr 25mm !important;
+    align-items: center !important;
+    gap: 5mm !important;
+    width: 100% !important;
+    min-height: 25mm !important;
+    margin: 0 0 4mm !important;
+    padding: 0 0 3mm !important;
+    border-bottom: 1.2px solid #222 !important;
+    direction: ltr !important;
+    box-sizing: border-box !important;
+  }
+
+  .print-report-logo {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 25mm !important;
+    height: 21mm !important;
+  }
+
+  .print-report-logo__picker {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 23mm !important;
+    height: 20mm !important;
+    border: 1px solid #777 !important;
+    background: #fff !important;
+    color: #777 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    font-family: Tahoma, Arial, sans-serif !important;
+    font-size: 9pt !important;
+  }
+
+  .print-report-logo__picker img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+
+  .print-report-title {
+    text-align: center !important;
+    direction: rtl !important;
+    color: #111 !important;
+  }
+
+  .print-report-title h1 {
+    margin: 0 !important;
+    font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+    font-size: 18pt !important;
+    line-height: 1.25 !important;
+    font-weight: 900 !important;
+  }
+
+  .print-report-title h2 {
+    margin: 2mm 0 0 !important;
+    font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+    font-weight: 700 !important;
+  }
+
+  .players-report-meta {
+    width: 100% !important;
+    display: grid !important;
+    gap: 2mm !important;
+    margin: 0 0 4mm !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .players-report-meta.players-report-meta--single-row {
+    grid-template-columns: 1.45fr 1fr .72fr .72fr .62fr .78fr .62fr 1.05fr .88fr .88fr !important;
+  }
+
+  .players-report-meta.players-report-meta--single-row > div {
+    min-width: 0 !important;
+    padding: 2mm !important;
+    border: 1px solid #555 !important;
+    border-radius: 2mm !important;
+    background: #fff !important;
+    color: #111 !important;
+    box-sizing: border-box !important;
+  }
+
+  .players-report-meta span {
+    display: block !important;
+    margin: 0 0 1mm !important;
+    font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+    font-size: 7pt !important;
+    line-height: 1.2 !important;
+    color: #444 !important;
+  }
+
+  .players-report-meta strong {
+    display: flex !important;
+    align-items: center !important;
+    min-height: 7mm !important;
+    height: auto !important;
+    padding: 0 !important;
+    font-family: Tahoma, Arial, sans-serif !important;
+    font-size: 8pt !important;
+    line-height: 1.25 !important;
+    color: #111 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .players-teams {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .players-team-table {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin: 0 0 4mm !important;
+  }
+
+  .players-team-table__title {
+    display: block !important;
+    margin: 0 0 1.5mm !important;
+    padding: 1.5mm 2mm !important;
+    border: 1px solid #222 !important;
+    background: #eee !important;
+    color: #111 !important;
+    text-align: center !important;
+    font-family: "Arial Narrow", Tahoma, Arial, sans-serif !important;
+    font-size: 10pt !important;
+    font-weight: 900 !important;
+  }
+
+  .players-table-wrap {
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .players-table {
+    width: 100% !important;
+    min-width: 0 !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+    background: #fff !important;
+    color: #111 !important;
+    font-family: Tahoma, Arial, sans-serif !important;
+    font-size: 7.5pt !important;
+  }
+
+  .players-table th,
+  .players-table td {
+    border: 1px solid #555 !important;
+    padding: 1.5mm 1mm !important;
+    height: 7.5mm !important;
+    color: #111 !important;
+    background: #fff !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+  }
+
+  .players-table th {
+    background: #e9e9e9 !important;
+    font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+    font-size: 7.5pt !important;
+    font-weight: 900 !important;
+  }
+
+  .players-table th:nth-child(1), .players-table td:nth-child(1) { width: 7% !important; }
+  .players-table th:nth-child(2), .players-table td:nth-child(2) { width: 32% !important; }
+  .players-table th:nth-child(3), .players-table td:nth-child(3) { width: 7% !important; }
+  .players-table th:nth-child(4), .players-table td:nth-child(4) { width: 9% !important; }
+  .players-table th:nth-child(5), .players-table td:nth-child(5) { width: 17% !important; }
+  .players-table th:nth-child(6), .players-table td:nth-child(6) { width: 14% !important; }
+  .players-table th:nth-child(7), .players-table td:nth-child(7) { width: 14% !important; }
+
+  .players-table input {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 5mm !important;
+    padding: 0 !important;
+    border: 0 !important;
+    outline: 0 !important;
+    background: transparent !important;
+    color: #111 !important;
+    font-family: Tahoma, Arial, sans-serif !important;
+    font-size: 7.5pt !important;
+    text-align: center !important;
+  }
+
+  .players-table__name {
+    text-align: right !important;
+  }
+
+  .players-table__goal-times {
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    font-size: 7pt !important;
+    line-height: 1.2 !important;
+  }
+
+  .referee-report-continuation {
+    width: 100% !important;
+    margin-top: 4mm !important;
+    color: #111 !important;
+  }
+
+  .referee-report-continuation .report-line-grid,
+  .referee-report-continuation .report-four-box-grid,
+  .referee-report-continuation .report-results-grid,
+  .referee-report-continuation .report-officials {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .referee-report-continuation label,
+  .referee-report-continuation .report-box {
+    color: #111 !important;
+  }
+
+  .referee-report-continuation input {
+    color: #111 !important;
+    background: #fff !important;
+  }
+
+  .report-signatures {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin-top: 6mm !important;
+  }
+
+  .report-signatures > div {
+    min-height: 15mm !important;
+    border: 1px solid #555 !important;
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}
+
+
+/* =========================================================
+   FINAL PRINT TABLE STRUCTURE — A4 LANDSCAPE
+   Only active while printing. Does not change the live UI.
+   ========================================================= */
+@page {
+  size: A4 landscape;
+  margin: 8mm;
+}
+
+@media print {
+  html,
+  body {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+
+  .referee-app {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+
+  .referee-main--players {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+  }
+
+  .players-panel,
+  .players-teams,
+  .players-team-table,
+  .players-table-wrap {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    overflow: visible !important;
+  }
+
+  /* The widths are locked on the actual columns, not inferred from cells. */
+  .players-table {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+  }
+
+  .players-table__col--row { width: 10mm !important; }
+  .players-table__col--name { width: auto !important; }
+  .players-table__col--number { width: 13mm !important; }
+  .players-table__col--goals { width: 15mm !important; }
+  .players-table__col--goal-time { width: 25mm !important; }
+  .players-table__col--yellow { width: 24mm !important; }
+  .players-table__col--red { width: 24mm !important; }
+
+  .players-table th:nth-child(1),
+  .players-table td:nth-child(1) { width: 10mm !important; }
+  .players-table th:nth-child(2),
+  .players-table td:nth-child(2) { width: auto !important; }
+  .players-table th:nth-child(3),
+  .players-table td:nth-child(3) { width: 13mm !important; }
+  .players-table th:nth-child(4),
+  .players-table td:nth-child(4) { width: 15mm !important; }
+  .players-table th:nth-child(5),
+  .players-table td:nth-child(5) { width: 25mm !important; }
+  .players-table th:nth-child(6),
+  .players-table td:nth-child(6) { width: 24mm !important; }
+  .players-table th:nth-child(7),
+  .players-table td:nth-child(7) { width: 24mm !important; }
+
+  .players-table th,
+  .players-table td {
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  .players-table td:nth-child(2),
+  .players-table td:nth-child(5),
+  .players-table td:nth-child(6),
+  .players-table td:nth-child(7) {
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .players-table .players-table__name {
+    width: 100% !important;
+    max-width: 100% !important;
+    text-align: right !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .players-table__goal-times {
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 7pt !important;
+  }
+}
+
+
+/* =========================================================
+   PRINT: HOME + GUEST TABLES SIDE BY SIDE
+   ========================================================= */
+@media print {
+  .players-teams {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    gap: 5mm !important;
+    align-items: start !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  .players-team-table {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .players-team-table .players-table-wrap {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    overflow: visible !important;
+  }
+
+  .players-team-table .players-table {
+    width: 100% !important;
+    table-layout: fixed !important;
+  }
+}
+
+/* =========================================================
+   PRINT FORM LAYOUT — TIMEOUT + FOUL BOXES IN ONE ROW
+   ========================================================= */
+@media print {
+  .referee-main--players .referee-report-continuation .report-line-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 3mm !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-bottom: 3mm !important;
+  }
+
+  .referee-main--players .referee-report-continuation .report-four-box-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 3mm !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-bottom: 3mm !important;
+    align-items: stretch !important;
+  }
+
+  .referee-main--players .referee-report-continuation .report-four-box-grid .report-box {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .referee-main--players .referee-report-continuation .report-four-box-grid .report-box h3 {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 7.5pt !important;
+  }
+
+  .referee-main--players .referee-report-continuation .report-four-box-grid .report-timeout-row {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 2mm !important;
+  }
+
+  .referee-main--players .referee-report-continuation .report-four-box-grid .fouls-grid {
+    width: 100% !important;
+    min-width: 0 !important;
+    gap: 1.5mm !important;
+  }
+
+  .referee-main--players .referee-report-continuation .report-results-grid {
+    display: grid !important;
+    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+    gap: 2.5mm !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-bottom: 3mm !important;
+  }
+
+  .referee-main--players .referee-report-continuation .report-officials {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 3mm !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-bottom: 3mm !important;
+  }
+
+  .referee-main--players .referee-report-continuation .report-signatures {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 3mm !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+/* =========================================================
+   PRINT A4 LANDSCAPE — FIT OFFICIALS ON THE SAME PAGE
+   ========================================================= */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 5mm;
+  }
+
+  .print-report-header {
+    min-height: 18mm !important;
+    margin-bottom: 2mm !important;
+    padding-bottom: 2mm !important;
+  }
+
+  .print-report-logo {
+    width: 20mm !important;
+    height: 16mm !important;
+  }
+
+  .print-report-logo__picker {
+    width: 19mm !important;
+    height: 15mm !important;
+  }
+
+  .print-report-title h1 {
+    font-size: 15pt !important;
+  }
+
+  .print-report-title h2 {
+    margin-top: 1mm !important;
+    font-size: 8pt !important;
+  }
+
+  .players-report-meta.players-report-meta--single-row {
+    gap: 1.2mm !important;
+    margin-bottom: 2mm !important;
+  }
+
+  .players-report-meta.players-report-meta--single-row > div {
+    padding: 1mm !important;
+    border-radius: 1mm !important;
+  }
+
+  .players-report-meta span {
+    margin-bottom: .5mm !important;
+    font-size: 6pt !important;
+  }
+
+  .players-report-meta strong {
+    min-height: 5mm !important;
+    font-size: 6.5pt !important;
+    line-height: 1.1 !important;
+  }
+
+  .players-teams {
+    gap: 3mm !important;
+  }
+
+  .players-team-table__title {
+    margin-bottom: .7mm !important;
+    padding: .8mm 1.5mm !important;
+    font-size: 8pt !important;
+  }
+
+  .players-table {
+    font-size: 6.5pt !important;
+  }
+
+  .players-table th,
+  .players-table td {
+    padding: .65mm .7mm !important;
+    height: 5.25mm !important;
+    line-height: 1.05 !important;
+  }
+
+  .players-table th {
+    font-size: 6.5pt !important;
+  }
+
+  .players-table input {
+    min-height: 3.8mm !important;
+    font-size: 6.5pt !important;
+  }
+
+  .players-table__goal-times {
+    font-size: 6pt !important;
+    line-height: 1 !important;
+  }
+
+  .referee-report-continuation {
+    margin-top: 2mm !important;
+  }
+
+  .referee-report-continuation .report-line-grid {
+    gap: 2mm !important;
+    margin-bottom: 2mm !important;
+  }
+
+  .referee-report-continuation .report-four-box-grid {
+    gap: 2mm !important;
+    margin-bottom: 2mm !important;
+  }
+
+  .referee-report-continuation .report-four-box-grid .report-box h3 {
+    margin: 0 !important;
+    padding: 1mm !important;
+    font-size: 6.5pt !important;
+    line-height: 1 !important;
+  }
+
+  .referee-report-continuation .report-four-box-grid .report-timeout-row {
+    gap: 1mm !important;
+  }
+
+  .referee-report-continuation .report-four-box-grid .fouls-grid {
+    gap: .8mm !important;
+  }
+
+  .referee-report-continuation input {
+    height: 4.5mm !important;
+    min-height: 4.5mm !important;
+    padding: .5mm 1mm !important;
+    font-size: 6.5pt !important;
+  }
+
+  .referee-main--players .referee-report-continuation .report-results-grid {
+    gap: 1.5mm !important;
+    margin-bottom: 2mm !important;
+  }
+
+  .referee-main--players .referee-report-continuation .report-results-grid label span {
+    font-size: 6pt !important;
+    line-height: 1 !important;
+  }
+
+  .referee-main--players .referee-report-continuation .report-officials {
+    gap: 2mm !important;
+    margin-bottom: 2mm !important;
+  }
+
+  .referee-main--players .referee-report-continuation .report-officials label span {
+    font-size: 6pt !important;
+    line-height: 1 !important;
+  }
+
+  .report-signatures {
+    gap: 2mm !important;
+    margin-top: 2mm !important;
+  }
+
+  .report-signatures > div {
+    min-height: 10mm !important;
+    padding: 2mm !important;
+  }
+}
+
+/* =========================================================
+   FINAL PRINT HEADER + JERSEY COLOR IN TEAM HEADERS
+   ========================================================= */
+.print-report-header {
+  display: grid;
+  grid-template-columns: 110px 1fr 110px;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 0 0 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--ref-yellow-dark, #8d6510);
+  direction: ltr;
+  box-sizing: border-box;
+}
+
+.print-report-logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 72px;
+  border: 1px solid rgba(216, 169, 30, .45);
+  background: #070a0c;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.print-report-logo > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.print-report-logo > span {
+  color: #8a8a8a;
+  font-size: 12px;
+}
+
+.print-report-logo__picker {
+  position: absolute;
+  inset: auto 3px 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 20px;
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: rgba(0,0,0,.78);
+  color: #fff;
+  font-size: 9px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.print-report-logo__picker input[type="file"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.print-report-title {
+  text-align: center;
+  direction: rtl;
+}
+
+.print-report-title h1,
+.print-report-title h2 {
+  margin: 0;
+}
+
+.print-report-title h1 {
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.print-report-title h2 {
+  margin-top: 4px;
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.players-team-table__title {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 14px !important;
+}
+
+.players-team-table__title > strong {
+  font-family: "Arial Narrow", "Roboto Condensed", "Segoe UI", sans-serif !important;
+  font-weight: 900 !important;
+}
+
+.players-team-table__title > span {
+  font-family: Tahoma, Arial, sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+}
+
+@media print {
+  .print-report-header {
+    grid-template-columns: 24mm 1fr 24mm !important;
+    gap: 4mm !important;
+    min-height: 21mm !important;
+    margin: 0 0 2mm !important;
+    padding: 0 0 2mm !important;
+    border-bottom: 1px solid #222 !important;
+  }
+
+  .print-report-logo {
+    width: 22mm !important;
+    height: 17mm !important;
+    border: 1px solid #777 !important;
+    background: #fff !important;
+  }
+
+  .print-report-logo > span {
+    color: #777 !important;
+    font-size: 7pt !important;
+  }
+
+  .print-report-logo__picker {
+    display: none !important;
+  }
+
+  .print-report-title h1 {
+    font-size: 15pt !important;
+  }
+
+  .print-report-title h2 {
+    margin-top: 1mm !important;
+    font-size: 7pt !important;
+  }
+
+  .players-team-table__title {
+    justify-content: center !important;
+    gap: 4mm !important;
+    padding: .8mm 1.5mm !important;
+  }
+
+  .players-team-table__title > strong {
+    font-size: 8pt !important;
+  }
+
+  .players-team-table__title > span {
+    font-family: Tahoma, Arial, sans-serif !important;
+    font-size: 6.5pt !important;
+    font-weight: 700 !important;
+  }
+}
+
+/* =========================================================
+   PRINT FINAL — COMPACT MATCH INFO UNDER HEADER
+   Keep the main application unchanged; print only.
+   ========================================================= */
+@media print {
+  .referee-main--players .print-report-header {
+    min-height: 17mm !important;
+    margin-bottom: 1.5mm !important;
+    padding-bottom: 1.5mm !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row {
+    gap: 1mm !important;
+    margin-bottom: 1.5mm !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row > div {
+    padding: .7mm .8mm !important;
+    min-height: 0 !important;
+    border-radius: .8mm !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row span {
+    margin-bottom: .3mm !important;
+    font-size: 5.2pt !important;
+    line-height: 1 !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row strong {
+    min-height: 4.1mm !important;
+    height: 4.1mm !important;
+    padding: 0 .8mm !important;
+    font-size: 5.6pt !important;
+    line-height: 1 !important;
+  }
+
+  .referee-main--players .players-teams {
+    gap: 2mm !important;
+  }
+
+  .referee-main--players .players-team-table__title {
+    margin-bottom: .4mm !important;
+    padding: .55mm 1mm !important;
+  }
+
+  .referee-main--players .players-table th,
+  .referee-main--players .players-table td {
+    padding: .45mm .55mm !important;
+    height: 4.6mm !important;
+    line-height: 1 !important;
+  }
+
+  .referee-main--players .players-table input {
+    min-height: 3.3mm !important;
+    height: 3.3mm !important;
+    padding: .2mm .7mm !important;
+  }
+
+  .referee-main--players .players-report-note {
+    margin-top: 1mm !important;
+    margin-bottom: 1mm !important;
+    font-size: 5.2pt !important;
+    line-height: 1 !important;
+  }
+
+  .referee-main--players .referee-report-continuation {
+    margin-top: 1mm !important;
+  }
+
+  .referee-main--players .referee-report-continuation .report-line-grid,
+  .referee-main--players .referee-report-continuation .report-four-box-grid,
+  .referee-main--players .referee-report-continuation .report-results-grid,
+  .referee-main--players .referee-report-continuation .report-officials {
+    margin-bottom: 1.2mm !important;
+  }
+
+  .referee-main--players .referee-report-continuation input {
+    height: 3.8mm !important;
+    min-height: 3.8mm !important;
+    padding: .25mm .7mm !important;
+    font-size: 5.8pt !important;
+  }
+
+  .referee-main--players .referee-report-continuation .report-box h3,
+  .referee-main--players .referee-report-continuation .report-results-grid label span,
+  .referee-main--players .referee-report-continuation .report-officials label span {
+    font-size: 5.5pt !important;
+    line-height: 1 !important;
+  }
+
+  .referee-main--players .report-signatures {
+    margin-top: 1mm !important;
+    gap: 1.5mm !important;
+  }
+
+  .referee-main--players .report-signatures > div {
+    min-height: 8mm !important;
+    padding: 1.2mm !important;
+  }
+}
+
+/* PRINT PATCH — MATCH INFO AS ONE TIGHT ROW DIRECTLY UNDER HEADER */
+@media print {
+  .referee-main--players .print-report-header {
+    margin-bottom: 0 !important;
+    padding-bottom: 1mm !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row {
+    display: grid !important;
+    grid-template-columns: 1.7fr .8fr .8fr .7fr .8fr .8fr .8fr 1.35fr 1fr 1fr !important;
+    grid-auto-flow: row !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    gap: .7mm !important;
+    margin-top: 0 !important;
+    margin-bottom: 1mm !important;
+    padding: 0 !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row > div {
+    min-width: 0 !important;
+    width: auto !important;
+    height: 6.2mm !important;
+    min-height: 6.2mm !important;
+    padding: .45mm .65mm !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row span {
+    display: block !important;
+    margin: 0 0 .25mm !important;
+    font-size: 4.5pt !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row strong {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 3.5mm !important;
+    min-height: 3.5mm !important;
+    padding: 0 .45mm !important;
+    box-sizing: border-box !important;
+    font-size: 5pt !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row .players-report-match-name {
+    height: 6.2mm !important;
+    min-height: 6.2mm !important;
+    margin: 0 !important;
+    padding: .45mm .65mm !important;
+    align-self: stretch !important;
+  }
+}
+
+
+/* =========================================================
+   FINAL REQUEST — compact report fields + referee names in scoreboard settings
+   ========================================================= */
+
+/* Four referee names now live in the scoreboard match-information menu. */
+.match-settings__row--officials {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  margin-top: 8px;
+}
+
+.match-settings__row--officials .settings-field {
+  min-width: 0;
+}
+
+.match-settings__row--officials .settings-field input {
+  font-family: var(--persian-font, Tahoma, sans-serif);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Keep HOME/GUEST jersey color at the left side of the team title field. */
+.players-team-table__title {
+  justify-content: space-between !important;
+  direction: rtl !important;
+}
+
+.players-team-table__title > span {
+  margin-left: auto !important;
+  text-align: left !important;
+}
+
+@media print {
+  /* The information fields sit tightly together directly below the header. */
+  .referee-main--players .players-report-meta.players-report-meta--single-row {
+    gap: 0 !important;
+    margin-bottom: 1mm !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row > div {
+    border-radius: 0 !important;
+    border-left-width: 1px !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row span {
+    font-size: 4.9pt !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row strong {
+    font-size: 6pt !important;
+    font-weight: 700 !important;
+  }
+
+  /* Jersey color stays on the left inside HOME/GUEST title bars. */
+  .referee-main--players .players-team-table__title {
+    justify-content: space-between !important;
+    direction: rtl !important;
+  }
+
+  .referee-main--players .players-team-table__title > span {
+    margin-left: auto !important;
+    text-align: left !important;
+  }
+
+  /* The referee-name inputs are part of the scoreboard settings, not the printed lower form. */
+  .match-settings__row--officials {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 1.5mm !important;
+    margin-top: 1.5mm !important;
+  }
+}
+
+/* =========================================================
+   FINAL — Jersey color right + HOME/GUEST centered
+   ========================================================= */
+
+/* رنگ پیراهن داخل فیلدهای اطلاعات مسابقه: کاملاً راست‌چین */
+.match-settings__row--compact .settings-field:nth-child(4) input,
+.match-settings__row--compact .settings-field:nth-child(5) input {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+/* عنوان HOME / GUEST دقیقاً وسط نوار */
+.players-team-table__title {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  direction: ltr !important;
+  text-align: center !important;
+}
+
+/* خود HOME / GUEST همیشه دقیقاً وسط */
+.players-team-table__title > strong {
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  margin: 0 !important;
+  text-align: center !important;
+}
+
+/* رنگ پیراهن سمت راست */
+.players-team-table__title > span {
+  position: absolute !important;
+  right: 10px !important;
+  left: auto !important;
+  margin: 0 !important;
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+
+/* =========================================================
+   MATCH SETTINGS — کمی بزرگ‌تر + فونت Titr برای فارسی
+   ========================================================= */
+
+.match-settings .settings-field {
+  padding: 7px 8px !important;
+}
+
+.match-settings .settings-field > span {
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+}
+
+.match-settings .settings-field input,
+.match-settings .settings-field select,
+.match-settings .settings-field textarea {
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  height: 30px !important;
+  min-height: 30px !important;
+  padding: 3px 7px !important;
+  box-sizing: border-box !important;
+}
+
+.match-settings .settings-field input::placeholder {
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 12px !important;
+}
+
+
+/* FINAL MATCH SETTINGS OVERRIDE */
+.match-settings {
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+}
+.match-settings__row {
+  gap: 10px !important;
+}
+.match-settings .settings-field {
+  min-height: 72px !important;
+  padding: 8px 10px !important;
+  border-width: 1px !important;
+}
+.match-settings .settings-field > span {
+  display: block !important;
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 900 !important;
+  line-height: 1.5 !important;
+  margin-bottom: 5px !important;
+}
+.match-settings .settings-field input,
+.match-settings .settings-field select,
+.match-settings .settings-field textarea {
+  width: 100% !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  padding: 4px 9px !important;
+  box-sizing: border-box !important;
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+}
+.match-settings__row--officials .settings-field {
+  min-height: 72px !important;
+}
+.match-settings__row--officials .settings-field input {
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 14px !important;
+}
+
+
+/* =========================================================
+   PRINT FIX — MATCH INFO FIELDS
+   فقط برای چاپ؛ چیدمان یک ردیف و پایدار می‌ماند.
+   ========================================================= */
+@media print {
+  .referee-main--players .players-report-meta.players-report-meta--single-row {
+    display: grid !important;
+    grid-template-columns: 1.45fr 0.88fr 0.78fr 0.78fr 0.65fr 0.82fr 0.68fr 1.12fr 0.95fr 0.95fr !important;
+    grid-auto-flow: row !important;
+    align-items: stretch !important;
+    gap: 1.2mm !important;
+    width: 100% !important;
+    margin: 0 0 2mm !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row > div {
+    min-width: 0 !important;
+    width: auto !important;
+    height: 8.5mm !important;
+    min-height: 8.5mm !important;
+    padding: 1mm 1.2mm !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    border-radius: 1.2mm !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row span {
+    display: block !important;
+    width: 100% !important;
+    height: 3mm !important;
+    min-height: 3mm !important;
+    margin: 0 0 .7mm !important;
+    padding: 0 !important;
+    font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+    font-size: 5.8pt !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    text-align: right !important;
+    direction: rtl !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row strong {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 3.9mm !important;
+    min-height: 3.9mm !important;
+    margin: 0 !important;
+    padding: 0 1mm !important;
+    box-sizing: border-box !important;
+    font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+    font-size: 6.4pt !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    direction: rtl !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row .players-report-match-name,
+  .referee-main--players .players-report-meta.players-report-meta--single-row .players-report-match-name > strong {
+    transform: none !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row .players-report-match-name {
+    height: 8.5mm !important;
+    min-height: 8.5mm !important;
+    margin: 0 !important;
+    padding: 1mm 1.2mm !important;
+    align-self: stretch !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row .players-report-match-name > span {
+    height: 3mm !important;
+    min-height: 3mm !important;
+    margin: 0 0 .7mm !important;
+    font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+    font-size: 5.8pt !important;
+    line-height: 1 !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row .players-report-match-name > strong {
+    height: 3.9mm !important;
+    min-height: 3.9mm !important;
+    margin: 0 !important;
+    font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+    font-size: 6.4pt !important;
+    line-height: 1 !important;
+  }
+}
+
+
+/* =========================================================
+   FINAL TUNING — فیلدهای چاپی کمی جمع‌وجورتر
+   + بخش داورها واضح‌تر و خواناتر
+   ========================================================= */
+
+/* بخش داوران در نرم‌افزار اصلی */
+.match-settings__row--officials .settings-field {
+  padding: 8px 9px !important;
+  border: 1px solid var(--ref-yellow) !important;
+  background: #070a0c !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 210, 26, .035) !important;
+}
+
+.match-settings__row--officials .settings-field > span {
+  display: block !important;
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 900 !important;
+  line-height: 1.35 !important;
+  color: #f3d45a !important;
+  text-align: right !important;
+  direction: rtl !important;
+  margin-bottom: 4px !important;
+}
+
+.match-settings__row--officials .settings-field input {
+  height: 32px !important;
+  min-height: 32px !important;
+  padding: 4px 8px !important;
+  border: 1px solid #8b7410 !important;
+  border-radius: 6px !important;
+  background: #010202 !important;
+  color: #f5f5f5 !important;
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+/* چاپ: فیلدهای اطلاعات مسابقه کمی کوچک‌تر، ولی مرتب و یک‌ردیف */
+@media print {
+  .referee-main--players .players-report-meta.players-report-meta--single-row > div,
+  .referee-main--players .players-report-meta.players-report-meta--single-row .players-report-match-name {
+    height: 7.2mm !important;
+    min-height: 7.2mm !important;
+    padding: .7mm 1mm !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row span,
+  .referee-main--players .players-report-meta.players-report-meta--single-row .players-report-match-name > span {
+    height: 2.5mm !important;
+    min-height: 2.5mm !important;
+    margin-bottom: .45mm !important;
+    font-size: 5.2pt !important;
+  }
+
+  .referee-main--players .players-report-meta.players-report-meta--single-row strong,
+  .referee-main--players .players-report-meta.players-report-meta--single-row .players-report-match-name > strong {
+    height: 3.3mm !important;
+    min-height: 3.3mm !important;
+    padding: 0 .8mm !important;
+    font-size: 5.9pt !important;
+  }
+}
+
+
+/* =========================================================
+   MATCH SETTINGS — جمع‌وجور کردن همه فیلدهای ورود اطلاعات
+   تا ردیف داورها کامل داخل صفحه دیده شود
+   ========================================================= */
+
+.match-settings {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.match-settings__row {
+  gap: 5px !important;
+}
+
+.match-settings__row--top {
+  margin-bottom: 5px !important;
+}
+
+.match-settings__row--compact {
+  gap: 5px !important;
+}
+
+.match-settings__row--officials {
+  gap: 5px !important;
+  margin-top: 5px !important;
+}
+
+.match-settings .settings-field {
+  padding: 5px 6px !important;
+  border-radius: 7px !important;
+  min-width: 0 !important;
+}
+
+.match-settings .settings-field > span {
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+  margin-bottom: 3px !important;
+  white-space: nowrap !important;
+}
+
+.match-settings .settings-field input,
+.match-settings .settings-field select,
+.match-settings .settings-field textarea {
+  height: 25px !important;
+  min-height: 25px !important;
+  padding: 2px 5px !important;
+  border-radius: 5px !important;
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  box-sizing: border-box !important;
+}
+
+.match-settings .settings-field input::placeholder {
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 10px !important;
+}
+
+/* ردیف داورها واضح بماند ولی فضای کمتری بگیرد */
+.match-settings__row--officials .settings-field {
+  padding: 5px 6px !important;
+}
+
+.match-settings__row--officials .settings-field > span {
+  font-size: 11px !important;
+  color: #f3d45a !important;
+}
+
+.match-settings__row--officials .settings-field input {
+  height: 27px !important;
+  min-height: 27px !important;
+  font-size: 12px !important;
+}
+
+/* در ارتفاع‌های کم صفحه، فاصله‌ها باز هم جمع‌وجور شوند */
+@media (max-height: 850px) {
+  .match-settings__row {
+    gap: 4px !important;
+  }
+
+  .match-settings__row--top {
+    margin-bottom: 4px !important;
+  }
+
+  .match-settings__row--officials {
+    margin-top: 4px !important;
+  }
+
+  .match-settings .settings-field {
+    padding: 4px 5px !important;
+  }
+
+  .match-settings .settings-field > span {
+    font-size: 9px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .match-settings .settings-field input,
+  .match-settings .settings-field select,
+  .match-settings .settings-field textarea {
+    height: 23px !important;
+    min-height: 23px !important;
+    font-size: 10px !important;
+  }
+
+  .match-settings__row--officials .settings-field > span {
+    font-size: 10px !important;
+  }
+
+  .match-settings__row--officials .settings-field input {
+    height: 25px !important;
+    min-height: 25px !important;
+    font-size: 11px !important;
+  }
+}
+
+
+/* =========================================================
+   LAYOUT TUNING — اسکوربرد و فرم اطلاعات کمی بالاتر
+   تا کل محتوا داخل ارتفاع صفحه بهتر دیده شود
+   ========================================================= */
+
+.referee-main {
+  padding-top: 10px !important;
+}
+
+.referee-main--players {
+  padding-top: 6px !important;
+}
+
+.referee-main--players .scoreboard-section,
+.referee-main--players .match-settings {
+  margin-top: 0 !important;
+}
+
+.referee-main--players .scoreboard-section {
+  transform: translateY(-8px) !important;
+}
+
+.referee-main--players .match-settings {
+  transform: translateY(-8px) !important;
+}
+
+/* اگر اسکوربرد داخل کانتینر مرکزی باشد، فاصله بالایی آن هم کم شود */
+.referee-main--players .scoreboard,
+.referee-main--players .scoreboard-shell,
+.referee-main--players .scoreboard-panel {
+  margin-top: 0 !important;
+}
+
+/* در صفحه‌های کم‌ارتفاع، کمی بیشتر فشرده شود */
+@media (max-height: 850px) {
+  .referee-main--players {
+    padding-top: 2px !important;
+  }
+
+  .referee-main--players .scoreboard-section,
+  .referee-main--players .match-settings {
+    transform: translateY(-12px) !important;
+  }
+}
+
+
+/* انتخاب ورزش فعلاً از هدر حذف شده است */
+.referee-header__sport {
+  display: none !important;
+}
+
+
+/* =========================================================
+   REFEREE SIGNATURES — نمایش نام واردشده بین عنوان و امضاء
+   ========================================================= */
+
+.report-signatures > div {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 4px !important;
+}
+
+.report-signatures .report-signatures__name {
+  display: block !important;
+  width: 100% !important;
+  min-height: 24px !important;
+  padding: 3px 6px !important;
+  box-sizing: border-box !important;
+  border-bottom: 1px solid var(--ref-yellow-dark, #8d7410) !important;
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  direction: rtl !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.report-signatures > div > span:last-child {
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+}
+
+@media print {
+  .report-signatures > div {
+    gap: 1mm !important;
+  }
+
+  .report-signatures .report-signatures__name {
+    min-height: 5mm !important;
+    padding: 1mm 1mm !important;
+    font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+    font-size: 7pt !important;
+    line-height: 1 !important;
+  }
+
+  .report-signatures > div > span:last-child {
+    font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+    font-size: 6pt !important;
+  }
+}
+
+
+/* =========================================================
+   REPORT — فاصله بیشتر بین عنوان داور، نام و امضاء
+   ========================================================= */
+.report-signatures > div {
+  gap: 8px !important;
+  padding-top: 3px !important;
+}
+
+.report-signatures > div > strong {
+  margin-bottom: 2px !important;
+}
+
+.report-signatures .report-signatures__name {
+  margin: 2px 0 3px !important;
+}
+
+.report-signatures > div > span:last-child {
+  margin-top: 2px !important;
+}
+
+@media print {
+  .report-signatures > div {
+    gap: 2.2mm !important;
+    padding-top: 1mm !important;
+  }
+
+  .report-signatures .report-signatures__name {
+    margin: .5mm 0 1mm !important;
+  }
+
+  .report-signatures > div > span:last-child {
+    margin-top: .5mm !important;
+  }
+
+  .report-four-box-grid input[readonly],
+  .report-results-grid input[readonly] {
+    font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+  }
+}
+
+
+/* تایمر صدم‌ثانیه‌ای در یک دقیقه پایانی */
+.digital-clock {
+  font-variant-numeric: tabular-nums lining-nums !important;
+  letter-spacing: 0.02em;
+}
+
+
+/* =========================================================
+   LAST MINUTE — فقط صدم‌ثانیه کوچک‌تر از زمان اصلی
+   ابعاد و جایگاه اسکوربرد تغییر نمی‌کند.
+   ========================================================= */
+
+.digital-clock__main {
+  display: inline-block;
+  font-size: 1em;
+  line-height: 1;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.digital-clock__hundredths {
+  display: inline-block;
+  margin-left: 2px;
+  font-size: 0.48em;
+  line-height: 1;
+  vertical-align: baseline;
+  white-space: nowrap;
+  letter-spacing: 0;
+}
+
+.digital-clock.digital-clock--running {
+  white-space: nowrap !important;
+}
+
+
+/* =========================================================
+   SCOREBOARD ACTIONS — Start کمی بزرگ‌تر
+   + دکمه‌های تست صدای پایان تایم و تایم اوت
+   ========================================================= */
+
+.scoreboard-center-actions {
+  flex-wrap: wrap !important;
+}
+
+.scoreboard-center-actions .scoreboard-action--primary {
+  min-width: 98px !important;
+  min-height: 44px !important;
+  padding: 0 16px !important;
+  font-size: 12px !important;
+}
+
+.scoreboard-action--sound {
+  min-width: 86px !important;
+  min-height: 38px !important;
+  padding: 0 10px !important;
+  border-color: #6b5b12 !important;
+  color: #e8bf16 !important;
+  background: #080909 !important;
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 10px !important;
+}
+
+.scoreboard-action--timeout-sound {
+  border-color: #245a78 !important;
+  color: #62c5ff !important;
+}
+
+/* خلاصه آماری به شکل کارت‌های گرافیکی */
+.event-summary {
+  border: 1px solid #6d5b10 !important;
+  border-radius: 12px !important;
+  background: linear-gradient(180deg, rgba(19, 25, 29, .98), rgba(7, 11, 14, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(216, 169, 30, .06), 0 10px 28px rgba(0, 0, 0, .25) !important;
+}
+
+.event-summary header {
+  padding: 11px 13px !important;
+  border-bottom: 1px solid #3c3510 !important;
+  color: #e7c441 !important;
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 11px !important;
+  text-align: center !important;
+}
+
+.summary-grid {
+  gap: 7px !important;
+  padding: 8px !important;
+  background: transparent !important;
+}
+
+.summary-grid > div {
+  min-height: 82px !important;
+  border: 1px solid #26333a !important;
+  border-radius: 9px !important;
+  background: linear-gradient(180deg, #10191f, #080d11) !important;
+  box-shadow: inset 0 0 12px rgba(255, 255, 255, .018) !important;
+  gap: 6px !important;
+}
+
+.summary-grid > div:last-child {
+  border-left: 1px solid #26333a !important;
+}
+
+.summary-grid span {
+  color: #aab2b7 !important;
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+}
+
+.summary-grid strong {
+  font-size: 31px !important;
+  text-shadow: 0 0 10px currentColor !important;
+}
+
+@media (max-width: 760px) {
+  .scoreboard-center-actions {
+    gap: 5px !important;
+  }
+
+  .scoreboard-center-actions .scoreboard-action--primary {
+    min-width: 90px !important;
+  }
+
+  .scoreboard-action--sound {
+    min-width: 78px !important;
+  }
+}
+
+/* Final five-foul graphical warning */
+.five-foul-warning-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 99999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+  background: rgba(0, 0, 0, .76) !important;
+  backdrop-filter: blur(3px) !important;
+}
+
+.five-foul-warning {
+  width: min(400px, 90vw) !important;
+  box-sizing: border-box !important;
+  padding: 24px 22px 20px !important;
+  border: 2px solid #d8a91e !important;
+  border-radius: 16px !important;
+  background: linear-gradient(180deg, #171d21 0%, #080c0f 100%) !important;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, .7) !important;
+  text-align: center !important;
+  animation: fiveFoulPopupIn .18s ease-out both !important;
+}
+
+.five-foul-warning__icon {
+  width: 52px !important;
+  height: 52px !important;
+  margin: 0 auto 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 2px solid #d8a91e !important;
+  border-radius: 50% !important;
+  color: #d8a91e !important;
+  font-size: 29px !important;
+  font-weight: 900 !important;
+}
+
+.five-foul-warning__title {
+  margin-bottom: 8px !important;
+  color: #e7c441 !important;
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 900 !important;
+}
+
+.five-foul-warning__team {
+  margin-bottom: 7px !important;
+  color: #ff4a4a !important;
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 25px !important;
+  font-weight: 900 !important;
+}
+
+.five-foul-warning__message {
+  margin-bottom: 17px !important;
+  color: #d9dddf !important;
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+.five-foul-warning__close {
+  min-width: 110px !important;
+  min-height: 40px !important;
+  padding: 0 16px !important;
+  border: 1px solid #8d7619 !important;
+  border-radius: 7px !important;
+  background: #0b1013 !important;
+  color: #e7c441 !important;
+  font-family: "B Titr", "BTitr", Titr, Tahoma, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+}
+
+@keyframes fiveFoulPopupIn {
+  from {
+    opacity: 0;
+    transform: scale(.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* SCOREBOARD title: keep Latin display typography after the Persian font rules. */
+.referee-header__title h1,
+.referee-header__title span {
+  font-family: "Arial Narrow", "Roboto Condensed", "Segoe UI", sans-serif !important;
+}
+
+.referee-header__title h1 {
+  color: var(--ref-yellow) !important;
+  font-size: 70px !important;       /*تغغیر سایز فونت هدر szcoreboard*/
+  font-weight: 950 !important;
+  line-height: 1 !important;
+  letter-spacing: 8px !important;
+  text-align: center !important;
+}
+
+.referee-header__title span {
+  color: var(--ref-yellow) !important;
+  font-size: 13px !important;
+  font-weight: 900 !important;
+  text-align: right !important;
+}
+
+
+/* ============================================================
+   PROPORTIONAL FRAME CONTROLS — SCOREBOARD + MATCH SETTINGS
+   Width/height changes also scale the contents inside each frame.
+   The two frames remain completely independent.
+   ============================================================ */
+
+:root {
+  /* SCOREBOARD FRAME */
+  --scoreboard-frame-width-control: 920px;
+  --scoreboard-frame-height-control: auto;
+  --scoreboard-frame-x-control: 0px;
+  --scoreboard-frame-y-control: 0px;
+
+  /* MATCH INFORMATION FRAME */
+  --match-settings-width-control: 920px;
+  --match-settings-height-control: 250px;
+  --match-settings-x-control: 0px;
+  --match-settings-y-control: -25px;
+}
+
+.referee-main .scoreboard-card {
+  width: var(--scoreboard-frame-width-control) !important;
+  max-width: none !important;
+  height: var(--scoreboard-frame-height-control) !important;
+  box-sizing: border-box !important;
+  transform: translate(
+    var(--scoreboard-frame-x-control),
+    var(--scoreboard-frame-y-control)
+  ) !important;
+  transform-origin: top center !important;
+  overflow: hidden !important;
+}
+
+.scoreboard-card__scale {
+  width: 920px !important;
+  max-width: none !important;
+  transform: scale(var(--scoreboard-content-scale, 1)) !important;
+  transform-origin: top center !important;
+}
+
+.referee-main .match-settings {
+  width: var(--match-settings-width-control) !important;
+  max-width: none !important;
+  height: var(--match-settings-height-control) !important;
+  box-sizing: border-box !important;
+  transform: translate(
+    var(--match-settings-x-control),
+    var(--match-settings-y-control)
+  ) !important;
+  transform-origin: top center !important;
+  overflow: hidden !important;
+}
+
+.match-settings__scale {
+  width: 870px !important;
+  max-width: none !important;
+  transform: scale(var(--match-settings-content-scale, 1)) !important;
+  transform-origin: top center !important;
+}
+
+@media (max-width: 900px) {
+  .scoreboard-card__scale,
+  .match-settings__scale {
+    transform-origin: top left !important;
+  }
+}

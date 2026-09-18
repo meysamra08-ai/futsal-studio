@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useRef,
   useState,
   type MouseEvent,
@@ -9,6 +10,7 @@ import { Capacitor } from "@capacitor/core";
 
 import { useBoard } from "../../core/contexts/BoardContext";
 import { useUI } from "../../core/contexts/UIContext";
+import { useAnimation } from "../../core/contexts/AnimationContext";
 
 import {
   DndContext,
@@ -16,9 +18,10 @@ import {
 } from "@dnd-kit/core";
 
 import DraggableObject from "../Board/DraggableObject";
+import BoardObjectRenderer from "../Board/BoardObjectRenderer";
 
 import "./CourtCanvas.css";
-
+import type { BoardObject } from "../../core/types/BoardObject";
 
 /* =========================================================
    Drawing Point
@@ -55,6 +58,54 @@ type Drawing = {
 };
 
 
+function PlaybackObjectsLayer({
+  objects,
+}: {
+  objects: BoardObject[];
+}) {
+  return (
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        pointerEvents: "none",
+        zIndex: 35,
+      }}
+    >
+      {objects.map((object) => {
+        const size =
+          object.type === "player" ||
+          object.type === "goalkeeper"
+            ? 60
+            : object.type === "ball"
+              ? 42
+              : 70;
+
+        return (
+          <div
+            key={`playback-${object.id}`}
+            style={{
+              position: "absolute",
+              left: object.x ?? 0,
+              top: object.y ?? 0,
+              width: size,
+              height: size,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              pointerEvents: "none",
+              touchAction: "none",
+            }}
+          >
+            <BoardObjectRenderer object={object} />
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+
 export default function CourtCanvas() {
 
   const {
@@ -75,7 +126,81 @@ export default function CourtCanvas() {
     objects,
     addObject,
     moveObject,
+    setObjects,
   } = useBoard();
+
+  const {
+    isPlaying,
+    
+    playbackEnded,
+    
+    keyframes,
+    getInterpolatedObjects,
+    editingSavedAnimationId,
+  } = useAnimation();
+
+  // Playback layer is shown only while the animation is playing.
+  // This keeps the real Board visible and draggable in edit mode.
+  const showPlayback =
+    keyframes.length > 0 &&
+    isPlaying;
+
+  const playbackObjects =
+    showPlayback
+      ? getInterpolatedObjects(objects)
+      : [];
+
+  // وقتی پخش طبیعی به انتهای انیمیشن می‌رسد، آخرین keyframe را
+  // روی Board واقعی اعمال می‌کنیم تا بلافاصله قابل ویرایش و Drag باشد.
+  // این effect فقط با playbackEnded اجرا می‌شود؛ بنابراین Pause وسط انیمیشن
+  // باعث پرش Board به فریم آخر نمی‌شود.
+  useEffect(() => {
+    if (isPlaying || !playbackEnded || keyframes.length === 0) {
+      return;
+    }
+
+    const lastKeyframe =
+      keyframes[keyframes.length - 1];
+
+    if (!lastKeyframe) {
+      return;
+    }
+
+    const positions = new Map(
+      lastKeyframe.objects.map((item) => [
+        item.id,
+        { x: item.x, y: item.y },
+      ])
+    );
+
+    setObjects((previousObjects) =>
+      previousObjects.map((object) => {
+        const position = positions.get(object.id);
+
+        if (!position) {
+          return { ...object, selected: false };
+        }
+
+        return {
+          ...object,
+          x:
+            typeof position.x === "number"
+              ? position.x
+              : object.x,
+          y:
+            typeof position.y === "number"
+              ? position.y
+              : object.y,
+          selected: false,
+        };
+      })
+    );
+  }, [
+    isPlaying,
+    playbackEnded,
+    keyframes,
+    setObjects,
+  ]);
 
 
   /* =========================================================
@@ -168,7 +293,13 @@ export default function CourtCanvas() {
     }
 
 
-    if (mode !== "add") return;
+    // در حالت ویرایش تمرین، ابزارهای بازیکن/تجهیزات/توپ
+    // باید بدون نیاز به تغییر Mode بتوانند آبجکت جدید بسازند.
+    // هنگام Playback هم اجازه افزودن نمی‌دهیم تا لایه پخش دست‌نخورده بماند.
+    const canAddDuringEdit =
+      Boolean(editingSavedAnimationId) && !isPlaying;
+
+    if (mode !== "add" && !canAddDuringEdit) return;
 
     if (!activeTool) return;
 
@@ -949,16 +1080,24 @@ export default function CourtCanvas() {
                 "android-court-objects"
             >
 
-              {objects.map(
-                (obj) => (
+              {!showPlayback &&
+                objects.map(
+                  (obj) => (
 
-                  <DraggableObject
-                    key={obj.id}
-                    object={obj}
-                  />
+                    <DraggableObject
+                      key={obj.id}
+                      object={obj}
+                    />
 
-                )
+                  )
+                )}
+
+              {showPlayback && (
+                <PlaybackObjectsLayer
+                  objects={playbackObjects}
+                />
               )}
+
 
             </div>
 
@@ -1113,26 +1252,34 @@ export default function CourtCanvas() {
             }}
           >
 
-            {objects.map(
-              (obj) => (
+            {!showPlayback &&
+              objects.map(
+                (obj) => (
 
-                <div
-                  key={obj.id}
+                  <div
+                    key={obj.id}
 
-                  style={{
-                    pointerEvents:
-                      "auto",
-                  }}
-                >
+                    style={{
+                      pointerEvents:
+                        "auto",
+                    }}
+                  >
 
-                  <DraggableObject
-                    object={obj}
-                  />
+                    <DraggableObject
+                      object={obj}
+                    />
 
-                </div>
+                  </div>
 
-              )
+                )
+              )}
+
+            {showPlayback && (
+              <PlaybackObjectsLayer
+                objects={playbackObjects}
+              />
             )}
+
 
           </div>
 
